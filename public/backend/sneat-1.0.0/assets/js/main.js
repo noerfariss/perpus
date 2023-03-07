@@ -265,6 +265,38 @@ $(document).ready(function(){
         }
     });
 
+    // --- biasa
+    $('.kelas-select').select2({
+        placeholder: " - Kelas -",
+        allowClear: true,
+        ajax: {
+          type: 'POST',
+          dataType: 'json',
+          data: function (params) {
+            return {
+              term      : params.term,
+              _token    : token,
+            }
+          },
+          processResults: function (data) {
+            const status = data.status;
+
+            if(status == true){
+                const record = data.data;
+
+                return {
+                    results : $.map(record, function (item){
+                        return {
+                            id : item.id,
+                            text : item.label,
+                        }
+                    }),
+                };
+            }
+          }
+        }
+    });
+
     // export
     $('.btn-export').click(function(e){
         e.preventDefault();
@@ -285,6 +317,7 @@ $(document).ready(function(){
                 export : 'export',
                 cari : $('#cari').val(),
                 tanggal : $('#tanggal').val(),
+                kelas : $('#kelas').val(),
                 status : $('.btn-check:checked').val(),
             },
         })

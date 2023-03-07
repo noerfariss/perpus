@@ -58,7 +58,7 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Anggota</span></li>
 
             <li class="menu-item {{ menuAktif('siswa') }}">
-                <a href="" class="menu-link">
+                <a href="{{ route('siswa.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-user-circle"></i>
                     <div data-i18n="Analytics">Siswa</div>
                 </a>
@@ -75,12 +75,12 @@
                     <div data-i18n="Analytics">Kelas</div>
                 </a>
             </li>
-            <li class="menu-item {{ menuAktif('jabatan') }}">
+            {{-- <li class="menu-item {{ menuAktif('jabatan') }}">
                 <a href="{{ route('jabatan.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-hive"></i>
                     <div data-i18n="Analytics">jabatan</div>
                 </a>
-            </li>
+            </li> --}}
         @endpermission
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>

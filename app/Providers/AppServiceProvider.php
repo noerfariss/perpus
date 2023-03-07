@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
             $umum = Umum::first();
 
             $e->with([
-                'tanggal_sekarang' => Carbon::now()->isoFormat('dddd, DD MMMM YYYY'),
+                'tanggal_sekarang' => Carbon::now()->timezone(zona_waktu())->isoFormat('dddd, DD MMMM YYYY'),
                 'title_web' => $umum->nama,
                 'logo' => ($umum->logo === NULL || $umum->logo === '' || $umum->logo == 'logo') ? '<h2 style="margin:.5rem 0 !important; font-weight:bold;">admin</h2>' : '<img src="'.url('/storage/foto/'.$umum->logo).'" height="50">',
                 'logo_login' => ($umum->logo === NULL || $umum->logo === '' || $umum->logo == 'logo') ? '<h2>'.env('APP_NAME').'</h2>' : '<img src="'.url('/storage/foto/'.$umum->logo).'" height="60">',

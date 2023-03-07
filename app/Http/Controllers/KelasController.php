@@ -46,6 +46,7 @@ class KelasController extends Controller
             ->get();
 
         if ($request->filled('export')) {
+            Weblog::set('Export data kelas');
             return Excel::download(new KelasExport($data), 'KELAS.xlsx');
         }
 
@@ -169,7 +170,7 @@ class KelasController extends Controller
     public function edit(Kelas $kela)
     {
         $validator = JsValidatorFacade::make([
-            'kelas' => 'required|unique:kelas, kelas, id' . $kela->id,
+            'kelas' => 'required|unique:kelas,kelas,id' . $kela->id,
         ]);
 
         return view('backend.kelas.edit', compact('validator', 'kela'));

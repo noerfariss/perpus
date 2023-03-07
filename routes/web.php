@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AjaxController;
+use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KelasController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UmumController;
 use App\Http\Controllers\UserController;
+use App\Mail\HelloMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,6 +25,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+Route::get('/email', function(){
+    try {
+        Mail::to('noerfaris@gmail.com')->send(new HelloMail());
+        return 'berhasil';
+    } catch (\Throwable $th) {
+        return $th->getMessage();
+    }
+
+
+});
+
 Route::middleware('xss')->group(function(){
     Route::any('/', [LoginController::class, 'index'])->name('login');
 
@@ -44,8 +59,14 @@ Route::middleware('xss')->group(function(){
 
 
             // Data Master
+            Route::resource('siswa', AnggotaController::class);
+            Route::post('/ajax-siswa', [AnggotaController::class, 'ajax'])->name('ajax-siswa');
+            Route::post('/siswa-ganti-password', [AnggotaController::class, 'ganti_password'])->name('siswa-ganti-password');
+            Route::post('/ganti-foto-anggota', [AnggotaController::class, 'ganti_foto'])->name('ganti-foto-anggota');
+
             Route::resource('kelas', KelasController::class);
             Route::post('/ajax-kelas', [KelasController::class, 'ajax'])->name('ajax-kelas');
+
             Route::resource('jabatan', JabatanController::class);
             Route::post('/ajax-jabatan', [JabatanController::class, 'ajax'])->name('ajax-jabatan');
 
@@ -66,6 +87,7 @@ Route::middleware('xss')->group(function(){
                 Route::post('/provinsi', [AjaxController::class, 'provinsi'])->name('drop-provinsi');
                 Route::post('/kota', [AjaxController::class, 'kota'])->name('drop-kota');
                 Route::post('/kecamatan', [AjaxController::class, 'kecamatan'])->name('drop-kecamatan');
+                Route::post('/kelas', [AjaxController::class, 'kelas'])->name('drop-kelas');
 
             });
         });

@@ -63,7 +63,7 @@ class UserController extends Controller
             ->addIndexColumn()
             ->editColumn('foto', function ($e) {
                 $foto = ($e->foto === "" || $e->foto === null) ? '/backend/sneat-1.0.0/assets/img/avatars/1.png' : '/storage/foto/thum_' . $e->foto;
-                return '<div style="height:50px; overflow:hidden; border-radius:4px;"><img src="' . url($foto) . '" class="rounded" width="40"/></div>';
+                return '<div><img src="' . url($foto) . '" class="rounded" width="40"/></div>';
             })
             ->editColumn('created_at', function ($e) {
                 return '<div class="badge bg-dark rounded-pill">' . Carbon::parse($e->created_at)->isoFormat('DD MMM YYYY HH:mm') . '</div>';

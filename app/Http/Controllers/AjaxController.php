@@ -6,6 +6,7 @@ use App\Models\Role;
 use App\Models\Provinsi;
 use App\Models\Kota;
 use App\Models\Kecamatan;
+use App\Models\Kelas;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -64,7 +65,9 @@ class AjaxController extends Controller
                 $e->where('kota', 'like', '%' . $term . '%');
             })
             ->where('status', true)
-            ->where('provinsi_id', $provinsi)
+            ->when($provinsi, function($e, $provinsi){
+                $e->where('provinsi_id', $provinsi);
+            })
             ->select('id', 'kota as label');
 
         if ($data->count() > 0) {
@@ -91,6 +94,29 @@ class AjaxController extends Controller
             ->where('status', true)
             ->where('kota_id', $kota)
             ->select('id', 'kecamatan as label');
+
+        if ($data->count() > 0) {
+            return response()->json([
+                'data'  => $data->get(),
+                'status' => true
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'data'  => null,
+            ]);
+        }
+    }
+
+    public function kelas(Request $request)
+    {
+        $term = $request->term;
+        $data = Kelas::query()
+            ->when($term, function ($e, $term) {
+                $e->where('kelas', 'like', '%' . $term . '%');
+            })
+            ->where('status', true)
+            ->select('id', 'kelas as label');
 
         if ($data->count() > 0) {
             return response()->json([

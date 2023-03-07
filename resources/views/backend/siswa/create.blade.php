@@ -5,46 +5,77 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-4">
-                    <h5 class="card-header">Edit user</h5>
+                    <h5 class="card-header">Tambah siswa</h5>
                     <div class="card-body">
                         @if (session()->has('pesan'))
                             {!! session('pesan') !!}
                         @endif
 
-                        <form action="{{ route('user.update', ['user' => $user->id]) }}" method="POST"
-                            enctype="multipart/form-data" id="my-form">
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
+                        <form action="{{ route('siswa.store') }}" method="POST" enctype="multipart/form-data" id="my-form">
                             @csrf
-                            @method('PATCH')
+
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="nama">Username</label>
+                                <label class="col-sm-3 col-form-label">Nomor anggota</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="username"
-                                        value="{{ $user->username }}">
+                                    <input type="text" class="form-control" name="nomor_anggota" readonly>
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="nama">Nama</label>
+                                <label class="col-sm-3 col-form-label">Nomor induk</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="nama" value="{{ $user->nama }}">
+                                    <input type="text" class="form-control" name="nomor_induk">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="email">Email</label>
+                                <label class="col-sm-3 col-form-label">nama</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="email" value="{{ $user->email }}">
+                                    <input type="text" class="form-control" name="nama">
                                 </div>
                             </div>
                             <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="role">Role</label>
+                                <label class="col-sm-3 col-form-label">ttl</label>
+                                <div class="col-sm-5">
+                                    <select class="form-control kota-select" id="kota_id" name="kota_id"
+                                        data-ajax--url="{{ route('drop-kota') }}">
+                                    </select>
+                                </div>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="tanggal_lahir">
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">jenis kelamin</label>
                                 <div class="col-sm-9">
-                                    <select name="role[]" id="role" class="form-control role-select"
-                                        data-url="{{ route('drop-role') }}">
-                                        @foreach ($user->roles as $item)
-                                            <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
-                                        @endforeach
+                                    <select name="jenis_kelamin" id="jenis_kelamin" class="form-control select2">
+                                        <option value="L">Laki-laki</option>
+                                        <option value="P">Perempuan</option>
                                     </select>
                                 </div>
                             </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">kelas</label>
+                                <div class="col-sm-9">
+                                    <select name="kelas_id" id="kelas_id" class="form-control kelas-select"
+                                        data-ajax--url="{{ route('drop-kelas') }}"></select>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label">alamat</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control" name="alamat">
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="email">Foto</label>
                                 <div class="col-sm-9">
@@ -54,7 +85,7 @@
                                             <span class="d-none d-sm-block">Ganti foto</span>
                                             <i class="bx bx-upload d-block d-sm-none"></i>
                                         </button>
-                                        <input type="hidden" name="foto" id="foto" value="{{ $user->foto }}">
+                                        <input type="hidden" name="foto" id="foto" value="">
                                         <div><small class="text-muted mb-0">Format : JPG, GIF, PNG. Maksimal ukuran 2000
                                                 Kb</small></div>
                                     </div>
@@ -63,17 +94,13 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="email"></label>
                                 <div class="col-sm-9">
-                                    <div id="box-foto">
-                                        @if ($user->foto)
-                                            <img src="{{ url('/storage/foto/thum_' . $user->foto) }}" class="rounded">
-                                        @endif
-                                    </div>
+                                    <div id="box-foto"></div>
                                 </div>
                             </div>
 
-                            <div class="row justify-content-end">
-                                <div class="col-sm-9">
-                                    <a href="{{ route('user.index') }}" class="btn btn-link btn-sm">Kembali</a>
+                            <div class="row mt-5">
+                                <div class="col-sm-12">
+                                    <a href="{{ route('siswa.index') }}" class="btn btn-link btn-sm">Kembali</a>
                                     <button type="submit" class="btn btn-primary btn-sm">Simpan</button>
                                 </div>
                             </div>
@@ -98,7 +125,7 @@
                 </div>
                 <div class="modal-body">
                     <span id="notif"></span>
-                    <form action="{{ route('ganti-foto') }}" class="dropzone" id="upload-image" method="POST"
+                    <form action="{{ route('ganti-foto-anggota') }}" class="dropzone" id="upload-image" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                     </form>
@@ -116,8 +143,21 @@
     <script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
     {!! $validator->selector('#my-form') !!}
 
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr@4.6.13/dist/l10n/id.js"></script>
+
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+    <script>
+        $('input[name="tanggal_lahir"]').flatpickr({
+            maxDate: '{{ date('Y-m-d') }}',
+            locale: 'id'
+        });
+
+        $('input[name="nomor_anggota"]').val('{{ $kode_anggota }}');
+    </script>
 
     <script>
         Dropzone.options.uploadImage = {
@@ -150,7 +190,7 @@
                 $('#notif').html(`<div class="alert alert-danger">Tidak dapat menambahkan foto</div>`);
             } else {
                 $('#modalUploadFoto').modal('hide');
-                $('#box-foto').html(`<img src="{{ url('/storage/foto/thum_${foto}') }}" class="rounded">`);
+                $('#box-foto').html(`<img src="{{ url('/storage/anggota/thum_${foto}') }}" class="rounded">`);
             }
         }
     </script>

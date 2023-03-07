@@ -59,42 +59,39 @@
                         <span id="notif"></span>
 
                         @csrf
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label class="col-sm-3 col-form-label" for="nama">Username</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control username" disabled>
                                 <input type="hidden" class="username" name="username">
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label class="col-sm-3 col-form-label" for="nama">Nama</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="nama" disabled>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label class="col-sm-3 col-form-label" for="email">Email</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" id="email" disabled>
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <input type="hidden" id="id" name="id">
                             <label class="col-sm-3 col-form-label" for="password">Password</label>
                             <div class="col-sm-9">
                                 <input type="password" class="form-control" id="password" name="password">
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        <div class="row mb-2">
                             <label class="col-sm-3 col-form-label" for="password_confirmation">Konfirmasi Password</label>
                             <div class="col-sm-9">
                                 <input type="password" class="form-control" id="password_confirmation"
                                     name="password_confirmation">
                             </div>
                         </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary btn-sm btn-simpan">Perbarui</button>
                     </div>
                 </form>
             </div>
