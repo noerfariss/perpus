@@ -20,7 +20,12 @@ class AnggotaExport implements FromView, WithEvents
 
     public function view(): View
     {
-        return view('backend.siswa.export', ['data' => $this->data, 'request' => $this->request]);
+        if(isset($this->request['jabatan'])){
+            return view('backend.guru.export', ['data' => $this->data, 'request' => $this->request]);
+        }else{
+            return view('backend.siswa.export', ['data' => $this->data, 'request' => $this->request]);
+        }
+
     }
 
     public function registerEvents(): array

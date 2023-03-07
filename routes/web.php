@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
 use App\Http\Controllers\KelasController;
@@ -63,6 +64,9 @@ Route::middleware('xss')->group(function(){
             Route::post('/ajax-siswa', [AnggotaController::class, 'ajax'])->name('ajax-siswa');
             Route::post('/siswa-ganti-password', [AnggotaController::class, 'ganti_password'])->name('siswa-ganti-password');
             Route::post('/ganti-foto-anggota', [AnggotaController::class, 'ganti_foto'])->name('ganti-foto-anggota');
+
+            Route::resource('guru', GuruController::class);
+            Route::post('/ajax-guru', [GuruController::class, 'ajax'])->name('ajax-guru');
 
             Route::resource('kelas', KelasController::class);
             Route::post('/ajax-kelas', [KelasController::class, 'ajax'])->name('ajax-kelas');

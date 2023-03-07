@@ -64,7 +64,7 @@
                 </a>
             </li>
             <li class="menu-item {{ menuAktif('guru') }}">
-                <a href="" class="menu-link">
+                <a href="{{ route('guru.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-male-female"></i>
                     <div data-i18n="Analytics">Guru</div>
                 </a>
