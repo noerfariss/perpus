@@ -47,7 +47,7 @@
                 </a>
             </li>
             <li class="menu-item {{ menuAktif('kategori') }}">
-                <a href="" class="menu-link">
+                <a href="{{ route('kategori.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-category-alt"></i>
                     <div data-i18n="Analytics">Kategori</div>
                 </a>

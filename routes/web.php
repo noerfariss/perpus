@@ -5,6 +5,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
+use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\LoginController;
@@ -57,6 +58,8 @@ Route::middleware('xss')->group(function(){
 
 
             // Data Buku
+            Route::resource('kategori', KategoriController::class);
+            Route::post('/ajax-kategori', [KategoriController::class, 'ajax'])->name('ajax-kategori');
 
 
             // Data Master
@@ -70,9 +73,6 @@ Route::middleware('xss')->group(function(){
 
             Route::resource('kelas', KelasController::class);
             Route::post('/ajax-kelas', [KelasController::class, 'ajax'])->name('ajax-kelas');
-
-            Route::resource('jabatan', JabatanController::class);
-            Route::post('/ajax-jabatan', [JabatanController::class, 'ajax'])->name('ajax-jabatan');
 
 
             // Pengaturan
