@@ -1,7 +1,8 @@
 <?php
 
-use App\Models\mobile_agent;
-use App\Models\outlet;
+use App\Models\BukuItem;
+use App\Models\Kategori;
+use App\Models\Penerbit;
 use App\Models\Umum;
 
 function menuAktif($url = NULL)
@@ -84,4 +85,49 @@ function pecahTanggal($tanggal)
 function zona_waktu()
 {
     return Umum::first()->timezone;
+}
+
+function getKodePenerbit()
+{
+    $kodePenerbit = Penerbit::orderBy('id', 'desc')->first();
+    if ($kodePenerbit === NULL) {
+        $kode = 'KP0001';
+    } else {
+        $getKode = $kodePenerbit->kode;
+        $pecah = (int) substr($getKode, 2);
+        $newKode = $pecah + 1;
+        $kode = 'KP' . str_pad($newKode, 4, '0', STR_PAD_LEFT);
+    }
+
+    return $kode;
+}
+
+function getKodeKategori()
+{
+    $kodePenerbit = Kategori::orderBy('id', 'desc')->first();
+    if ($kodePenerbit === NULL) {
+        $kode = 'KG0001';
+    } else {
+        $getKode = $kodePenerbit->kode;
+        $pecah = (int) substr($getKode, 2);
+        $newKode = $pecah + 1;
+        $kode = 'KG' . str_pad($newKode, 4, '0', STR_PAD_LEFT);
+    }
+
+    return $kode;
+}
+
+function getKodeBuku()
+{
+    $kodePenerbit = BukuItem::orderBy('id', 'desc')->first();
+    if ($kodePenerbit === NULL) {
+        $kode = 'BK00001';
+    } else {
+        $getKode = $kodePenerbit->kode;
+        $pecah = (int) substr($getKode, 2);
+        $newKode = $pecah + 1;
+        $kode = 'BK' . str_pad($newKode, 5, '0', STR_PAD_LEFT);
+    }
+
+    return $kode;
 }

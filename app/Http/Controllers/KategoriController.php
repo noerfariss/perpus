@@ -93,6 +93,30 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->exists('tipe')) {
+            $request->validate([
+                'kode' => 'required|unique:kategoris,kode',
+                'kategori' => 'required',
+            ]);
+
+            DB::beginTransaction();
+            try {
+                Kategori::create($request->except(['_token', 'tipe']));
+                DB::commit();
+                Weblog::set('Menambahkan Kategori baru : ' . $request->kategori);
+
+                return response()->json([
+                    'message' => 'Data berhasil diinputkan'
+                ]);
+            } catch (\Throwable $th) {
+                DB::rollBack();
+                Log::warning($th->getMessage());
+                return redirect()->back()->with([
+                    'pesan' => '<div class="alert alert-danger">Terjadi kesalahan, cobalah kembali</div>',
+                ]);
+            }
+        }
+
         $request->validate([
             'kategori' => 'required|unique:kategoris,kategori',
             'kategori.*' => 'nullable|distinct',

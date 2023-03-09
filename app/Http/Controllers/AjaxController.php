@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kategori;
 use App\Models\Role;
 use App\Models\Provinsi;
 use App\Models\Kota;
 use App\Models\Kecamatan;
 use App\Models\Kelas;
+use App\Models\Penerbit;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -117,6 +119,52 @@ class AjaxController extends Controller
             })
             ->where('status', true)
             ->select('id', 'kelas as label');
+
+        if ($data->count() > 0) {
+            return response()->json([
+                'data'  => $data->get(),
+                'status' => true
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'data'  => null,
+            ]);
+        }
+    }
+
+    public function kategori(Request $request)
+    {
+        $term = $request->term;
+        $data = Kategori::query()
+            ->when($term, function ($e, $term) {
+                $e->where('kategori', 'like', '%' . $term . '%');
+            })
+            ->where('status', true)
+            ->select('id', 'kategori as label');
+
+        if ($data->count() > 0) {
+            return response()->json([
+                'data'  => $data->get(),
+                'status' => true
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'data'  => null,
+            ]);
+        }
+    }
+
+    public function penerbit(Request $request)
+    {
+        $term = $request->term;
+        $data = Penerbit::query()
+            ->when($term, function ($e, $term) {
+                $e->where('penerbit', 'like', '%' . $term . '%');
+            })
+            ->where('status', true)
+            ->select('id', 'penerbit as label');
 
         if ($data->count() > 0) {
             return response()->json([

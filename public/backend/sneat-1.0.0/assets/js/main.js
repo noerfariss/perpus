@@ -297,6 +297,70 @@ $(document).ready(function(){
         }
     });
 
+    // --- biasa
+    $('.kategori-select').select2({
+        placeholder: " - Kategori -",
+        allowClear: true,
+        ajax: {
+          type: 'POST',
+          dataType: 'json',
+          data: function (params) {
+            return {
+              term      : params.term,
+              _token    : token,
+            }
+          },
+          processResults: function (data) {
+            const status = data.status;
+
+            if(status == true){
+                const record = data.data;
+
+                return {
+                    results : $.map(record, function (item){
+                        return {
+                            id : item.id,
+                            text : item.label,
+                        }
+                    }),
+                };
+            }
+          }
+        }
+    });
+
+    // --- biasa
+    $('.penerbit-select').select2({
+        placeholder: " - Penerbit -",
+        allowClear: true,
+        ajax: {
+          type: 'POST',
+          dataType: 'json',
+          data: function (params) {
+            return {
+              term      : params.term,
+              _token    : token,
+            }
+          },
+          processResults: function (data) {
+            const status = data.status;
+
+            if(status == true){
+                const record = data.data;
+
+                return {
+                    results : $.map(record, function (item){
+                        return {
+                            id : item.id,
+                            text : item.label,
+                        }
+                    }),
+                };
+            }
+          }
+        }
+    });
+
     // export
     $('.btn-export').click(function(e){
         e.preventDefault();

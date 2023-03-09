@@ -41,7 +41,7 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Buku</span></li>
 
             <li class="menu-item {{ menuAktif('buku') }}">
-                <a href="" class="menu-link">
+                <a href="{{ route('buku.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-book"></i>
                     <div data-i18n="Analytics">Buku</div>
                 </a>

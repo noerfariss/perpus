@@ -16712,3 +16712,6 @@ table.dataTable{
     float: left;
     margin-right: 7px;
 }
+.table td a:hover{
+    text-decoration: underline;
+}

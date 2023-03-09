@@ -82,16 +82,16 @@ class AnggotaController extends Controller
                             data-kelas="'.$e->kelas->kelas.'"
                             data-ttl="'.$e->kota->kota.', '.Carbon::parse($e->tanggal_lahir)->isoFormat('DD MMMM YYYY').'"
                             data-alamat="'.$e->alamat.'">
-                                <h2 style="font-size:1rem; font-weight:bold; margin:0 0 2px 0; padding:0;">' . strtoupper($e->nama) . '</h2>
-                                <h1 style="font-size:.9rem; margin:0; padding:0;">' . $e->nomor_anggota . ' | ' . $e->nomor_induk . '</h1>
+                                <h2 style="font-size:.9rem; font-weight:bold; margin:0 0 2px 0; padding:0;">' . strtoupper($e->nama) . '</h2>
+                                <h1 style="font-size:.8rem; margin:0; padding:0;">' . $e->nomor_anggota . ' | ' . $e->nomor_induk . '</h1>
                                 <h3 style="font-size:.75rem; margin:4px 0 0 0; padding:0;">' . $jenis_kelamin . '</h3>
                             </a>';
 
                 return $anggota;
             })
             ->addColumn('ttl', function ($e) {
-                $anggota = '<h1 style="font-size:.9rem; margin:0; padding:0;">' . $e->kota->kota .  '</h1>
-                            <h2 style="font-size:.9rem; margin:0; padding:0;">' . Carbon::parse($e->tanggal_lahir)->isoFormat('DD MMMM YYYY') . '</h2>';
+                $anggota = '<h1 style="font-size:.8rem; margin:0; padding:0;">' . $e->kota->kota .  '</h1>
+                            <h2 style="font-size:.8rem; margin:0; padding:0;">' . Carbon::parse($e->tanggal_lahir)->isoFormat('DD MMMM YYYY') . '</h2>';
 
                 return $anggota;
             })

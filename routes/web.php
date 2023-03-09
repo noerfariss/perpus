@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JabatanController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KelasController;
 use App\Http\Controllers\LogController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\PenerbitController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UmumController;
@@ -58,8 +60,15 @@ Route::middleware('xss')->group(function(){
 
 
             // Data Buku
+            Route::resource('buku', BukuController::class);
+            Route::post('/ajax-buku', [BukuController::class, 'ajax'])->name('ajax-buku');
+            Route::post('/ganti-foto-buku', [BukuController::class, 'ganti_foto'])->name('ganti-foto-buku');
+
             Route::resource('kategori', KategoriController::class);
             Route::post('/ajax-kategori', [KategoriController::class, 'ajax'])->name('ajax-kategori');
+
+            Route::resource('penerbit', PenerbitController::class);
+            Route::post('/ajax-penerbit', [PenerbitController::class, 'ajax'])->name('ajax-penerbit');
 
 
             // Data Master
@@ -92,6 +101,8 @@ Route::middleware('xss')->group(function(){
                 Route::post('/kota', [AjaxController::class, 'kota'])->name('drop-kota');
                 Route::post('/kecamatan', [AjaxController::class, 'kecamatan'])->name('drop-kecamatan');
                 Route::post('/kelas', [AjaxController::class, 'kelas'])->name('drop-kelas');
+                Route::post('/kategori', [AjaxController::class, 'kategori'])->name('drop-kategori');
+                Route::post('/penerbit', [AjaxController::class, 'penerbit'])->name('drop-penerbit');
 
             });
         });
