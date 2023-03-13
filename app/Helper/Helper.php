@@ -4,6 +4,7 @@ use App\Models\BukuItem;
 use App\Models\Kategori;
 use App\Models\Penerbit;
 use App\Models\Umum;
+use Illuminate\Support\Facades\DB;
 
 function menuAktif($url = NULL)
 {
@@ -130,4 +131,27 @@ function getKodeBuku()
     }
 
     return $kode;
+}
+
+function getKodeTransaksi()
+{
+    $no_transaksi = DB::table('peminjaman_transaksi')
+        ->whereYear('created_at', date('Y'))
+        ->whereMonth('created_at', date('m'))
+        ->orderBy('id', 'desc')
+        ->first();
+
+    if ($no_transaksi === null) {
+        $nomor = 'PJ' . date('Y') . '' . date('m') . '0001';
+    } else {
+
+        $tahun = substr($no_transaksi->kode, 2, 4);
+        $bulan = substr($no_transaksi->kode, 6, 2);
+        $urutan = (int) substr($no_transaksi->kode, 8);
+        $newUrutan = $urutan + 1;
+
+        $nomor = 'PJ' . $tahun . $bulan . str_pad($newUrutan, 4, '0', STR_PAD_LEFT);
+    }
+
+    return  $nomor;
 }

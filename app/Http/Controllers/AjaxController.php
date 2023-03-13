@@ -67,7 +67,7 @@ class AjaxController extends Controller
                 $e->where('kota', 'like', '%' . $term . '%');
             })
             ->where('status', true)
-            ->when($provinsi, function($e, $provinsi){
+            ->when($provinsi, function ($e, $provinsi) {
                 $e->where('provinsi_id', $provinsi);
             })
             ->select('id', 'kota as label');
@@ -177,5 +177,10 @@ class AjaxController extends Controller
                 'data'  => null,
             ]);
         }
+    }
+
+    public function get_no_transaksi()
+    {
+        return getKodeTransaksi();
     }
 }

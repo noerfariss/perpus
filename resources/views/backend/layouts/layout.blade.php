@@ -70,11 +70,11 @@
 
     @csrf
 
-    {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script> --}}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <script src="{{ asset('backend/sneat-1.0.0/') }}/assets/vendor/js/helpers.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+    <script src="{{ asset('backend/sneat-1.0.0/') }}/assets/vendor/js/helpers.js"></script>
     <script src="{{ asset('backend/sneat-1.0.0/') }}/assets/vendor/js/bootstrap.js"></script>
     <script src="{{ asset('backend/sneat-1.0.0/') }}/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
     <script src="{{ asset('backend/sneat-1.0.0/') }}/assets/vendor/js/menu.js"></script>

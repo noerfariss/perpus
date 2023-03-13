@@ -24,7 +24,7 @@
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Aktivitas</span></li>
 
             <li class="menu-item {{ menuAktif('peminjaman') }}">
-                <a href="" class="menu-link">
+                <a href="{{ route('peminjaman.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-up-arrow-alt"></i>
                     <div data-i18n="Analytics">Peminjaman</div>
                 </a>
