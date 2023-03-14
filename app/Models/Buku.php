@@ -20,4 +20,9 @@ class Buku extends Model
     {
         return $this->belongsTo(Penerbit::class, 'penerbit_id');
     }
+
+    public function buku_item()
+    {
+        return $this->hasMany(BukuItem::class, 'buku_id');
+    }
 }

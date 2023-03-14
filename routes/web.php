@@ -67,6 +67,7 @@ Route::middleware('xss')->group(function () {
             Route::resource('buku', BukuController::class);
             Route::post('/ajax-buku', [BukuController::class, 'ajax'])->name('ajax-buku');
             Route::post('/ganti-foto-buku', [BukuController::class, 'ganti_foto'])->name('ganti-foto-buku');
+            Route::post('/buku/hapus-item', [BukuController::class, 'hapus_item'])->name('hapus_buku_item');
 
             Route::resource('kategori', KategoriController::class);
             Route::post('/ajax-kategori', [KategoriController::class, 'ajax'])->name('ajax-kategori');

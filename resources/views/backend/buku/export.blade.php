@@ -3,7 +3,13 @@
         <tr>
             <th width="3"><b>NO</b></th>
             <th width="12"><b>KODE</b></th>
-            <th width="14"><b>KELAS</b></th>
+            <th width="14"><b>JUDUL</b></th>
+            <th width="14"><b>KATEGORI</b></th>
+            <th width="14"><b>PENGARANG</b></th>
+            <th width="14"><b>PENERBIT</b></th>
+            <th width="14"><b>ISBN</b></th>
+            <th width="14"><b>STOK</b></th>
+            <th width="14"><b>DIPINJAM</b></th>
         </tr>
     </thead>
     <tbody>

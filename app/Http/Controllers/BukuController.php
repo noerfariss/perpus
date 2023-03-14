@@ -35,7 +35,14 @@ class BukuController extends Controller
         $kategori = $request->kategori;
 
         $data = Buku::query()
-            ->with(['kategori', 'penerbit'])
+            ->with([
+                'kategori',
+                'penerbit',
+                'buku_item' => fn ($e) => $e->has('peminjaman_belum_kembali')->where('status', true),
+            ])
+            ->withCount([
+                'buku_item' => fn($e) => $e->where('status', true),
+            ])
             ->when($kategori, function ($e, $kategori) {
                 $e->whereHas('kategori', function ($e) use ($kategori) {
                     $e->where('id', $kategori);
@@ -55,16 +62,19 @@ class BukuController extends Controller
 
         return DataTables::of($data)
             ->addIndexColumn()
+            ->addColumn('dipinjam', function ($e) {
+                return (count($e->buku_item));
+            })
             ->editColumn('foto', function ($e) {
                 $foto = ($e->foto === "" || $e->foto === null) ? '/storage/user/coverbook.jpg' : '/storage/buku/thum_' . $e->foto;
                 return '<div><img src="' . url($foto) . '" class="img-thumbnail"/></div>';
             })
             ->editColumn('judul', function ($e) {
-                $judul = '<a href="#" >
+                $judul = '<a href="#" class="detail-anggota" data-id="' . $e->id . '" data-judul="' . $e->judul . '" data-kategori="' . $e->kategori->implode('kategori', ', ') . '" data-pengarang="' . $e->pengarang . '" data-isbn="' . $e->isbn . '">
                             <h1 style="font-size:.9rem; font-weight:bold; margin:0; padding:0 0 4px 0; ">' . ucfirst($e->judul) . '</h1>
+                            <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">ISBN : ' . $e->isbn . '</h2>
                             <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">Pengarang : ' . $e->pengarang . '</h2>
                             <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">Penerbit : ' . $e->penerbit->penerbit . '</h2>
-                            <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">ISBN : ' . $e->isbn . '</h2>
                           </a>';
                 return $judul;
             })
@@ -123,7 +133,7 @@ class BukuController extends Controller
      */
     public function store(Request $request)
     {
-        $validasi = $request->validate([
+        $request->validate([
             'judul' => 'required|unique:bukus,judul',
             'pengarang' => 'nullable',
             'isbn' => 'required',
@@ -158,7 +168,7 @@ class BukuController extends Controller
             $kode = getKodeBuku();
             $newKode = (int) substr($kode, 2);
 
-            for ($i = 0; $i <= $stok; $i++) {
+            for ($i = 0; $i < $stok; $i++) {
                 $buku_items[] = [
                     'buku_id' => $buku->id,
                     'kode' => 'BK' . str_pad($newKode++, 5, '0', STR_PAD_LEFT),
@@ -191,7 +201,63 @@ class BukuController extends Controller
      */
     public function show(Buku $buku)
     {
-        //
+        $data = BukuItem::query()
+            ->withCount('peminjaman_belum_kembali')
+            ->where('buku_id', $buku->id)
+            ->where('status', true)
+            ->get();
+
+        return DataTables::of($data)
+            ->addIndexColumn()
+            ->editColumn('kode', function ($e) {
+                return $e->peminjaman_belum_kembali_count === 1 ? '<span style="color:#999">' . $e->kode . '</span>' : $e->kode;
+            })
+            ->addColumn('status', function ($e) {
+                return $e->peminjaman_belum_kembali_count === 1 ? '<span class="badge bg-secondary">dipinjam</span>' : '<span class="badge bg-success">tersedia</span>';
+            })
+            ->rawColumns(['kode', 'status'])
+            ->make(true);
+    }
+
+    public function hapus_item(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $items_id = [];
+            $buku_id = '';
+            $items = BukuItem::doesntHave('peminjaman_belum_kembali')
+                ->whereIn('id', $request->items)
+                ->get();
+
+            foreach ($items as $row) {
+                $items_id[] = $row->id;
+                $buku_id = $row->buku_id;
+            }
+
+            BukuItem::whereIn('id', $items_id)->update(['status' => false]);
+
+            $stok = BukuItem::where('buku_id', $buku_id)->where('status', true)->count();
+            Buku::where('id', $buku_id)->update(['stok' => $stok]);
+            Weblog::set('Menghapus stok');
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Kode buku berhasil dihapus',
+                'status' => true,
+                'data' => [
+                    'stok' => $stok,
+                ],
+            ]);
+        } catch (\Throwable $th) {
+            Log::warning($th->getMessage());
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Terjadi kesalahan, cobalah kembali',
+                'status' => false,
+                'data' => []
+            ], 500);
+        }
     }
 
     /**
@@ -219,7 +285,6 @@ class BukuController extends Controller
 
         $kode = getKodePenerbit();
         $kode_kategori = getKodeKategori();
-
 
         return view('backend.buku.edit', compact('validator', 'kode', 'kode_kategori', 'buku'));
     }

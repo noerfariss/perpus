@@ -29,25 +29,32 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">judul</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="judul" value="{{$buku->judul}}">
+                                    <input type="text" class="form-control" name="judul" value="{{ $buku->judul }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">pengarang</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="pengarang" value="{{$buku->pengarang}}">
+                                    <input type="text" class="form-control" name="pengarang"
+                                        value="{{ $buku->pengarang }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">isbn</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="isbn" value="{{$buku->isbn}}">
+                                    <input type="text" class="form-control" name="isbn" value="{{ $buku->isbn }}">
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label">stok</label>
-                                <div class="col-sm-9">
-                                    <input type="number" min="0" class="form-control" value="{{$buku->stok}}" disabled>
+                                <div class="col-sm-7">
+                                    <input type="number" min="0" class="form-control" id="stok"
+                                        value="{{ $buku->stok }}" disabled>
+                                </div>
+                                <div class="col-sm-2">
+                                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal"
+                                        data-bs-target="#modalStok" type="button"><i
+                                            class='bx bx-plus-circle'></i></button>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -56,7 +63,7 @@
                                     <select name="kategori_id[]" id="kategori" class="form-control kategori-select"
                                         multiple data-ajax--url="{{ route('drop-kategori') }}">
                                         @foreach ($buku->kategori as $item)
-                                            <option value="{{ $item->id}}" selected>{{$item->kategori}}</option>
+                                            <option value="{{ $item->id }}" selected>{{ $item->kategori }}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -71,7 +78,8 @@
                                 <div class="col-sm-7">
                                     <select name="penerbit_id" id="penerbit_id" class="form-control penerbit-select"
                                         data-ajax--url="{{ route('drop-penerbit') }}">
-                                        <option value="{{ $buku->penerbit_id }}" selected>{{ $buku->penerbit->penerbit }}</option>
+                                        <option value="{{ $buku->penerbit_id }}" selected>{{ $buku->penerbit->penerbit }}
+                                        </option>
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
@@ -100,7 +108,8 @@
                                 <div class="col-sm-9">
                                     <div id="box-foto">
                                         @if ($buku->foto)
-                                            <img src="{{ url('/storage/buku/thum_' . $buku->foto) }}" class="img-thumbnail">
+                                            <img src="{{ url('/storage/buku/thum_' . $buku->foto) }}"
+                                                class="img-thumbnail">
                                         @endif
                                     </div>
                                 </div>
@@ -117,6 +126,26 @@
                     <!-- /Account -->
                 </div>
 
+            </div>
+            <div class="col-sm-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Item
+                            <button class="btn btn-sm btn-danger float-end btn-hapus-buku-item">hapus item</button>
+                        </h5>
+
+                        <table class="table table-sm" id="bukutable">
+                            <thead>
+                                <tr>
+                                    <th>NO</th>
+                                    <th>kode buku</th>
+                                    <th>status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -229,6 +258,23 @@
 
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/dropzone@5/dist/min/dropzone.min.css" type="text/css" />
+
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap5.min.css">
+    <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap5.min.js"></script>
+
+    <link type="text/css" href="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/css/dataTables.checkboxes.css"
+        rel="stylesheet" />
+    <script type="text/javascript"
+        src="//gyrocode.github.io/jquery-datatables-checkboxes/1.2.12/js/dataTables.checkboxes.min.js"></script>
+
+    <style>
+        #bukutable_filter input {
+            margin-left: 0 !important;
+            display: block !important;
+            width: 100% !important;
+        }
+    </style>
 
     <script>
         Dropzone.options.uploadImage = {
@@ -350,6 +396,125 @@
                     });
                 return false;
             });
+
+            // --- HAPUS BUKU ITEM
+            $('.btn-hapus-buku-item').click(function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: 'Peringatan',
+                    text: "Anda yakin ingin tetap menghapus kode buku ini?",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#1A237E',
+                    cancelButtonColor: '#B71C1C',
+                    confirmButtonText: 'Ya, Hapus!',
+                    cancelButtonText: 'Batal',
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        const checkboxList = [];
+                        const datanya = bukutable.column(3).checkboxes.selected();
+
+                        $.each(datanya, function(index, val) {
+                            checkboxList.push(val);
+                        });
+
+
+                        if (checkboxList.length > 0) {
+                            $.ajax({
+                                    type: 'POST',
+                                    url: '{{ route('hapus_buku_item') }}',
+                                    data: {
+                                        _token: $('input[name="_token"]').val(),
+                                        items: checkboxList
+                                    }
+                                })
+                                .done(function(res) {
+                                    const pesan = res.message;
+                                    const stok = res.data.stok;
+
+                                    bukutable.ajax.reload();
+                                    $('#stok').val(stok);
+
+                                    Swal.fire({
+                                        text: pesan,
+                                        icon: 'success',
+                                        showCancelButton: false,
+                                        showConfirmButton: false,
+                                        showCloseButton: true,
+                                        timer: 4500,
+                                    });
+                                })
+                                .fail(function(err) {
+                                    const pesan = err.message;
+                                    Swal.fire({
+                                        text: pesan,
+                                        icon: 'error',
+                                        showCancelButton: false,
+                                        showConfirmButton: false,
+                                        showCloseButton: true,
+                                        timer: 4500,
+                                    });
+                                });
+                            return false;
+                        } else {
+                            Swal.fire({
+                                text: 'Kode buku belum dipilih',
+                                icon: 'error',
+                                showCancelButton: false,
+                                showConfirmButton: false,
+                                showCloseButton: true,
+                                timer: 4500,
+                            });
+                        }
+                    }
+                });
+            });
+        });
+
+        let items = [];
+
+        var bukutable = $('#bukutable').DataTable({
+            scrollX: true,
+            processing: true,
+            serverSide: false,
+            searching: true,
+            lengthChange: false,
+            pageLength: 10,
+            bDestroy: true,
+            ajax: {
+                url: `{{ url('/auth/buku/' . $buku->id) }}`,
+                type: "GET",
+            },
+            columns: [{
+                    data: 'DT_RowIndex'
+                },
+                {
+                    data: 'kode'
+                },
+                {
+                    data: 'status'
+                },
+                {
+                    data: 'id'
+                },
+            ],
+            rowCallback: function(row, data) {
+                if (data.peminjaman_belum_kembali_count === 1) {
+                    // $(row).addClass('disabledSelect');
+                    $(row).find('input[type="checkbox"]').remove();
+                }
+            },
+            columnDefs: [{
+                'targets': 3,
+                'checkboxes': {
+                    'selectRow': true
+                },
+            }],
+            select: {
+                style: 'multi',
+                selector: 'tr.disabledSelect td:not(:first-child)'
+            }
         });
     </script>
 @endsection
