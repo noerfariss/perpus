@@ -41,7 +41,7 @@ class BukuController extends Controller
                 'buku_item' => fn ($e) => $e->has('peminjaman_belum_kembali')->where('status', true),
             ])
             ->withCount([
-                'buku_item' => fn($e) => $e->where('status', true),
+                'buku_item' => fn ($e) => $e->where('status', true),
             ])
             ->when($kategori, function ($e, $kategori) {
                 $e->whereHas('kategori', function ($e) use ($kategori) {
@@ -226,10 +226,17 @@ class BukuController extends Controller
             $items_id = [];
             $buku_id = '';
             $items = BukuItem::doesntHave('peminjaman_belum_kembali')
-                ->whereIn('id', $request->items)
-                ->get();
+                ->whereIn('id', $request->items);
 
-            foreach ($items as $row) {
+            if ($items->count() === 0) {
+                return response()->json([
+                    'message' => 'Data tidak tersedia',
+                    'status' => false,
+                    'data' => []
+                ]);
+            }
+
+            foreach ($items->get() as $row) {
                 $items_id[] = $row->id;
                 $buku_id = $row->buku_id;
             }
@@ -256,6 +263,54 @@ class BukuController extends Controller
                 'message' => 'Terjadi kesalahan, cobalah kembali',
                 'status' => false,
                 'data' => []
+            ], 500);
+        }
+    }
+
+    public function tambah_stok(Request $request)
+    {
+        $request->validate([
+            'stok_new' => 'required|min:0|not_in:0|numeric',
+        ]);
+
+        DB::beginTransaction();
+        try {
+            $buku = Buku::where('id', $request->s_buku_id)->first();
+            $stok_sekarang = $buku->stok;
+            $judul = $buku->judul;
+
+            Buku::where('id', $request->s_buku_id)->update(['stok' => $stok_sekarang + $request->stok_new]);
+
+            $buku_items = [];
+            $kode = getKodeBuku();
+            $newKode = (int) substr($kode, 2);
+
+            for ($i = 0; $i < $request->stok_new; $i++) {
+                $buku_items[] = [
+                    'buku_id' => $request->s_buku_id,
+                    'kode' => 'BK' . str_pad($newKode++, 5, '0', STR_PAD_LEFT),
+                    'created_at' => Carbon::now(),
+                ];
+            }
+            BukuItem::insert($buku_items);
+
+            DB::commit();
+
+            Weblog::set('Menambahkan stok ' . $request->stok_new . ' di buku ' . $judul);
+            return response()->json([
+                'message' => 'Stok berhasil ditambahkan',
+                'status' => true,
+                'data' => []
+            ]);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::warning($th->getMessage());
+            return response()->json([
+                'errors' => [
+                    'data' => [
+                        'Terjadi kesalahan, cobalah kembali'
+                    ],
+                ],
             ], 500);
         }
     }

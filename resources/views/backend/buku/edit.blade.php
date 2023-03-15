@@ -52,9 +52,8 @@
                                         value="{{ $buku->stok }}" disabled>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal"
-                                        data-bs-target="#modalStok" type="button"><i
-                                            class='bx bx-plus-circle'></i></button>
+                                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal" data-bs-target="#modalStok"
+                                        type="button"><i class='bx bx-plus-circle'></i></button>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -250,6 +249,44 @@
             </div>
         </div>
     </div>
+
+    <!-- STOK -->
+    <div class="modal fade" id="modalStok" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalStokLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <form action="{{ route('tambah_stok') }}" method="POST" enctype="multipart/form-data"
+                    id="StokForm">
+                    @csrf
+
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="modalStokLabel">Stok</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <span id="notif_stok"></span>
+
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">stok sekarang</label>
+                            <div class="col-sm-9">
+                                <input type="text" class="form-control" name="stok_sekarang" id="stok_sekarang" value="{{ $buku->stok }}" readonly>
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label class="col-sm-3 col-form-label">tambah</label>
+                            <div class="col-sm-9">
+                                <input type="number" min="1" class="form-control" name="stok_new">
+                                <input type="hidden" name="s_buku_id" value="{{ $buku->id }}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary btn-sm btn-simpan">Tambahkan</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 @endsection
 
 @section('script')
@@ -432,18 +469,32 @@
                                 .done(function(res) {
                                     const pesan = res.message;
                                     const stok = res.data.stok;
+                                    const status = res.status;
 
-                                    bukutable.ajax.reload();
-                                    $('#stok').val(stok);
+                                    if (status === false) {
+                                        Swal.fire({
+                                            text: pesan,
+                                            icon: 'error',
+                                            showCancelButton: false,
+                                            showConfirmButton: false,
+                                            showCloseButton: true,
+                                            timer: 4500,
+                                        });
+                                        return false;
 
-                                    Swal.fire({
-                                        text: pesan,
-                                        icon: 'success',
-                                        showCancelButton: false,
-                                        showConfirmButton: false,
-                                        showCloseButton: true,
-                                        timer: 4500,
-                                    });
+                                    } else {
+                                        bukutable.ajax.reload();
+                                        $('#stok').val(stok);
+
+                                        Swal.fire({
+                                            text: pesan,
+                                            icon: 'success',
+                                            showCancelButton: false,
+                                            showConfirmButton: false,
+                                            showCloseButton: true,
+                                            timer: 4500,
+                                        });
+                                    }
                                 })
                                 .fail(function(err) {
                                     const pesan = err.message;
@@ -469,6 +520,47 @@
                         }
                     }
                 });
+            });
+
+            // --- KATEGORI FORM
+            $('#StokForm').submit(function(e) {
+                e.preventDefault();
+
+                let notif_stok = $('#notif_stok');
+
+                const url = $(this).attr('action');
+                const data = $(this).serialize();
+
+                $.ajax({
+                        type: 'POST',
+                        url: url,
+                        data: data,
+                    })
+                    .done(function(e) {
+                        const msg = e.message;
+                        $(notif_stok).html(`<div class="alert alert-success">${msg}</div>`);
+
+                        bukutable.ajax.reload();
+                        setTimeout(() => {
+                            $('#modalStok').modal('hide');
+                            $(notif_stok).html('');
+
+                        }, 1500);
+                    })
+                    .fail(function(err) {
+                        const errors = err.responseJSON.errors;
+                        let show_notif = '';
+
+                        $.each(errors, function(i, val) {
+                            $.each(val, function(x, y) {
+                                show_notif +=
+                                    `<div class="alert alert-danger">${y}</div>`;
+                            });
+                        });
+
+                        $(notif_stok).html(show_notif);
+                    });
+                return false;
             });
         });
 

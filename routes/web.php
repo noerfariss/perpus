@@ -68,13 +68,13 @@ Route::middleware('xss')->group(function () {
             Route::post('/ajax-buku', [BukuController::class, 'ajax'])->name('ajax-buku');
             Route::post('/ganti-foto-buku', [BukuController::class, 'ganti_foto'])->name('ganti-foto-buku');
             Route::post('/buku/hapus-item', [BukuController::class, 'hapus_item'])->name('hapus_buku_item');
+            Route::post('/buku/tambah-stok', [BukuController::class, 'tambah_stok'])->name('tambah_stok');
 
             Route::resource('kategori', KategoriController::class);
             Route::post('/ajax-kategori', [KategoriController::class, 'ajax'])->name('ajax-kategori');
 
             Route::resource('penerbit', PenerbitController::class);
             Route::post('/ajax-penerbit', [PenerbitController::class, 'ajax'])->name('ajax-penerbit');
-
 
             // Data Master
             Route::resource('siswa', AnggotaController::class);
@@ -87,7 +87,6 @@ Route::middleware('xss')->group(function () {
 
             Route::resource('kelas', KelasController::class);
             Route::post('/ajax-kelas', [KelasController::class, 'ajax'])->name('ajax-kelas');
-
 
             // Pengaturan
             Route::singleton('umum', UmumController::class);
