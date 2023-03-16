@@ -6,10 +6,11 @@
         <div class="row">
             <div class="col-sm-4">
                 <div class="card mb-5">
-                    <h5 class="card-header"><span class="badge bg-danger"><i class='bx bx-up-arrow-alt' ></i> Peminjaman</span></h5>
+                    <h5 class="card-header"><span class="badge bg-success text-dark"><i class='bx bx-down-arrow-alt'></i>
+                            Pengembalian</span></h5>
 
                     <div class="card-body" id="pencarian">
-                        <form action="{{ route('get-anggota') }}" method="POST" id="cari-anggota">
+                        <form action="{{ route('get-anggota-kembali') }}" method="POST" id="cari-anggota">
                             @csrf
                             <input type="text" id="cari" class="form-control" name="anggota"
                                 placeholder="Nomor Induk atau Nomor Anggota">
@@ -73,59 +74,46 @@
 
             <div class="col-sm-12 mt-4">
                 <div class="card">
-                    <h5 class="card-header">Buku</h5>
+                    <h5 class="card-header">Buku
+                        <button type="button" class="btn btn-success float-end btn-proses-kembali"><i class='bx bx-check'
+                                style="font-size:22px; float:left;"></i> Prose kembali</button>
+                    </h5>
 
                     <div class="card-body">
-                        <form action="{{ route('cari-buku') }}" method="POST" id="cari-buku">
+                        <form action="" method="POST" id="cari-buku">
                             @csrf
                             <div class="row">
                                 <div class="col-sm-4">
                                     <input type="text" id="buku" name="buku" class="form-control"
                                         placeholder="Cari atau scan kode buku">
+
+                                </div>
+                                <div class="col-sm-2">
+                                    <input type="checkbox" name="checkall" id="checkall"
+                                        onClick="check_uncheck_checkbox(this.checked);" />
+                                    <label for="checkall">Pilih semua</label>
                                 </div>
                                 <div class="col-sm-8 box-btn-proses-pinjam"></div>
                             </div>
 
                             <div class="row">
 
-                                <div class="col-sm-8">
-                                    <table class="table table-sm mt-4">
+                                <div class="col-sm-12">
+                                    <table class="table table-sm mt-4 nowrap" id="tablepengembalian">
                                         <thead>
                                             <tr>
-                                                <th>No</th>
+                                                <th></th>
                                                 <th>kode buku</th>
                                                 <th>judul</th>
-                                                <th>pengarang</th>
                                                 <th>isbn</th>
-                                                <th></th>
+                                                <th>tgl pinjam</th>
+                                                <th>batas pengembalian</th>
+                                                <th>denda</th>
                                             </tr>
                                         </thead>
-                                        <tbody id="box-item-buku"></tbody>
                                     </table>
                                 </div>
-                                <div class="col-sm-4">
-                                    <div class="box-transaksi">
-                                        <table class="table table-sm">
-                                            <tbody>
-                                                <tr>
-                                                    <td width="110">No. Transaksi</td>
-                                                    <td width="2">:</td>
-                                                    <td><span id="box-no-transaksi"></span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Jumlah</td>
-                                                    <td>:</td>
-                                                    <td><span id="box-jumlah-transaksi">0</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Tanggal</td>
-                                                    <td>:</td>
-                                                    <td><span id="box-tanggal-transaksi">{{ $tanggal_sekarang }}</span></td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+
                             </div>
                         </form>
                     </div>
@@ -214,6 +202,8 @@
                             $(kelas).val(data.kelas === null ? '-' : data.kelas.kelas);
                             $(jabatan).val(data.jabatan);
 
+                            tablepengembalian.ajax.reload();
+
                         } else {
                             notifAlert('alert', msg.message);
                             resetFormAnggota();
@@ -236,77 +226,66 @@
                 return false;
             });
 
+            var kode_buku = [];
+            var tablepengembalian = $('#tablepengembalian').DataTable({
+                scrollX: true,
+                scrollY: "200px",
+                processing: true,
+                serverSide: false,
+                searching: false,
+                lengthChange: false,
+                pageLength: 10,
+                deferLoading: false,
+                paging: false,
+                bDestroy: true,
+                ajax: {
+                    url: "{{ route('pengembalian.daftar_buku') }}",
+                    type: "POST",
+                    data: function(d) {
+                        d._token = $("input[name=_token]").val();
+                        d.nomor_anggota = $('input[name="nomor_anggota"]').val();
+                        d.buku = $('#buku').val();
+                    },
+                },
+                columns: [{
+                        data: 'checkbox'
+                    },
+                    {
+                        data: 'buku_item.kode'
+                    },
+                    {
+                        data: 'buku_item.buku.judul'
+                    },
+                    {
+                        data: 'buku_item.buku.isbn'
+                    },
+                    {
+                        data: 'tgl_pinjam'
+                    },
+                    {
+                        data: 'batas_kembali'
+                    },
+                    {
+                        data: 'buku_item_id'
+                    },
+                ],
+            });
+
             $('#cari-buku').submit(function(e) {
                 e.preventDefault();
 
-                const box_item_buku = $('#box-item-buku');
-                const url = $(this).attr('action');
-                const data = $(this).serialize();
+                const cari_kode = $('#buku').val();
+                $(`.${cari_kode}`).prop('checked', true);
 
-                const buku = $('#buku').val();
-                const cek = $('.cek_kode').text();
-
-                let kode_buku_arr = cekJumlahBuku();
-
-                if (jQuery.inArray(buku, kode_buku_arr) !== -1) {
-                    notifAlert('alert', 'Kode buku sudah ada di daftar');
-                    return false;
-                }
-
-                $.ajax({
-                        type: 'POST',
-                        url: url,
-                        data: data,
-                    })
-                    .done(function(msg) {
-                        const data = msg.data;
-                        const status = msg.status;
-
-                        if (status === true) {
-                            $('#cari-buku #buku').val('').focus();
-                            $(box_item_buku).append(`<tr>
-                                                        <td class="no_urut"></td>
-                                                        <td class="cek_kode">${data.kode}</td>
-                                                        <td>${data.buku.judul}</td>
-                                                        <td>${data.buku.pengarang}</td>
-                                                        <td>${data.buku.isbn}</td>
-                                                        <td><button type="button" class="btn btn-sm btn-dark btn-remove-item"><i class='bx bx-trash-alt' ></i></button></td>
-                                                    </tr>`);
-                            noUrut();
-                            cekJumlahBuku();
-                        } else {
-                            notifAlert('alert', msg.message);
-                        }
-                    })
-                    .fail(function(err) {
-                        const errors = err.responseJSON.errors;
-
-                        let box_notif = '';
-                        $.each(errors, function(i, val) {
-                            $.each(val, function(x, y) {
-                                box_notif += `${y}`;
-                            });
-                        });
-
-                        notifAlert('alert', box_notif);
-                    });
-
-                return false;
+                $('#buku').val('').focus();
             });
 
-            $('#box-item-buku').on('click', '.btn-remove-item', function(e) {
-                e.preventDefault();
-                $(this).parent('td').parent('tr').remove();
-                noUrut();
-                cekJumlahBuku();
-            });
-
-            $('.box-btn-proses-pinjam').on('click', '.btn-proses-pinjam', function(e) {
+            $('.btn-proses-kembali').click(function(e) {
                 e.preventDefault();
 
                 Swal.fire({
                     title: 'Apakah Anda sudah yakin?',
-                    text: "Pastikan data yang akan diinputkan sudah benar",
+                    text: "Pastikan data yang dipilih sudah benar",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#1A237E',
@@ -316,45 +295,55 @@
                 }).then((result) => {
                     if (result.isConfirmed) {
                         const anggota = $('input[name="nomor_anggota"]').val();
-                        const kode_buku = $('.cek_kode');
-                        let kode_buku_arr = [];
-                        $.each(kode_buku, function(i, val) {
-                            kode_buku_arr.push($(this).text());
+                        let buku_id = $('.kode_item:checked');
+                        kode_buku = [];
+                        $.each(buku_id, function(i, item) {
+                            kode_buku.push($(item).val());
                         });
 
-                        const kode_transaksi = $('#box-no-transaksi').text();
+                        if (kode_buku.length > 0) {
+                            $.ajax({
+                                    type: 'POST',
+                                    url: '{{ route("pengembalian.simpan") }}',
+                                    data: {
+                                        _token: $('input[name="_token"]').val(),
+                                        anggota,
+                                        kode_buku,
+                                    }
+                                })
+                                .done(function(msg) {
+                                    notifAlert('success', msg.message);
+                                    // resetFormAnggota();
+                                    tablepengembalian.ajax.reload();
+                                })
+                                .fail(function(err) {
+                                    const errors = err.responseJSON.errors;
 
-                        $.ajax({
-                                type: 'POST',
-                                url: '{{ route('simpan-peminjaman') }}',
-                                data: {
-                                    _token: $('input[name="_token"]').val(),
-                                    anggota,
-                                    kode_buku_arr,
-                                    kode_transaksi
-                                }
-                            })
-                            .done(function(msg) {
-                                notifAlert('success', msg.message);
-                                resetFormAnggota();
-                            })
-                            .fail(function(err) {
-                                const errors = err.responseJSON.errors;
-
-                                let box_notif = '';
-                                $.each(errors, function(i, val) {
-                                    $.each(val, function(x, y) {
-                                        box_notif += `${y}`;
+                                    let box_notif = '';
+                                    $.each(errors, function(i, val) {
+                                        $.each(val, function(x, y) {
+                                            box_notif += `${y}`;
+                                        });
                                     });
-                                });
 
-                                notifAlert('alert', box_notif);
-                            });
-                        return false;
+                                    notifAlert('alert', box_notif);
+                                });
+                            return false;
+                        } else {
+                            notifAlert('alert', 'Kode buku belum dipilih');
+                        }
                     }
                 });
             });
         });
+
+        function check_uncheck_checkbox(isChecked) {
+            if (isChecked) {
+                $('.kode_item').prop('checked', true);
+            } else {
+                $('.kode_item').prop('checked', false);
+            }
+        }
 
         function cekJumlahBuku() {
             let kode_buku_arr = [];
@@ -373,14 +362,6 @@
             }
 
             return kode_buku_arr;
-        }
-
-        function noUrut() {
-            let no_urut_arr = [];
-            let x = 1;
-            $('.no_urut').each(function(i, val) {
-                $('.no_urut').eq(i).text(x++);
-            });
         }
 
         function notifAlert(tipe = 'alert', pesan = '', url) {

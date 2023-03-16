@@ -12,6 +12,7 @@ use App\Http\Controllers\LogController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PeminjamanController;
 use App\Http\Controllers\PenerbitController;
+use App\Http\Controllers\PengembalianController;
 use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UmumController;
@@ -62,6 +63,11 @@ Route::middleware('xss')->group(function () {
             Route::post('/peminjaman/buku', [PeminjamanController::class, 'cari_buku'])->name('cari-buku');
             Route::post('/peminjaman/simpan', [PeminjamanController::class, 'simpan_peminjaman'])->name('simpan-peminjaman');
             Route::get('/peminjaman/notransaksi', [AjaxController::class, 'get_no_transaksi'])->name('get-no-transaksi');
+
+            Route::get('/pengembalian', [PengembalianController::class, 'index'])->name('pengembalian.index');
+            Route::post('/pengembalian/anggota', [PengembalianController::class, 'get_anggota'])->name('get-anggota-kembali');
+            Route::post('/pengembalian/daftar-buku', [PengembalianController::class, 'daftar_buku'])->name('pengembalian.daftar_buku');
+            Route::post('/pengembalian/simpan', [PengembalianController::class, 'proses_kembali'])->name('pengembalian.simpan');
 
             // Data Buku
             Route::resource('buku', BukuController::class);

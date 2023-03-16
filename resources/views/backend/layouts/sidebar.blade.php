@@ -30,7 +30,7 @@
                 </a>
             </li>
             <li class="menu-item {{ menuAktif('pengembalian') }}">
-                <a href="" class="menu-link">
+                <a href="{{ route('pengembalian.index')}}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-down-arrow-alt"></i>
                     <div data-i18n="Analytics">Pengembalian</div>
                 </a>
@@ -54,7 +54,7 @@
             </li>
         @endpermission
 
-        @permission('siswa-read', 'guru-read', 'kelas-read', 'jabatan-read')
+        @permission('siswa-read', 'guru-read', 'kelas-read')
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Anggota</span></li>
 
             <li class="menu-item {{ menuAktif('siswa') }}">
@@ -75,12 +75,6 @@
                     <div data-i18n="Analytics">Kelas</div>
                 </a>
             </li>
-            {{-- <li class="menu-item {{ menuAktif('jabatan') }}">
-                <a href="{{ route('jabatan.index') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bx-hive"></i>
-                    <div data-i18n="Analytics">jabatan</div>
-                </a>
-            </li> --}}
         @endpermission
 
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Pengaturan</span></li>

@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Log;
 
 class PeminjamanController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:peminjaman-read')->only('index');
+        $this->middleware('permission:peminjaman-create')->only(['create', 'store']);
+        $this->middleware('permission:peminjaman-update')->only(['edit', 'update']);
+        $this->middleware('permission:peminjaman-delete')->only('delete');
+    }
     /**
      * Display a listing of the resource.
      *
