@@ -266,7 +266,7 @@
                         data: 'batas_kembali'
                     },
                     {
-                        data: 'buku_item_id'
+                        data: 'denda_sum_denda'
                     },
                 ],
             });

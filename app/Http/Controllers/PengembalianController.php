@@ -75,6 +75,7 @@ class PengembalianController extends Controller
             ->with([
                 'buku_item' => fn ($e) => $e->with('buku'),
             ])
+            ->withSum('denda','denda')
             ->when($buku, function ($e, $buku) {
                 $e->whereHas('buku_item', function ($e) use ($buku) {
                     $e->where('kode', $buku);
@@ -94,6 +95,9 @@ class PengembalianController extends Controller
             })
             ->addColumn('batas_kembali', function ($e) {
                 return Carbon::parse($e->batas_pengembalian)->timezone(zona_waktu())->isoFormat('DD MMMM YYYY');
+            })
+            ->editColumn('denda_sum_denda', function($e){
+                return 'Rp '.number_format($e->denda_sum_denda, 0, ', ', '.');
             })
             ->rawColumns(['checkbox'])
             ->make(true);

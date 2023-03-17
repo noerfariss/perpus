@@ -20,4 +20,9 @@ class Peminjaman extends Model
     {
         return $this->belongsTo(BukuItem::class, 'buku_item_id');
     }
+
+    public function denda()
+    {
+        return $this->hasMany(Denda::class, 'peminjaman_id');
+    }
 }

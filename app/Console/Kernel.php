@@ -15,7 +15,7 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('visit:autocheckout')->dailyAt('23:55')->timezone('Asia/Jakarta');
+        $schedule->command('denda:traking')->dailyAt('18:30')->timezone(zona_waktu());
     }
 
     /**
