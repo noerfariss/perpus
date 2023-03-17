@@ -4,3 +4,17 @@
 * PHP min. 8.0.25
 
 DOKUMENTASI API
+
+* Auth
+- Login
+- Logout
+
+* Profil
+- ShowUser
+- EditUser
+- EditPassword
+- EditFoto
+
+* Buku
+- KategoriByKelas
+- DetailBuku
