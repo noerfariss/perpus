@@ -43,7 +43,7 @@ Route::get('/email', function () {
 });
 
 Route::middleware('xss')->group(function () {
-    Route::any('/', [LoginController::class, 'index'])->name('login');
+    Route::any('/login', [LoginController::class, 'index'])->name('login');
 
     Route::middleware(['auth'])->group(function () {
         Route::prefix('auth')->group(function () {

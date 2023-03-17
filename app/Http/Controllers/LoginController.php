@@ -27,7 +27,7 @@ class LoginController extends Controller
                 Weblog::set('Login');
                 return redirect(route('dashboard'));
             } else {
-                return redirect('/')->with([
+                return redirect(route('login'))->with([
                     'pesan' => '<div class="alert alert-danger">Username atau password Anda salah!</div>'
                 ]);
             }
