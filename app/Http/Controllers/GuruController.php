@@ -75,7 +75,7 @@ class GuruController extends Controller
                 $anggota = '<a href="#" class="btn-link btn-anggota"
                             data-id="' . $e->id . '"
                             data-anggota="' . $e->nomor_anggota . '"
-                            data-induk="' . $e->nomor_anggota . '"
+                            data-induk="' . $e->nomor_induk . '"
                             data-foto="' . $e->foto . '"
                             data-nama="' . $e->nama . '"
                             data-jenis_kelamin="' . strip_tags($jenis_kelamin) . '"
