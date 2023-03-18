@@ -6,7 +6,7 @@
 ## DOKUMENTASI API
 
 ### Auth
-- Login
+- Login | POST
 
 ```
 {{baseUrl}}/login
@@ -33,7 +33,7 @@
 }
 ```
 
-- Logout
+- Logout |GET
 ```
 {{baseUrl}}/logout
 
@@ -56,7 +56,7 @@
 ```
 
 ### Profil
-- ShowUser
+- ShowUser | GET
 ```
 {{baseUrl}}/user
 
@@ -78,7 +78,37 @@
 }
 ```
 
-- EditUser
+- EditUser | PUT
+```
+{{baseUrl}}/user
+
+// Parameter
+{
+    "Authorization ": "Bearer isi-token-nya",
+
+    <!-- Raw Data -->
+    {
+        "nama" : "Elfiansyah",
+        "jenis_kelamin" : "L",
+        "kota_id" : 1212,
+        "tanggal_lahir" : "2007-12-31",
+        "kelas_id" : "14",
+        "alamat" : "tengah tengah"
+    }
+}
+
+// Return Success ---- 200
+{
+    "message": "Data berhasil ditemukan",
+    "success": true,
+    "data": [] <----- isi datanyaaa
+}
+
+// Return Errors ---- 401
+{
+    "message": "Unauthenticated.",
+}
+
 - EditPassword
 - EditFoto
 
