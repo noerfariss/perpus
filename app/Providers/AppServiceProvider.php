@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Umum;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,5 +37,8 @@ class AppServiceProvider extends ServiceProvider
                 'favicon' => ($umum->favicon === NULL || $umum->favicon === '' || $umum->favicon == 'favicon') ? 'Admin' : ''.url('/storage/foto/'.$umum->favicon).'',
             ]);
         });
+
+        Schema::defaultStringLength(191);
+
     }
 }
