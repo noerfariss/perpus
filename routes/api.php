@@ -23,6 +23,8 @@ Route::middleware('xss')->group(function () {
 
         Route::prefix('profil')->group(function(){
             Route::apiSingleton('user', ProfilController::class);
+            Route::post('/password', [ProfilController::class, 'password']);
+            Route::post('/ganti-foto', [ProfilController::class, 'ganti_foto']);
         });
 
     });
