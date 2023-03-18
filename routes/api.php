@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Api\ProfilController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +20,10 @@ Route::middleware('xss')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout');
-        Route::get('/user', [AuthController::class, 'cek_user'])->name('api.cek_user');
+
+        Route::prefix('profil')->group(function(){
+            Route::apiSingleton('user', ProfilController::class);
+        });
+
     });
 });

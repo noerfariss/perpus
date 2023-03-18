@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anggota;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -47,18 +48,6 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
             return $this->responError('Terjadi kesalahan, cobalah kembali');
-        }
-    }
-
-    public function cek_user()
-    {
-        try {
-            $user = Auth::user();
-            return $this->responOk('Data berhasil ditemukan', $user);
-
-        } catch (\Throwable $th) {
-            Log::warning($th->getMessage());
-            return $this->responError(kode: 422);
         }
     }
 }
