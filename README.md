@@ -6,7 +6,7 @@
 ## DOKUMENTASI API
 
 ### Auth
-- Login | POST
+- Login ===== ![#f03c15](https://placehold.co/15x15/f03c15/f03c15.png) POST
 
 ```
 {{baseUrl}}/login
@@ -33,7 +33,7 @@
 }
 ```
 
-- Logout |GET
+- Logout ===== ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) GET
 ```
 {{baseUrl}}/logout
 
@@ -56,7 +56,7 @@
 ```
 
 ### Profil
-- ShowUser | GET
+- ShowUser ===== ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) GET
 ```
 {{baseUrl}}/user
 
@@ -78,7 +78,7 @@
 }
 ```
 
-- EditUser | PUT
+- EditUser ===== ![#c5f015](https://placehold.co/15x15/c5f015/c5f015.png) PUT
 ```
 {{baseUrl}}/user
 
@@ -108,6 +108,7 @@
 {
     "message": "Unauthenticated.",
 }
+```
 
 - EditPassword
 - EditFoto
@@ -115,3 +116,4 @@
 ### Buku
 - KategoriByKelas
 - DetailBuku
+
