@@ -301,7 +301,9 @@ class BukuController extends Controller
             return response()->json([
                 'message' => 'Stok berhasil ditambahkan',
                 'status' => true,
-                'data' => []
+                'data' => [
+                    'new_stok' => $stok_sekarang + $request->stok_new,
+                ]
             ]);
         } catch (\Throwable $th) {
             DB::rollBack();

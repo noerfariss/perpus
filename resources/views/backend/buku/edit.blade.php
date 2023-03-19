@@ -561,8 +561,10 @@
                     })
                     .done(function(e) {
                         const msg = e.message;
+                        const new_stok = e.data.new_stok;
                         $(notif_stok).html(`<div class="alert alert-success">${msg}</div>`);
 
+                        $('#stok').val(new_stok);
                         bukutable.ajax.reload();
                         setTimeout(() => {
                             $('#modalStok').modal('hide');
