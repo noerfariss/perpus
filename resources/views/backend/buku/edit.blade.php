@@ -375,9 +375,6 @@
         }
 
         $(document).ready(function() {
-            $('#kode_penerbit').val('{{ $kode }}');
-            $('#kode_kategori').val('{{ $kode_kategori }}');
-
             // --- PENERBIT FORM
             $('#PenerbitForm').submit(function(e) {
                 e.preventDefault();
