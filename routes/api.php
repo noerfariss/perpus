@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\KelasController;
 use App\Http\Controllers\Api\ProfilController;
+use App\Http\Controllers\Api\KotaController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +27,11 @@ Route::middleware('xss')->group(function () {
             Route::apiSingleton('user', ProfilController::class);
             Route::post('/password', [ProfilController::class, 'password']);
             Route::post('/ganti-foto', [ProfilController::class, 'ganti_foto']);
+        });
+
+        Route::prefix('master')->group(function(){
+            Route::apiResource('kelas', KelasController::class);
+            Route::apiResource('kota', KotaController::class);
         });
 
     });

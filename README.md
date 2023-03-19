@@ -188,6 +188,92 @@
 }
 ```
 
+### DATA MASTER
+- Kelas ===== ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) GET
+```
+{{baseUrl}}/master/kelas
+// Parameter
+{
+    "Authorization ": "Bearer isi-token-nya",
+}
+
+// Return Success ---- 200
+{
+    "message": "Success",
+    "success": true,
+    "data": [] <----- isi datanyaaa
+}
+
+// Return Errors ---- 401
+{
+    "message": "Unauthenticated.",
+}
+```
+
+- KelasDetail ===== ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) GET
+```
+{{baseUrl}}/master/kelas/:IDKELAS
+// Parameter
+{
+    "Authorization ": "Bearer isi-token-nya",
+}
+
+// Return Success ---- 200
+{
+    "message": "Success",
+    "success": true,
+    "data": [] <----- isi datanyaaa
+}
+
+// Return Errors ---- 401
+{
+    "message": "Unauthenticated.",
+}
+```
+
+- Kota ===== ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) GET
+```
+{{baseUrl}}/master/kota
+// Parameter
+{
+    "Authorization ": "Bearer isi-token-nya",
+}
+
+// Return Success ---- 200
+{
+    "message": "Success",
+    "success": true,
+    "data": [] <----- isi datanyaaa
+}
+
+// Return Errors ---- 401
+{
+    "message": "Unauthenticated.",
+}
+```
+
+- KotaDetail ===== ![#1589F0](https://placehold.co/15x15/1589F0/1589F0.png) GET
+```
+{{baseUrl}}/master/kota/:IDKOTA
+// Parameter
+{
+    "Authorization ": "Bearer isi-token-nya",
+}
+
+// Return Success ---- 200
+{
+    "message": "Success",
+    "success": true,
+    "data": [] <----- isi datanyaaa
+}
+
+// Return Errors ---- 401
+{
+    "message": "Unauthenticated.",
+}
+```
+
+
 ### Buku
 - KategoriByKelas
 - DetailBuku
