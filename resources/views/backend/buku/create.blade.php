@@ -56,8 +56,7 @@
                                         data-ajax--url="{{ route('drop-kategori') }}"></select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal"
-                                        data-bs-target="#modalKategori" type="button"><i
+                                    <button class="btn btn-sm btn-dark" onclick="openKategoriModal()" type="button"><i
                                             class='bx bx-plus-circle'></i></button>
                                 </div>
                             </div>
@@ -68,8 +67,7 @@
                                         data-ajax--url="{{ route('drop-penerbit') }}"></select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal"
-                                        data-bs-target="#modalPenerbit" type="button"><i
+                                    <button class="btn btn-sm btn-dark" onclick="openPenerbitModal()" type="button"><i
                                             class='bx bx-plus-circle'></i></button>
                                 </div>
                             </div>
@@ -255,10 +253,35 @@
             }
         }
 
-        $(document).ready(function() {
-            $('#kode_penerbit').val('{{ $kode }}');
-            $('#kode_kategori').val('{{ $kode_kategori }}');
+        function openKategoriModal(){
+            $('#kode_kategori').val('');
+            $('#modalKategori').modal('show');
 
+            $.ajax({
+                type : 'GET',
+                url : '{{ route("buku.get_kode_kategori") }}',
+            })
+            .done(function(res){
+                const kode = res.data;
+                $('#kode_kategori').val(kode);
+            });
+        }
+
+        function openPenerbitModal(){
+            $('#kode_penerbit').val('');
+            $('#modalPenerbit').modal('show');
+
+            $.ajax({
+                type : 'GET',
+                url : '{{ route("buku.get_kode_penerbit") }}',
+            })
+            .done(function(res){
+                const kode = res.data;
+                $('#kode_penerbit').val(kode);
+            });
+        }
+
+        $(document).ready(function() {
             // --- PENERBIT FORM
             $('#PenerbitForm').submit(function(e) {
                 e.preventDefault();
@@ -321,7 +344,6 @@
                         setTimeout(() => {
                             $('#modalKategori').modal('hide');
                             $(notif_kategori).html('');
-                            $('input[name="kode"]').val('');
                             $('input[name="kategori"]').val('');
                         }, 1500);
                     })

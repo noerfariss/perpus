@@ -106,6 +106,7 @@ class BukuController extends Controller
      */
     public function create()
     {
+
         $validator = JsValidatorFacade::make([
             'judul' => 'required|unique:bukus,judul',
             'pengarang' => 'nullable',
@@ -456,5 +457,21 @@ class BukuController extends Controller
                 'file' => $foto,
             ]);
         }
+    }
+
+    public function getKodeKategori()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => getKodeKategori(),
+        ]);
+    }
+
+    public function getKodePenerbit()
+    {
+        return response()->json([
+            'success' => true,
+            'data' => getKodePenerbit(),
+        ]);
     }
 }

@@ -67,8 +67,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal"
-                                        data-bs-target="#modalKategori" type="button"><i
+                                    <button class="btn btn-sm btn-dark" onclick="openKategoriModal()" type="button"><i
                                             class='bx bx-plus-circle'></i></button>
                                 </div>
                             </div>
@@ -82,8 +81,7 @@
                                     </select>
                                 </div>
                                 <div class="col-sm-2">
-                                    <button class="btn btn-sm btn-dark" data-bs-toggle="modal"
-                                        data-bs-target="#modalPenerbit" type="button"><i
+                                    <button class="btn btn-sm btn-dark" onclick="openPenerbitModal()" type="button"><i
                                             class='bx bx-plus-circle'></i></button>
                                 </div>
                             </div>
@@ -255,8 +253,7 @@
         aria-labelledby="modalStokLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
             <div class="modal-content">
-                <form action="{{ route('tambah_stok') }}" method="POST" enctype="multipart/form-data"
-                    id="StokForm">
+                <form action="{{ route('tambah_stok') }}" method="POST" enctype="multipart/form-data" id="StokForm">
                     @csrf
 
                     <div class="modal-header">
@@ -269,7 +266,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label">stok sekarang</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" name="stok_sekarang" id="stok_sekarang" value="{{ $buku->stok }}" readonly>
+                                <input type="text" class="form-control" name="stok_sekarang" id="stok_sekarang"
+                                    value="{{ $buku->stok }}" readonly>
                             </div>
                         </div>
                         <div class="row mb-3">
@@ -336,6 +334,34 @@
                 $('.modal-body #notif').html(`<div class="alert alert-danger">${pesan}</div>`);
             }
         };
+
+        function openKategoriModal() {
+            $('#kode_kategori').val('');
+            $('#modalKategori').modal('show');
+
+            $.ajax({
+                    type: 'GET',
+                    url: '{{ route('buku.get_kode_kategori') }}',
+                })
+                .done(function(res) {
+                    const kode = res.data;
+                    $('#kode_kategori').val(kode);
+                });
+        }
+
+        function openPenerbitModal() {
+            $('#kode_penerbit').val('');
+            $('#modalPenerbit').modal('show');
+
+            $.ajax({
+                    type: 'GET',
+                    url: '{{ route('buku.get_kode_penerbit') }}',
+                })
+                .done(function(res) {
+                    const kode = res.data;
+                    $('#kode_penerbit').val(kode);
+                });
+        }
 
         function simpanFoto() {
             let foto = $('#foto').val();
