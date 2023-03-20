@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\BukuController;
+use App\Http\Controllers\Api\KategoriController;
 use App\Http\Controllers\Api\KelasController;
 use App\Http\Controllers\Api\ProfilController;
 use App\Http\Controllers\Api\KotaController;
@@ -28,6 +30,12 @@ Route::middleware('xss')->group(function () {
             Route::apiSingleton('user', ProfilController::class);
             Route::post('/password', [ProfilController::class, 'password']);
             Route::post('/ganti-foto', [ProfilController::class, 'ganti_foto']);
+        });
+
+        Route::prefix('buku')->group(function(){
+            Route::get('/kategori', [KategoriController::class, 'index']);
+            Route::get('/kategori/{id}', [KategoriController::class, 'show']);
+            Route::get('/list', [BukuController::class, 'index']);
         });
 
         Route::prefix('master')->group(function(){
