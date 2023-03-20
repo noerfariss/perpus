@@ -171,7 +171,6 @@ class ProfilController extends Controller
 
                 DB::commit();
                 return $this->responOk(data: $data);
-
             } else {
                 $error = [
                     'foto' => [
@@ -179,7 +178,7 @@ class ProfilController extends Controller
                     ],
                 ];
 
-                return $this->responError(data:$error);
+                return $this->responError(data: $error);
             }
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());

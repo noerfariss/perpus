@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anggota;
+use App\Models\Banner;
+use App\Models\Kategori;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 
@@ -45,6 +48,43 @@ class AuthController extends Controller
             $user->tokens()->delete();
 
             return $this->responOk('Berhasil Logout', $user);
+        } catch (\Throwable $th) {
+            Log::warning($th->getMessage());
+            return $this->responError('Terjadi kesalahan, cobalah kembali');
+        }
+    }
+
+    public function init_home()
+    {
+        $data = [];
+
+        try {
+            $kategori = Kategori::query()
+                ->has('buku')
+                ->with([
+                    'buku' => fn ($e) => $e->select('id', 'judul', 'pengarang', 'isbn')
+                        ->where('status', true)
+                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/", foto) end as foto')),
+                ])
+                ->where('status', true)
+                ->orderBy('id', 'desc')
+                ->limit(3)
+                ->get()
+                ->map(function ($e) {
+                    return $e->setRelation('buku', $e->buku->take(5));
+                });
+
+            $banner = Banner::where('status', true)
+                ->select('id','keterangan')
+                ->addSelect(DB::raw('concat("' . url('/storage/banner') . '","/", gambar) as foto'))
+                ->orderBy('id', 'desc')
+                ->limit(5)
+                ->get();
+
+            $data['banner'] = $banner;
+            $data['kategori'] = $kategori;
+
+            return $this->responOk(data: $data);
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
             return $this->responError('Terjadi kesalahan, cobalah kembali');

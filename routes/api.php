@@ -22,6 +22,7 @@ Route::middleware('xss')->group(function () {
 
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout');
+        Route::get('/init-home', [AuthController::class, 'init_home']);
 
         Route::prefix('profil')->group(function(){
             Route::apiSingleton('user', ProfilController::class);
