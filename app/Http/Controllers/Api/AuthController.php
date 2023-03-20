@@ -75,7 +75,7 @@ class AuthController extends Controller
                 });
 
             $banner = Banner::where('status', true)
-                ->select('id','keterangan')
+                ->select('id', 'keterangan')
                 ->addSelect(DB::raw('concat("' . url('/storage/banner') . '","/", gambar) as foto'))
                 ->orderBy('id', 'desc')
                 ->limit(5)
