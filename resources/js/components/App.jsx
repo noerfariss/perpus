@@ -1,26 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import About from './About';
-import Home from './Home';
-import Layout from './Layout';
-import notFound from './notFound';
+import About from './Pages/About';
+import Home from './Pages/Home';
+import Menu from './Navigasi/Menu';
 
 const App = () => {
-    const [judul, setJudul] = useState('awal');
-
-    const tekan = () => {
-        setJudul('okkk');
-    }
-
     return (
         <BrowserRouter>
-            <Routes>
-                <Route path="/" element={<Layout></Layout>}>
-                    <Route index element={<Home></Home>}></Route>
-                    <Route path='/about' element={<About></About>}></Route>
-                    <Route path='*' element={<notFound></notFound>}></Route>
-                </Route>
-            </Routes>
+           <Menu></Menu>
+           <Routes>
+                <Route path='/' element={<Home></Home>}></Route>
+                <Route path='/about' element={<About></About>}></Route>
+           </Routes>
         </BrowserRouter>
     );
 };

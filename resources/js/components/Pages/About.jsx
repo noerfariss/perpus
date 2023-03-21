@@ -1,13 +1,11 @@
 import React, { useEffect } from 'react';
 
 const About = () => {
-    useEffect(() => {
-        console.log('load About');
-    }, []);
 
     return (
-        <div>
-           About us
+        <div className='container'>
+           <h1>Profil</h1>
+           <h3>ini adalah profil sekolah</h3>
         </div>
     );
 };

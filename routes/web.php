@@ -42,6 +42,10 @@ Route::get('/email', function () {
     }
 });
 
+Route::get('/', function(){
+    return view('frontend.app');
+});
+
 Route::middleware('xss')->group(function () {
     Route::any('/login', [LoginController::class, 'index'])->name('login');
 
