@@ -6,17 +6,18 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Routing\Controller as BaseController;
+use stdClass;
 
 class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    public function responOk($message = 'Success', $data = [], $token = '')
+    public function responOk($message = 'Success', $data = '', $token = '')
     {
         $data = [
             'message' => $message,
             'success' => true,
-            'data' => $data,
+            'data' => $data ? $data : new stdClass(),
         ];
 
         if ($token !== '') {
@@ -26,12 +27,12 @@ class Controller extends BaseController
         return response()->json($data);
     }
 
-    public function responError($message = 'Error', $data = [], $kode = 500)
+    public function responError($message = 'Error', $data = '', $kode = 500)
     {
         $data = [
             'message' => $message,
             'success' => false,
-            'errors' => $data,
+            'errors' => $data ? $data : new stdClass(),
         ];
 
         return response()->json($data, $kode);

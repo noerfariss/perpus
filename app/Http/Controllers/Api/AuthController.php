@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Models\Anggota;
 use App\Models\Banner;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
