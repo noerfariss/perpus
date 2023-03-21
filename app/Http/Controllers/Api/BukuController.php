@@ -113,6 +113,7 @@ class BukuController extends Controller
                             ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/", foto) end as foto')),
                     ]),
                 ])
+                ->withSum('denda','denda')
                 ->where('anggota_id', Auth::id())
                 ->where('status', true)
                 ->whereBetween('created_at', [$from.' 00:00:00', $to.' 23:59:59'])
@@ -126,6 +127,7 @@ class BukuController extends Controller
                         'batas_pengembalian' => Carbon::parse($item->batas_pengembalian)->isoFormat('DD MMM YYYY'),
                         'status_pinjam' => $item->is_kembali === 1 ? 'Dikembalikan' : 'Dipinjam',
                         'tgl_kembali' => $item->is_kembali === 1 ? Carbon::parse($item->updated_at)->timezone(zona_waktu())->isoFormat('DD MMM YYYY') : '-',
+                        'denda' => $item->denda_sum_denda === null ? 0 : (int) $item->denda_sum_denda,
                         'buku' => [
                             'id' => $item->buku_item->buku->id,
                             'kode_buku' => $item->buku_item->kode,
