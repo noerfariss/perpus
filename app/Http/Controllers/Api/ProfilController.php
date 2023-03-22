@@ -48,7 +48,10 @@ class ProfilController extends Controller
                 'kelas',
                 'kota'
             ])
-                ->where('id', Auth::id())->first();
+                ->where('id', Auth::id())
+                ->select('*')
+                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
+                ->first();
             return $this->responOk('Data berhasil ditemukan', $user);
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
