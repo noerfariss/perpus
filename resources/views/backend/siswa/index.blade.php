@@ -167,8 +167,7 @@
 
                 </div>
                 <div class="modal-footer">
-                    <a href="{{ route('siswa.kartu', ['anggota' => '2023KS0004'])}}" target="_blank" class="btn btn-primary btn-sm">Download kartu</a>
-                    {{-- <button type="submit" class="btn btn-primary btn-sm">Download Kartu</button> --}}
+                    <a href="" target="_blank" class="btn btn-primary btn-sm btn-kartu">Download kartu</a>
                 </div>
             </div>
         </div>
@@ -288,6 +287,8 @@
 
             $('#modalDetailAnggota').modal('show');
 
+            const url = '{{ url("/auth/siswa/kartu") }}';
+            $('.btn-kartu').attr('href',`${url}/${anggota}`);
             $('.dt_nomor_anggota').val(anggota);
             $('.dt_nomor_induk').val(induk);
             $('.dt_nama').val(nama);

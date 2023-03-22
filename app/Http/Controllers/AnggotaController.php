@@ -6,6 +6,7 @@ use App\Exports\AnggotaExport;
 use App\Facade\Weblog;
 use App\Http\Requests\PasswordRequest;
 use App\Models\Anggota;
+use App\Models\Umum;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -406,11 +407,16 @@ class AnggotaController extends Controller
 
     public function kartu($id)
     {
-        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-        $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128, widthFactor:1,  height:40)) . '">';
+        $anggota = Anggota::with(['kelas', 'kota'])->where('nomor_anggota', $id)->first();
+        if ($anggota === null) {
+            abort(404);
+        }
 
-        $data = 'oke';
-        $pdf = Pdf::loadView('backend.siswa.kartu', compact('data', 'barcode'));
+        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+        $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128, widthFactor: 1,  height: 40)) . '">';
+
+        $sekolah = Umum::with(['provinsi', 'kota'])->first();
+        $pdf = Pdf::loadView('backend.siswa.kartu', compact('sekolah', 'anggota', 'barcode'));
         $pdf->set_paper([0, 0, 243.78, 158.74]); // -------- ukuran ID CARD 8.6cm * 5.6cm
         return $pdf->stream();
     }

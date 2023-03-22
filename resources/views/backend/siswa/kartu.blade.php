@@ -5,15 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>kartu</title>
+    <title>KARTU ANGGOTA</title>
     <style>
         .page-break {
             page-break-after: always;
-        }
-
-        body {
-            background: url({{ public_path('/storage/foto/bg-kartu.jpg') }}) no-repeat;
-            background-size:cover;
         }
 
         @page {
@@ -21,9 +16,23 @@
             font-size: 11px;
             background-image: url({{ public_path('/storage/foto/bg-kartu.jpg') }})
         }
-        .wrapper{
-            margin: 3mm;
+
+        .wrapper {
+            background: url("{{ public_path('/storage/foto/bg-kartu.jpg') }}") no-repeat;
+            background-size: cover;
+            width: 100%;
+            height: 100%;
         }
+        .wrapper-back{
+            background: #101D93;
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+        .container {
+            padding: 3mm 4mm;
+        }
+
         header {
             margin: 0 auto;
             display: block;
@@ -70,6 +79,14 @@
             font-size: 12px;
         }
 
+        #body ol {
+            padding-left: 4mm;
+        }
+
+        #body ol li {
+            font-size: 9px;
+        }
+
         table {
             margin-top: 5px;
             width: 100%;
@@ -87,14 +104,13 @@
         #foto {
             width: 2cm;
             height: 2.5cm;
-            border: 1px solid;
             border-radius: 8px;
             overflow: hidden;
             position: absolute;
             right: 0;
             background: #999;
-            margin-top: -40px;
-            margin-right: 10px;
+            margin-top: -35px;
+            margin-right: 16px;
         }
 
         #barcode {
@@ -106,58 +122,92 @@
 
 <body>
     <section class="wrapper">
-        <header>
-            <table>
-                <tr>
-                    <td width="35" valign="top">
-                        <div id="logo-kiri"><img src="{{ public_path('/storage/foto/thum_1679297466.png') }}"
-                                width="50"></div>
-                    </td>
-                    <td valign="top">
-                        <h2>Kartu Anggota perpustakaan</h2>
-                        <h1>smpn 1 karossa</h1>
-                        <p>Karossa, Kec. Karossa, Kabupaten Mamuju, <br> Sulawesi Barat 91512</p>
-                        <p>Telp: 032493493 | Email: smpn1karossa@gmail.com</p>
-                    </td>
-                    <td width="35" align="right" valign="top">
-                        <div id="logo-kanan"><img src="{{ public_path('/storage/foto/thum_1679297466.png') }}"
-                                width="50"></div>
-                    </td>
-                </tr>
-            </table>
-        </header>
-        <section id="body">
-            <table>
-                <tr>
-                    <td colspan="3">
-                        <h1>MUHAMMAD TSAQIF ATMADEVA</h1>
-                    </td>
-                </tr>
-                <tr>
-                    <td width="22%">No. Anggota</td>
-                    <td width="1%">:</td>
-                    <td width="75%">23423423423</td>
-                </tr>
-                <tr>
-                    <td>Kelas</td>
-                    <td>:</td>
-                    <td>VII C</td>
-                </tr>
-                <tr>
-                    <td>Jenis Kelamin</td>
-                    <td>:</td>
-                    <td>Laki-laki</td>
-                </tr>
-            </table>
+        <div class="container">
+            <header>
+                <table>
+                    <tr>
+                        <td width="35" valign="top">
+                            <div id="logo-kiri"><img src="{{ public_path('/storage/foto/thum_1679297466.png') }}"
+                                    width="50"></div>
+                        </td>
+                        <td valign="top">
+                            <h2>Kartu Anggota perpustakaan</h2>
+                            <h1>{{ $sekolah->nama}}</h1>
+                            <p>{{ $sekolah->alamat }}, {{ ucfirst(strtolower($sekolah->kota->kota)) }} <br> {{ ucwords(strtolower($sekolah->provinsi->provinsi)) }}</p>
+                            <p>Telp: {{ $sekolah->telpon }} | Email: {{ $sekolah->email }} </p>
+                        </td>
+                        <td width="35" align="right" valign="top">
+                            <div id="logo-kanan"><img src="{{ public_path('/storage/foto/thum_1679297466.png') }}"
+                                    width="50"></div>
+                        </td>
+                    </tr>
+                </table>
+            </header>
+            <section id="body">
+                <table>
+                    <tr>
+                        <td colspan="3">
+                            <h1>{{ strtoupper($anggota->nama) }}</h1>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td width="22%">No. Anggota</td>
+                        <td width="1%">:</td>
+                        <td width="75%">{{ $anggota->nomor_anggota }}</td>
+                    </tr>
+                    <tr>
+                        <td>Kelas</td>
+                        <td>:</td>
+                        <td>{{ $anggota->kelas->kelas }}</td>
+                    </tr>
+                    <tr>
+                        <td>Jenis Kelamin</td>
+                        <td>:</td>
+                        <td>{{ $anggota->jenis_kelamin === 'L' ? 'Laki-laki' : 'Perempuan' }}</td>
+                    </tr>
+                </table>
 
-            <div id="foto">
+                <div id="foto">
+                    <img src="{{ $anggota->foto === null || $anggota->foto == '' ? public_path('/storage/foto/pasfoto.jpg') : public_path('/storage/anggota').'/'.$anggota->foto }}" width="100%">
+                </div>
 
-            </div>
+                <div id="barcode">
+                    {!! $barcode !!}
+                </div>
+            </section>
+        </div>
+    </section>
 
-            <div id="barcode">
-                {!! $barcode !!}
-            </div>
-        </section>
+    <section class="page-break"></section>
+
+    <section class="wrapper-back">
+        <div class="container">
+            <header>
+                <table>
+                    <tr>
+                        <td width="35" valign="top">
+
+                        </td>
+                        <td valign="top">
+                            <h2>TATA tertib perpustakaan</h2>
+                            <h1>{{ $sekolah->nama}}</h1>
+                        </td>
+                        <td width="35" align="right" valign="top">
+
+                        </td>
+                    </tr>
+                </table>
+            </header>
+            <section id="body">
+                <ol>
+                    <li>Berpakaian sopan dan tidak diperkenankan memakai kaos oblong, jaket dan sandal.</li>
+                    <li>Mengisi daftar pengunjung yang sudah disediakan.</li>
+                    <li>Menjaga kerapihan bahan pustaka, kebersihan, keamanan dan ketenangan belajar.</li>
+                    <li>Tidak diperkenankan membawa makanan dan minuman atau pun makan-makan dan merokok di ruang perpustakaan.</li>
+                    <li>Memperlihatkan kepada petugas barang/buku yang dibawa pada saat masuk dan keluar perpustakaan.</li>
+                </ol>
+            </section>
+        </div>
     </section>
 </body>
 
