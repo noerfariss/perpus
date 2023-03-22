@@ -413,7 +413,7 @@ class AnggotaController extends Controller
         }
 
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
-        $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128, widthFactor: 1,  height: 40)) . '">';
+        $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($anggota->nomor_anggota, $generator::TYPE_CODE_128, widthFactor: 1,  height: 40)) . '">';
 
         $sekolah = Umum::with(['provinsi', 'kota'])->first();
         $pdf = Pdf::loadView('backend.siswa.kartu', compact('sekolah', 'anggota', 'barcode'));
