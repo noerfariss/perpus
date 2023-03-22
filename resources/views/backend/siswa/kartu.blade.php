@@ -115,7 +115,11 @@
 
         #barcode {
             margin: 8px 0 0 0;
-            display: block;
+            display: inline-block;
+            background: white;
+            border:1px solid rgb(191, 191, 191);
+            padding:4px;
+            border-radius: 4px;
         }
     </style>
 </head>
