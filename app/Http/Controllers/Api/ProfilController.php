@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Anggota;
+use App\Models\Umum;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -191,5 +193,22 @@ class ProfilController extends Controller
 
             return $this->responError('Terjadi kesalahan, cobalah kembali');
         }
+    }
+
+    public function kartu_anggota()
+    {
+        $anggota = Anggota::with(['kelas', 'kota'])->where('nomor_anggota', Auth::user()->nomor_anggota)->first();
+        if ($anggota === null) {
+            return $this->responError('Data tidak ditemukan', kode:404);
+        }
+
+        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+        $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($anggota->nomor_anggota, $generator::TYPE_CODE_128, widthFactor: 1,  height: 40)) . '">';
+
+        $sekolah = Umum::with(['provinsi', 'kota'])->first();
+        $pdf = Pdf::loadView('backend.siswa.kartu', compact('sekolah', 'anggota', 'barcode'));
+        $pdf->set_paper([0, 0, 243.78, 158.74]); // -------- ukuran ID CARD 8.6cm * 5.6cm
+
+        return $pdf->stream();
     }
 }

@@ -30,6 +30,7 @@ Route::middleware('xss')->group(function () {
             Route::apiSingleton('user', ProfilController::class);
             Route::post('/password', [ProfilController::class, 'password']);
             Route::post('/ganti-foto', [ProfilController::class, 'ganti_foto']);
+            Route::get('/kartu', [ProfilController::class, 'kartu_anggota']);
         });
 
         Route::prefix('buku')->group(function(){

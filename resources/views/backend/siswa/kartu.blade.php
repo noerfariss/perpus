@@ -137,7 +137,7 @@
                         <td valign="top">
                             <h2>Kartu Anggota perpustakaan</h2>
                             <h1>{{ $sekolah->nama}}</h1>
-                            <p>{{ $sekolah->alamat }}, {{ ucfirst(strtolower($sekolah->kota->kota)) }} <br> {{ ucwords(strtolower($sekolah->provinsi->provinsi)) }}</p>
+                            <p>{{ $sekolah->alamat }}, {{ ucfirst(strtolower($sekolah->kota?->kota)) }} <br> {{ ucwords(strtolower($sekolah->provinsi?->provinsi)) }}</p>
                             <p>Telp: {{ $sekolah->telpon }} | Email: {{ $sekolah->email }} </p>
                         </td>
                         <td width="35" align="right" valign="top">
@@ -162,7 +162,7 @@
                     <tr>
                         <td>Kelas</td>
                         <td>:</td>
-                        <td>{{ $anggota->kelas->kelas }}</td>
+                        <td>{{ $anggota->kelas?->kelas }}</td>
                     </tr>
                     <tr>
                         <td>Jenis Kelamin</td>
