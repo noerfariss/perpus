@@ -90,6 +90,8 @@ class ProfilController extends Controller
                 'kelas',
                 'kota'
             ])
+                ->select('*')
+                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
                 ->where('id', Auth::id())->first();
 
             return $this->responOk(data: $user);
