@@ -40,12 +40,16 @@ Route::get('/email', function () {
     }
 });
 
-Route::get('/{path?}', function(){
+Route::get('/', function(){
+    return view('frontend.app');
+});
+
+Route::get('/about', function(){
     return view('frontend.app');
 });
 
 Route::middleware('xss')->group(function () {
-    Route::any('/auth/login', [LoginController::class, 'index'])->name('login');
+    Route::any('/login', [LoginController::class, 'index'])->name('login');
 
     Route::middleware(['auth'])->group(function () {
         Route::prefix('auth')->group(function () {
@@ -88,6 +92,7 @@ Route::middleware('xss')->group(function () {
 
             // Data Master
             Route::resource('siswa', AnggotaController::class);
+            Route::get('/siswa/kartu/{anggota}', [AnggotaController::class, 'kartu'])->name('siswa.kartu');
             Route::post('/ajax-siswa', [AnggotaController::class, 'ajax'])->name('ajax-siswa');
             Route::post('/siswa-ganti-password', [AnggotaController::class, 'ganti_password'])->name('siswa-ganti-password');
             Route::post('/ganti-foto-anggota', [AnggotaController::class, 'ganti_foto'])->name('ganti-foto-anggota');

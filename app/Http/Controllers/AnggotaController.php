@@ -6,6 +6,7 @@ use App\Exports\AnggotaExport;
 use App\Facade\Weblog;
 use App\Http\Requests\PasswordRequest;
 use App\Models\Anggota;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -73,15 +74,15 @@ class AnggotaController extends Controller
             ->addColumn('anggota', function ($e) {
                 $jenis_kelamin = $e->jenis_kelamin === 'L' ? '<span class="badge bg-danger">Laki-laki</span>' : '<span class="badge bg-warning">Perempuan</span>';
                 $anggota = '<a href="#" class="btn-link btn-anggota"
-                            data-id="'.$e->id.'"
-                            data-anggota="'.$e->nomor_anggota.'"
-                            data-induk="'.$e->nomor_induk.'"
-                            data-foto="'.$e->foto.'"
-                            data-nama="'.$e->nama.'"
-                            data-jenis_kelamin="'.strip_tags($jenis_kelamin).'"
-                            data-kelas="'.$e->kelas->kelas.'"
-                            data-ttl="'.$e->kota->kota.', '.Carbon::parse($e->tanggal_lahir)->isoFormat('DD MMMM YYYY').'"
-                            data-alamat="'.$e->alamat.'">
+                            data-id="' . $e->id . '"
+                            data-anggota="' . $e->nomor_anggota . '"
+                            data-induk="' . $e->nomor_induk . '"
+                            data-foto="' . $e->foto . '"
+                            data-nama="' . $e->nama . '"
+                            data-jenis_kelamin="' . strip_tags($jenis_kelamin) . '"
+                            data-kelas="' . $e->kelas->kelas . '"
+                            data-ttl="' . $e->kota->kota . ', ' . Carbon::parse($e->tanggal_lahir)->isoFormat('DD MMMM YYYY') . '"
+                            data-alamat="' . $e->alamat . '">
                                 <h2 style="font-size:.9rem; font-weight:bold; margin:0 0 2px 0; padding:0;">' . strtoupper($e->nama) . '</h2>
                                 <h1 style="font-size:.8rem; margin:0; padding:0;">' . $e->nomor_anggota . ' | ' . $e->nomor_induk . '</h1>
                                 <h3 style="font-size:.75rem; margin:4px 0 0 0; padding:0;">' . $jenis_kelamin . '</h3>
@@ -401,5 +402,16 @@ class AnggotaController extends Controller
                 'file' => $foto,
             ]);
         }
+    }
+
+    public function kartu($id)
+    {
+        $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
+        $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode('081231723897', $generator::TYPE_CODE_128, widthFactor:1,  height:40)) . '">';
+
+        $data = 'oke';
+        $pdf = Pdf::loadView('backend.siswa.kartu', compact('data', 'barcode'));
+        $pdf->set_paper([0, 0, 243.78, 158.74]); // -------- ukuran ID CARD 8.6cm * 5.6cm
+        return $pdf->stream();
     }
 }

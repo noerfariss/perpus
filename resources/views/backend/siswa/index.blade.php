@@ -167,7 +167,8 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm">Download</button>
+                    <a href="{{ route('siswa.kartu', ['anggota' => '2023KS0004'])}}" target="_blank" class="btn btn-primary btn-sm">Download kartu</a>
+                    {{-- <button type="submit" class="btn btn-primary btn-sm">Download Kartu</button> --}}
                 </div>
             </div>
         </div>
