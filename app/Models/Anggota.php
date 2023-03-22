@@ -11,6 +11,7 @@ class Anggota extends Authenticatable
     use HasFactory, HasApiTokens;
 
     protected $guarded = [];
+    protected $hidden = ['password'];
 
     public function kelas()
     {
