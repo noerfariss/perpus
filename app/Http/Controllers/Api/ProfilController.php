@@ -199,7 +199,7 @@ class ProfilController extends Controller
     {
         $anggota = Anggota::with(['kelas', 'kota'])->where('nomor_anggota', Auth::user()->nomor_anggota)->first();
         if ($anggota === null) {
-            return $this->responError('Data tidak ditemukan', kode:404);
+            return $this->responError('Data tidak ditemukan', kode: 404);
         }
 
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
@@ -209,6 +209,12 @@ class ProfilController extends Controller
         $pdf = Pdf::loadView('backend.siswa.kartu', compact('sekolah', 'anggota', 'barcode'));
         $pdf->set_paper([0, 0, 243.78, 158.74]); // -------- ukuran ID CARD 8.6cm * 5.6cm
 
-        return $pdf->stream();
+        $konten = $pdf->download()->getOriginalContent();
+        Storage::put('public/kartu/' . Auth::user()->nomor_anggota . '.pdf', $konten);
+
+        $collect = collect($anggota);
+        $collect->put('kartu', url('/storage/kartu' . '/' . Auth::user()->nomor_anggota . '.pdf'));
+
+        return $this->responOk(data: $collect);
     }
 }
