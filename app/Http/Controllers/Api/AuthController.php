@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Anggota;
 use App\Models\Banner;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
@@ -31,7 +32,16 @@ class AuthController extends Controller
         ]);
 
         if ($auth) {
-            $user = Auth::guard('anggota')->user();
+            $user = Anggota::query()
+                ->with([
+                    'kelas',
+                    'kota'
+                ])
+                ->where('nomor_anggota', $request->anggota)
+                ->select('*')
+                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
+                ->first();
+
             $token = $user->createToken($user->nama)->plainTextToken;
 
             return $this->responOk(data: $user, token: $token);
