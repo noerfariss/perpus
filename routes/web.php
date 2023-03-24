@@ -43,8 +43,13 @@ Route::get('/email', function () {
 Route::get('/', function(){
     return view('frontend.app');
 });
-
-Route::get('/about', function(){
+Route::get('/profil', function(){
+    return view('frontend.app');
+});
+Route::get('/fitur', function(){
+    return view('frontend.app');
+});
+Route::get('/kontak', function(){
     return view('frontend.app');
 });
 

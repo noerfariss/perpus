@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('xss')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
+    Route::get('/sekolah', [ProfilController::class, 'sekolah']);
+
     Route::middleware('auth:sanctum')->group(function(){
         Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout');
         Route::get('/init-home', [AuthController::class, 'init_home']);

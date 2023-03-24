@@ -217,4 +217,15 @@ class ProfilController extends Controller
 
         return $this->responOk(data: $collect);
     }
+
+    public function sekolah()
+    {
+        try {
+            $data = Umum::with(['kecamatan', 'kota', 'provinsi'])->first();
+            return $this->responOk(data: $data);
+        } catch (\Throwable $th) {
+            Log::warning($th->getMessage());
+            return $this->responError();
+        }
+    }
 }
