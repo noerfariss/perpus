@@ -13,12 +13,14 @@ use Illuminate\Support\Facades\Log;
 
 class BukuController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
+        $cari = $request->cari;
+
         try {
             $data = Buku::query()
                 ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/", foto) end as foto'))
+                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
                 ->withCount([
                     'buku_item as dipinjam' => fn ($e) => $e->has('peminjaman_belum_kembali'),
                 ])
@@ -26,6 +28,11 @@ class BukuController extends Controller
                     'kategori' => fn ($e) => $e->select('id', 'kode', 'kategori'),
                     'penerbit' => fn ($e) => $e->select('id', 'kode', 'penerbit'),
                 ])
+                ->when($cari, function ($e, $cari) {
+                    $e->where(function ($e) use ($cari) {
+                        $e->where('judul', 'like', '%' . $cari . '%')->orWhere('isbn', 'like', '%' . $cari . '%');
+                    });
+                })
                 ->where('status', true)
                 ->orderBy('id', 'desc')
                 ->get();
@@ -58,7 +65,7 @@ class BukuController extends Controller
         try {
             $data = Buku::query()
                 ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/", foto) end as foto'))
+                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
                 ->withCount([
                     'buku_item as dipinjam' => fn ($e) => $e->has('peminjaman_belum_kembali'),
                 ])
@@ -110,13 +117,13 @@ class BukuController extends Controller
                             'penerbit'
                         ])
                             ->select('*')
-                            ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/", foto) end as foto')),
+                            ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto')),
                     ]),
                 ])
-                ->withSum('denda','denda')
+                ->withSum('denda', 'denda')
                 ->where('anggota_id', Auth::id())
                 ->where('status', true)
-                ->whereBetween('created_at', [$from.' 00:00:00', $to.' 23:59:59'])
+                ->whereBetween('created_at', [$from . ' 00:00:00', $to . ' 23:59:59'])
                 ->orderBy('id', 'desc');
 
             if ($data->count() > 0) {

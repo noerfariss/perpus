@@ -30,7 +30,7 @@ class KategoriController extends Controller
             $data = Kategori::query()
                 ->with([
                     'buku' => fn ($e) => $e->select('*')
-                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/", foto) end as foto'))
+                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
                         ->withCount([
                             'buku_item as dipinjam' => fn ($e) => $e->has('peminjaman_belum_kembali'),
                         ])
