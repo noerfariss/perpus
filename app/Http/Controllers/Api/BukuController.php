@@ -16,6 +16,7 @@ class BukuController extends Controller
     public function index(Request $request)
     {
         $cari = $request->cari;
+        $kategori = $request->kategori;
 
         try {
             $data = Buku::query()
@@ -33,10 +34,16 @@ class BukuController extends Controller
                         $e->where('judul', 'like', '%' . $cari . '%')->orWhere('isbn', 'like', '%' . $cari . '%');
                     });
                 })
+                ->when($kategori, function ($e, $kategori) {
+                    $e->whereHas('kategori', function ($e) use ($kategori) {
+                        $e->where('id', $kategori);
+                    });
+                })
                 ->where('status', true)
                 ->orderBy('id', 'desc')
                 ->get();
 
+            $records = [];
             foreach ($data as $item) {
                 $records[] = [
                     'id' => $item->id,
@@ -53,7 +60,11 @@ class BukuController extends Controller
                 ];
             }
 
-            return $this->responOk(data: $records);
+            if (count($records) > 0) {
+                return $this->responOk(data: $records);
+            } else {
+                return $this->responError('Data tidak tersedia', kode:404);
+            }
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
             return $this->responError('Terjadi kesalahan, cobalah kembali');
