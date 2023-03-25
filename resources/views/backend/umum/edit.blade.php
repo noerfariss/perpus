@@ -3,6 +3,18 @@
 @section('konten')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('umum.show') }}"><i class="bx bx-user me-1"></i>
+                            Pengaturan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('umum.peminjaman') }}"><i class='bx bxs-key'></i>
+                            Peminjaman</a>
+                    </li>
+                </ul>
+            </div>
             <div class="col-md-6">
                 <div class="card mb-4">
                     <h5 class="card-header">Edit user</h5>
@@ -11,7 +23,8 @@
                             {!! session('pesan') !!}
                         @endif
 
-                        <form action="{{ route('umum.update') }}" method="POST" enctype="multipart/form-data" id="my-form">
+                        <form action="{{ route('umum.update') }}" method="POST" enctype="multipart/form-data"
+                            id="my-form">
                             @csrf
                             @method('PATCH')
 
@@ -46,35 +59,6 @@
                                             Logo belum diset
                                         @else
                                             <img src="{{ url('/storage/foto/thum_' . $umum->logo) }}" class="rounded">
-                                        @endif
-                                    </div>
-                                </div>
-                            </div>
-
-                            {{-- FAVICON --}}
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="email">Favicon</label>
-                                <div class="col-sm-9">
-                                    <div class="button-wrapper">
-                                        <button type="button" class="account-file-input btn btn-sm btn-outline-primary"
-                                            data-bs-toggle="modal" data-bs-target="#modalUploadFavicon">
-                                            <span class="d-none d-sm-block">Ganti favicon</span>
-                                            <i class="bx bx-upload d-block d-sm-none"></i>
-                                        </button>
-                                        <input type="hidden" name="favicon" id="favicon" value="">
-                                        <div><small class="text-muted mb-0">JPG, GIF, PNG. Maksimal ukuran 2000 Kb</small>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row mb-3">
-                                <label class="col-sm-3 col-form-label" for="email"></label>
-                                <div class="col-sm-9">
-                                    <div id="box-favicon">
-                                        @if ($umum->favicon === 'favicon' || $umum->favicon === null || $umum->favicon == '')
-                                            Favicon belum diset
-                                        @else
-                                            <img src="{{ url('/storage/foto/thum_' . $umum->favicon) }}" class="rounded">
                                         @endif
                                     </div>
                                 </div>
@@ -132,8 +116,7 @@
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="nama">Telpon</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="telpon"
-                                        value="{{ $umum->telpon }}">
+                                    <input type="text" class="form-control" name="telpon" value="{{ $umum->telpon }}">
                                 </div>
                             </div>
 

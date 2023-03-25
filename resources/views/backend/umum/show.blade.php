@@ -3,6 +3,17 @@
 @section('konten')
     <div class="container-xxl flex-grow-1 container-p-y">
         <div class="row">
+            <div class="col-sm-12">
+                <ul class="nav nav-pills flex-column flex-md-row mb-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="{{ route('umum.show') }}"><i class="bx bx-user me-1"></i> Pengaturan</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('umum.peminjaman') }}"><i class='bx bxs-key'></i>
+                            Peminjaman</a>
+                    </li>
+                </ul>
+            </div>
             <div class="col-md-6">
                 <div class="card mb-4">
                     <h5 class="card-header">Pengaturan</h5>
@@ -31,17 +42,6 @@
                         </div>
 
                         <div class="row mb-3">
-                            <label class="col-sm-3 col-form-label" for="nama">Favicon</label>
-                            <div class="col-sm-9">
-                                @if ($pengaturan->logo === 'logo' || $pengaturan->logo === null || $pengaturan->logo == '')
-                                    Favicon belum diset
-                                @else
-                                    <img src="{{ url('/storage/foto/' . $pengaturan->favicon) }}" alt="">
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="nama">Alamat</label>
                             <div class="col-sm-9">
                                 <input type="text" class="form-control" value="{{ $pengaturan->alamat }}" disabled>
@@ -51,7 +51,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="nama">Provinsi</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" value="{{ $pengaturan->provinsi?->provinsi }}" disabled>
+                                <input type="text" class="form-control" value="{{ $pengaturan->provinsi?->provinsi }}"
+                                    disabled>
                             </div>
                         </div>
 
@@ -65,7 +66,8 @@
                         <div class="row mb-3">
                             <label class="col-sm-3 col-form-label" for="nama">Kecamatan</label>
                             <div class="col-sm-9">
-                                <input type="text" class="form-control" value="{{ $pengaturan->kecamatan?->kecamatan }}" disabled>
+                                <input type="text" class="form-control" value="{{ $pengaturan->kecamatan?->kecamatan }}"
+                                    disabled>
                             </div>
                         </div>
 
