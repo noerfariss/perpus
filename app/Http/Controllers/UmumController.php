@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade;
 
+use function PHPUnit\Framework\returnSelf;
+
 class UmumController extends Controller
 {
 
@@ -74,7 +76,6 @@ class UmumController extends Controller
         $validator = JsValidatorFacade::make([
             'nama' => 'required',
             'logo' => 'nullable',
-            'favicon' => 'nullable',
             'alamat' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
@@ -101,7 +102,6 @@ class UmumController extends Controller
         $validasi = $request->validate([
             'nama' => 'required',
             'logo' => 'nullable',
-            'favicon' => 'nullable',
             'alamat' => 'required',
             'provinsi' => 'required',
             'kota' => 'required',
@@ -116,10 +116,6 @@ class UmumController extends Controller
         try {
             if ($request->logo <> '') {
                 Umum::find($umum->id)->update(['logo' => $request->logo]);
-            }
-
-            if ($request->favicon <> '') {
-                Umum::find($umum->id)->update(['favicon' => $request->favicon]);
             }
 
             Umum::find($umum->id)->update([
@@ -160,5 +156,47 @@ class UmumController extends Controller
     public function destroy(Umum $umum)
     {
         //
+    }
+
+    public function peminjaman()
+    {
+        $pengaturan = Umum::first();
+
+        return view('backend.umum.peminjaman', compact('pengaturan'));
+    }
+
+    public function editPinjam(Request $request)
+    {
+        $validasi = [
+            'batas_pengembalian' => 'required|numeric',
+            'batas_peminjaman' => 'required|numeric',
+            'denda' => 'required|numeric'
+        ];
+
+        if ($request->method() === 'PUT') {
+            DB::beginTransaction();
+            try {
+                Umum::where('id', $request->peminjaman)->update($request->only(['batas_pengembalian', 'batas_peminjaman', 'denda']));
+                Weblog::set('Mempebarui pengaturan peminjaman buku');
+                DB::commit();
+                return redirect(route('umum.peminjaman'))->with([
+                    'pesan' => '<div class="alert alert-success">Pengaturan berhasil diperbarui</div>'
+                ]);
+            } catch (\Throwable $th) {
+                Log::warning($th->getMessage());
+                DB::rollBack();
+                return redirect()->back()->with([
+                    'pesan' => '<div class="alert alert-danger">Terjadi kesalahan, silahkan coba kembali</div>'
+                ]);
+            }
+        }
+
+        $pengaturan = Umum::first();
+        $validator = JsValidatorFacade::make($validasi, [
+            'batas_pengembalian.required' => 'Durasi peminjaman wajib diisi',
+            'batas_pengembalian.numeric' => 'Durasi peminjaman harus berupa Angka',
+        ]);
+
+        return view('backend.umum.peminjamanEdit', compact('pengaturan', 'validator'));
     }
 }

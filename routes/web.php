@@ -110,6 +110,8 @@ Route::middleware('xss')->group(function () {
 
             // Pengaturan
             Route::singleton('umum', UmumController::class);
+            Route::get('/umum/peminjaman', [UmumController::class, 'peminjaman'])->name('umum.peminjaman');
+            Route::any('/umum/peminjaman/edit', [UmumController::class, 'editPinjam'])->name('umum.peminjaman.edit');
             Route::resource('user', UserController::class);
             Route::post('/ajax-user', [UserController::class, 'ajax'])->name('ajax-user');
 
