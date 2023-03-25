@@ -67,7 +67,7 @@ class GuruController extends Controller
         return DataTables::of($data)
             ->addIndexColumn()
             ->editColumn('foto', function ($e) {
-                $foto = ($e->foto === "" || $e->foto === null) ? '/storage/user/user_nw.png' : '/storage/anggota/thum_' . $e->foto;
+                $foto = ($e->foto === "" || $e->foto === null) ? '/storage/foto/pasfoto.jpg' : '/storage/anggota/thum_' . $e->foto;
                 return '<div><img src="' . url($foto) . '" class="rounded" width="40"/></div>';
             })
             ->addColumn('anggota', function ($e) {

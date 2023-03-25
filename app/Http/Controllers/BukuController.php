@@ -16,6 +16,7 @@ use Yajra\DataTables\Facades\DataTables;
 use Laratrust\LaratrustFacade as Laratrust;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade;
 use Intervention\Image\Facades\Image;
+use Illuminate\Support\Str;
 
 class BukuController extends Controller
 {
@@ -71,9 +72,9 @@ class BukuController extends Controller
             })
             ->editColumn('judul', function ($e) {
                 $judul = '<a href="#" class="detail-anggota" data-id="' . $e->id . '" data-judul="' . $e->judul . '" data-kategori="' . $e->kategori->implode('kategori', ', ') . '" data-pengarang="' . $e->pengarang . '" data-isbn="' . $e->isbn . '">
-                            <h1 style="font-size:.9rem; font-weight:bold; margin:0; padding:0 0 4px 0; ">' . ucfirst($e->judul) . '</h1>
+                            <div style="width:400px; word-wrap: break-word;"><h1 style="font-size:.9rem; font-weight:bold; margin:0; padding:0 0 4px 0;">' . ucfirst($e->judul) . '</h1></div>
                             <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">ISBN : ' . $e->isbn . '</h2>
-                            <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">Pengarang : ' . $e->pengarang . '</h2>
+                            <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">Pengarang : ' . Str::limit($e->pengarang, 20) . '</h2>
                             <h2 style="font-size:.8rem; font-weight:normal; margin:0; padding:0 0 4px 0;">Penerbit : ' . $e->penerbit->penerbit . '</h2>
                           </a>';
                 return $judul;

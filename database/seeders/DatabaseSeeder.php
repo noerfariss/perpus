@@ -23,7 +23,19 @@ class DatabaseSeeder extends Seeder
         $this->call([
             ProvinsiSeeder::class,
             KotaSeeder::class,
-            KecamatanSeeder::class
+            KecamatanSeeder::class,
+        ]);
+
+        $this->call([
+            KategoriSeeder::class,
+            KelasSeeder::class,
+            PenerbitSeeder::class,
+        ]);
+
+        $this->call([
+            AnggotaSeeder::class,
+            GuruSeeder::class,
+            BukuSeeder::class,
         ]);
 
         $user = User::create([
@@ -41,7 +53,7 @@ class DatabaseSeeder extends Seeder
 
         $user->attachRole($role);
 
-        $permissions = ['permission', 'role', 'umum', 'user', 'peminjaman', 'pengembalian', 'buku', 'kategori', 'kelas', 'siswa', 'guru'];
+        $permissions = ['permission', 'role', 'umum', 'user', 'banner', 'peminjaman', 'pengembalian', 'buku', 'kategori', 'penerbit', 'kelas', 'siswa', 'guru'];
         foreach ($permissions as $item) {
             Permission::create([
                 'grup' => $item,

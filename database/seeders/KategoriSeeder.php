@@ -1,0 +1,49 @@
+<?php
+
+namespace Database\Seeders;
+
+use App\Models\Kategori;
+use Carbon\Carbon;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Seeder;
+
+class KategoriSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        $data = ['umum', 'novel'];
+
+        $kategories = [];
+        $kode = Kategori::orderby('id', 'desc')->first();
+
+        if ($kode === NULL) {
+            $i = 1;
+            $kategories = $this->input_item($data, $i);
+        } else {
+            $last_kode = (int) substr($kode->kode, 2);
+            $last_kode = $last_kode + 1;
+
+            $kategories = $this->input_item($data, $last_kode);
+        }
+
+        Kategori::insert($kategories);
+    }
+
+    private function input_item($kategori_arr, $nomor)
+    {
+        foreach ($kategori_arr as $item) {
+            $kategories[] = [
+                'kode' => 'KG' . str_pad($nomor++, 4, '0', STR_PAD_LEFT),
+                'kategori' => $item,
+                'created_at' => Carbon::now(),
+            ];
+        }
+
+        return $kategories;
+    }
+}

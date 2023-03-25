@@ -28,7 +28,7 @@
                     {!! session('pesan') !!}
                 @endif
 
-                <table class="table table-sm table-hover display nowrap mb-4" id="datatable">
+                <table class="table table-sm table-hover mb-4" id="datatable">
                     <thead>
                         <tr>
                             <th>NO</th>
