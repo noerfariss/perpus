@@ -85,6 +85,34 @@
                                             class='bx bx-plus-circle'></i></button>
                                 </div>
                             </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-3 col-form-label" for="email">Buku PDF</label>
+                                <div class="col-sm-9">
+                                    <div class="button-wrapper">
+                                        <button type="button" class="account-file-input btn btn-sm btn-outline-primary"
+                                            data-bs-toggle="modal" data-bs-target="#modalUploadPDF">
+                                            <span class="d-none d-sm-block">Ganti Berkas</span>
+                                            <i class="bx bx-upload d-block d-sm-none"></i>
+                                        </button>
+                                        <input type="hidden" name="pdf" id="pdf" value="{{$buku->pdf}}">
+                                        <div><small class="text-muted mb-0">Format : PDF Maksimal ukuran 5000
+                                                Kb</small></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mb-4">
+                                <label class="col-sm-3 col-form-label" for="email"></label>
+                                <div class="col-sm-9">
+                                    <div id="box-pdf">
+                                        @if ($buku->pdf)
+                                            <div><img src="{{ url('/storage/buku/pdf/demo/pdf-icon.png') }}" width="60"></div>
+                                            <button class="btn btn-xs btn-outline-danger mt-2">Lihat PDF</button>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+
                             <div class="row mb-3">
                                 <label class="col-sm-3 col-form-label" for="email">Foto</label>
                                 <div class="col-sm-9">
@@ -94,7 +122,7 @@
                                             <span class="d-none d-sm-block">Ganti foto</span>
                                             <i class="bx bx-upload d-block d-sm-none"></i>
                                         </button>
-                                        <input type="hidden" name="foto" id="foto" value="">
+                                        <input type="hidden" name="foto" id="foto" value="{{$buku->foto}}">
                                         <div><small class="text-muted mb-0">Format : JPG, GIF, PNG. Maksimal ukuran 2000
                                                 Kb</small></div>
                                     </div>
@@ -167,6 +195,30 @@
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-sm btn-simpan"
                         onclick="simpanFoto()">Tambahkan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- UPLOAD PDF -->
+    <div class="modal fade" id="modalUploadPDF" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalUploadPDFLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalUploadPDFLabel">Unggah Berkas</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <span id="notif-pdf"></span>
+                    <form action="{{ route('ganti-pdf-buku') }}" class="dropzone" id="upload-pdf" method="POST"
+                        enctype="multipart/form-data">
+                        @csrf
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary btn-sm btn-simpan"
+                        onclick="simpanPDF()">Tambahkan</button>
                 </div>
             </div>
         </div>
@@ -314,7 +366,7 @@
     <script>
         Dropzone.options.uploadImage = {
             maxFilesize: 2000,
-            acceptedFiles: ".jpeg,.jpg,.png",
+            acceptedFiles: ".jpeg,.jpg,.png,.pdf",
             method: 'post',
             createImageThumbnails: true,
             init: function() {
@@ -332,6 +384,29 @@
                 $('.btn-simpan').removeAttr('disabled').text('Tambahkan');
                 const pesan = response.message;
                 $('.modal-body #notif').html(`<div class="alert alert-danger">${pesan}</div>`);
+            }
+        };
+
+        Dropzone.options.uploadPdf = {
+            maxFilesize: 5000,
+            acceptedFiles: ".pdf",
+            method: 'post',
+            createImageThumbnails: true,
+            init: function() {
+                this.on("addedfile", file => {
+                    $('.btn-simpan').attr('disabled', 'disabled').text('Loading...');
+                });
+            },
+            success: function(file, response) {
+                $('.btn-simpan').removeAttr('disabled').text('Tambahkan');
+                const foto = response.file;
+                $('.modal-body #notif-pdf').html(`<div class="alert alert-success">Berkas berhasil diunggah</div>`);
+                $('#pdf').val(foto);
+            },
+            error: function(file, response) {
+                $('.btn-simpan').removeAttr('disabled').text('Tambahkan');
+                const pesan = response.message;
+                $('.modal-body #notif-pdf').html(`<div class="alert alert-danger">${pesan}</div>`);
             }
         };
 
@@ -371,6 +446,17 @@
             } else {
                 $('#modalUploadFoto').modal('hide');
                 $('#box-foto').html(`<img src="{{ url('/storage/buku/thum_${foto}') }}" class="rounded">`);
+            }
+        }
+
+        function simpanPDF() {
+            let pdf = $('#pdf').val();
+
+            if (pdf === '' || pdf === null) {
+                $('#notif-pdf').html(`<div class="alert alert-danger">Tidak dapat menambahkan berkas</div>`);
+            } else {
+                $('#modalUploadPDF').modal('hide');
+                $('#box-pdf').html(`<img src="{{ url('/storage/buku/pdf/demo/pdf-icon.png') }}" width="60">`);
             }
         }
 

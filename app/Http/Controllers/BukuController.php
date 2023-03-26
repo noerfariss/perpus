@@ -116,6 +116,7 @@ class BukuController extends Controller
             'kategori_id' => 'required',
             'penerbit_id' => 'required',
             'foto' => 'nullable',
+            'pdf' => 'nullable',
         ], [
             'kategori_id.required' => 'Kategori wajib diisi',
             'penerbit_id.required' => 'Penerbit wajib diisi',
@@ -143,6 +144,7 @@ class BukuController extends Controller
             'kategori_id' => 'required',
             'penerbit_id' => 'required',
             'foto' => 'nullable',
+            'pdf' => 'nullable',
         ], [
             'kategori_id.required' => 'Kategori wajib diisi',
             'penerbit_id.required' => 'Penerbit wajib diisi',
@@ -337,6 +339,7 @@ class BukuController extends Controller
             'kategori_id' => 'required',
             'penerbit_id' => 'required',
             'foto' => 'nullable',
+            'pdf' => 'nullable',
         ], [
             'kategori_id.required' => 'Kategori wajib diisi',
             'penerbit_id.required' => 'Penerbit wajib diisi',
@@ -367,6 +370,7 @@ class BukuController extends Controller
             'kategori_id' => 'required',
             'penerbit_id' => 'required',
             'foto' => 'nullable',
+            'pdf' => 'nullable',
         ], [
             'kategori_id.required' => 'Kategori wajib diisi',
             'penerbit_id.required' => 'Penerbit wajib diisi',
@@ -455,6 +459,26 @@ class BukuController extends Controller
             $thum = Image::make($thum)->save($thumPath);
 
             $request->file->storeAs('public/buku', $foto);
+
+            return response()->json([
+                'file' => $foto,
+            ]);
+        }
+    }
+
+    public function ganti_pdf(Request $request)
+    {
+        if ($request->has('file')) {
+            $file = $request->file;
+            $request->validate([
+                'file' => 'required|mimes:pdf|max:2000'
+            ]);
+
+            $name = time();
+            $ext  = $file->getClientOriginalExtension();
+            $foto = $name . '.' . $ext;
+
+            $request->file->storeAs('public/buku/pdf', $foto);
 
             return response()->json([
                 'file' => $foto,
