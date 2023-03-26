@@ -101,6 +101,7 @@ class BukuController extends Controller
                     'status_pinjam' => ($data->stok - $data->dipinjam) === 0 ? 'Kosong' : 'Tersedia',
                     'kategori' => $data->kategori,
                     'penerbit' => $data->penerbit,
+                    'pdf' => $data->pdf ? url('/storage/buku/pdf').'/'.$data->pdf : null,
                     'created_at' => $data->created_at,
                 ];
 
