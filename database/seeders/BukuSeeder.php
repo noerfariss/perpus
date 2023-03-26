@@ -811,5 +811,166 @@ class BukuSeeder extends Seeder
                 ]);
             }
         }
+
+
+        $kelas8 = [
+            [
+                'judul' => 'Bahasa Indonesia Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Bahasa-Indonesia-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Bahasa Inggris Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Bahasa-Inggris-BS-KLS-VIII-nsn.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Buddha Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Buddha-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Hindu Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Hindu-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Informatika Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Informatika-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'IPA Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/IPA-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'IPS Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/IPS-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Islam Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Islam-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Katolik Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Katolik-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Pojok Buku Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Kelas8_pjok_buku_siswa_smp_mts_kelas_viii_2027.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Kepercayaan Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Kepercayaan-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Khonghucu Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Khonghucu-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Kristen Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Kristen-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Matematika Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Matematika-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Matematika Baru Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/Matematika-BS-KLS-VIII-Baru.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'PPKN Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/PPKN-BS-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+        ];
+
+        foreach ($kelas8 as $item) {
+            $buku = Buku::create([
+                'judul' => $item['judul'],
+                'isbn' => $item['isbn'],
+                'pengarang' => $item['pengarang'],
+                'stok' => $item['stok'],
+                'pdf' => $item['pdf'],
+                'penerbit_id' => $item['penerbit_id'],
+            ]);
+
+            DB::table('buku_kategori')->insert([
+                'buku_id' => $buku->id,
+                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'created_at' => Carbon::now(),
+            ]);
+
+            // stok
+            $stok = $item['stok'];
+            $kode = getKodeBuku();
+            $newKode = (int) substr($kode, 2);
+
+            for ($i = 0; $i < $stok; $i++) {
+                BukuItem::create([
+                    'buku_id' => $buku->id,
+                    'kode' => 'BK' . str_pad($newKode++, 5, '0', STR_PAD_LEFT),
+                ]);
+            }
+        }
     }
 }
