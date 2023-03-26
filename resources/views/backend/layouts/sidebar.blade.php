@@ -37,7 +37,7 @@
             </li>
         @endpermission
 
-        @permission('buku-read', 'kategori-read')
+        @permission('buku-read', 'kategori-read', 'penerbit-read')
             <li class="menu-header small text-uppercase"><span class="menu-header-text">Data Buku</span></li>
 
             <li class="menu-item {{ menuAktif('buku') }}">
@@ -50,6 +50,12 @@
                 <a href="{{ route('kategori.index') }}" class="menu-link">
                     <i class="menu-icon tf-icons bx bx-category-alt"></i>
                     <div data-i18n="Analytics">Kategori</div>
+                </a>
+            </li>
+            <li class="menu-item {{ menuAktif('penerbit') }}">
+                <a href="{{ route('penerbit.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-area"></i>
+                    <div data-i18n="Analytics">Penerbit</div>
                 </a>
             </li>
         @endpermission
