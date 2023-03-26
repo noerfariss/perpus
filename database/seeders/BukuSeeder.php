@@ -106,7 +106,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/umum/7/Bahasa-Indonesia-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Bahasa-Indonesia-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -114,7 +114,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/umum/7/Bahasa-Inggris-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Bahasa-Inggris-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -122,7 +122,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 8,
-                'pdf' => 'demo/umum/7/Buddha-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Buddha-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -130,7 +130,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/umum/7/Hindu-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Hindu-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -138,7 +138,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/umum/7/Informatika-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Informatika-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -146,7 +146,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/umum/7/IPA-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/IPA-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -154,7 +154,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/umum/7/IPS-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/IPS-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -162,7 +162,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/umum/7/Islam-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Islam-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -170,7 +170,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/umum/7/Kepercayaan-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Kepercayaan-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -178,7 +178,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 9,
-                'pdf' => 'demo/umum/7/Khonghucu-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Khonghucu-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -186,7 +186,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 3,
-                'pdf' => 'demo/umum/7/Kristen-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Kristen-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -194,7 +194,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 13,
-                'pdf' => 'demo/umum/7/Matematika-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/Matematika-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -202,7 +202,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 13,
-                'pdf' => 'demo/umum/7/Matematika-BS-KLS-VII-Licensi.pdf',
+                'pdf' => 'demo/7/Matematika-BS-KLS-VII-Licensi.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -210,7 +210,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/umum/7/PPKN-BS-KLS-VII.pdf',
+                'pdf' => 'demo/7/PPKN-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -218,7 +218,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/umum/7/Seni-Musik-BG-KLS-VII.pdf',
+                'pdf' => 'demo/7/Seni-Musik-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
