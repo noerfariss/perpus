@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AjaxController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\GuruController;
 use App\Http\Controllers\HomeController;
@@ -114,6 +115,10 @@ Route::middleware('xss')->group(function () {
             Route::any('/umum/peminjaman/edit', [UmumController::class, 'editPinjam'])->name('umum.peminjaman.edit');
             Route::resource('user', UserController::class);
             Route::post('/ajax-user', [UserController::class, 'ajax'])->name('ajax-user');
+
+            Route::resource('banner', BannerController::class);
+            Route::post('/ajax-banner', [BannerController::class, 'ajax'])->name('ajax-banner');
+            Route::post('/ganti-foto-banner', [BannerController::class, 'ganti_foto'])->name('ganti-foto-banner');
 
             Route::resource('role', RoleController::class);
             Route::post('/ajax-role', [RoleController::class, 'ajax'])->name('ajax-roles');

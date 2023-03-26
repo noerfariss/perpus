@@ -88,7 +88,7 @@
         @permission('user-read', 'role-read', 'permission-read')
             <li class="menu-item {{ menuAktif(['user', 'role', 'permission']) }}">
                 <a href="#" class="menu-link menu-toggle">
-                    <i class='menu-icon tf-icons bx bxs-user-circle'></i>
+                    <i class='menu-icon tf-icons bx bx-user-circle'></i>
                     <div data-i18n="Form Layouts">Userweb</div>
                 </a>
                 <ul class="menu-sub">
@@ -118,10 +118,16 @@
         @endpermission
 
 
-        @permission('umum-read')
+        @permission('umum-read', 'banner-read')
+            <li class="menu-item {{ menuAktif('banner') }}">
+                <a href="{{ route('banner.index') }}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-image"></i>
+                    <div data-i18n="Analytics">Banner</div>
+                </a>
+            </li>
             <li class="menu-item {{ menuAktif('umum') }}">
                 <a href="{{ route('umum.show') }}" class="menu-link">
-                    <i class="menu-icon tf-icons bx bxs-cog"></i>
+                    <i class="menu-icon tf-icons bx bx-cog"></i>
                     <div data-i18n="Analytics">Pengaturan</div>
                 </a>
             </li>

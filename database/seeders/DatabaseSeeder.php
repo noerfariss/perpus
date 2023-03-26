@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             AnggotaSeeder::class,
             GuruSeeder::class,
             BukuSeeder::class,
+            BannerSeeder::class,
         ]);
 
         $user = User::create([

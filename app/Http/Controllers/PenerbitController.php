@@ -16,6 +16,13 @@ use Proengsoft\JsValidation\Facades\JsValidatorFacade;
 
 class PenerbitController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('permission:penerbit-read')->only('index');
+        $this->middleware('permission:penerbit-create')->only(['create', 'store']);
+        $this->middleware('permission:penerbit-update')->only(['edit', 'update']);
+        $this->middleware('permission:penerbit-delete')->only('delete');
+    }
     /**
      * Display a listing of the resource.
      *
