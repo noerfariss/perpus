@@ -31,7 +31,6 @@
                 <table class="table table-sm table-hover mb-4" id="datatable">
                     <thead>
                         <tr>
-                            <th>NO</th>
                             <th>buku</th>
                             <th>judul</th>
                             <th>kategori</th>
@@ -138,7 +137,7 @@
                 var bukutable = $('#bukutable').DataTable({
                     scrollX: true,
                     processing: true,
-                    serverSide: true,
+                    serverSide: false,
                     searching: true,
                     lengthChange: false,
                     pageLength: 10,
@@ -165,7 +164,7 @@
             scrollX: true,
             processing: true,
             serverSide: true,
-            searching: true,
+            searching: false,
             lengthChange: false,
             pageLength: 10,
             bDestroy: true,
@@ -179,9 +178,7 @@
                     d.cari = $('#cari').val();
                 },
             },
-            columns: [{
-                    data: 'DT_RowIndex'
-                },
+            columns: [
                 {
                     data: 'foto'
                 },

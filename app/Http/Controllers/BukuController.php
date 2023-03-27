@@ -50,19 +50,19 @@ class BukuController extends Controller
                 });
             })
             ->when($cari, function ($e, $cari) {
-                $e->where('judul', 'like', '%' . $cari . '%')->orWhere('pengarang', 'like', '%' . $cari . '%')->orWhere('isbn', 'like', '%' . $cari . '%');
+                $e->where(function($e) use($cari){
+                    $e->where('judul', 'like', '%' . $cari . '%')->orWhere('pengarang', 'like', '%' . $cari . '%')->orWhere('isbn', 'like', '%' . $cari . '%');
+                });
             })
             ->where('status', $request->status)
-            ->orderBy('judul')
-            ->get();
+            ->orderBy('judul');
 
         if ($request->filled('export')) {
             Weblog::set('Export data kelas');
-            return Excel::download(new BukuExport($data), 'BUKU.xlsx');
+            return Excel::download(new BukuExport($data->get()), 'BUKU.xlsx');
         }
 
-        return DataTables::of($data)
-            ->addIndexColumn()
+        return DataTables::eloquent($data)
             ->addColumn('dipinjam', function ($e) {
                 return (count($e->buku_item));
             })

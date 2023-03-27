@@ -2,7 +2,6 @@
     <thead>
         <tr>
             <th width="3"><b>NO</b></th>
-            <th width="12"><b>KODE</b></th>
             <th width="14"><b>JUDUL</b></th>
             <th width="14"><b>KATEGORI</b></th>
             <th width="14"><b>PENGARANG</b></th>
@@ -19,8 +18,13 @@
         @foreach ($data as $item)
         <tr>
             <td valign="top" align="left">{{ $no++ }}</td>
-            <td valign="top">{{ $item->kode }}</td>
-            <td valign="top">{{ $item->kelas }}</td>
+            <td valign="top">{{ $item->judul }}</td>
+            <td valign="top">{{ $item->kategori->implode('kategori', ', ') }}</td>
+            <td valign="top">{{ $item->pengarang }}</td>
+            <td valign="top">{{ $item->penerbit->penerbit }}</td>
+            <td valign="top">{{ $item->isbn }}</td>
+            <td valign="top">{{ $item->stok }}</td>
+            <td valign="top">{{ count($item->buku_item) }}</td>
         </tr>
         @endforeach
     </tbody>
