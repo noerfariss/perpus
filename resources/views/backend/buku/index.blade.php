@@ -138,7 +138,7 @@
                 var bukutable = $('#bukutable').DataTable({
                     scrollX: true,
                     processing: true,
-                    serverSide: false,
+                    serverSide: true,
                     searching: true,
                     lengthChange: false,
                     pageLength: 10,
