@@ -972,5 +972,511 @@ class BukuSeeder extends Seeder
                 ]);
             }
         }
+
+        // =============================== BUKU PANDUAN
+
+        $panduan9 = [
+            [
+                'judul' => 'Buku Guru Bahasa Indonesia Kelas IX',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/9/panduan/Kelas9_buku_guru_bahasa_indonesia_kelas_ix_2119.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Buku Guru Bahasa Inggris Kelas IX',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/9/panduan/Kelas9_buku_guru_bahasa_inggris_kelas_ix_2141.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+        ];
+
+        foreach ($panduan9 as $item) {
+            $buku = Buku::create([
+                'judul' => $item['judul'],
+                'isbn' => $item['isbn'],
+                'pengarang' => $item['pengarang'],
+                'stok' => $item['stok'],
+                'pdf' => $item['pdf'],
+                'penerbit_id' => $item['penerbit_id'],
+            ]);
+
+            DB::table('buku_kategori')->insert([
+                'buku_id' => $buku->id,
+                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'created_at' => Carbon::now(),
+            ]);
+
+            // stok
+            $stok = $item['stok'];
+            $kode = getKodeBuku();
+            $newKode = (int) substr($kode, 2);
+
+            for ($i = 0; $i < $stok; $i++) {
+                BukuItem::create([
+                    'buku_id' => $buku->id,
+                    'kode' => 'BK' . str_pad($newKode++, 5, '0', STR_PAD_LEFT),
+                ]);
+            }
+        }
+
+        $panduan8 = [
+            [
+                'judul' => 'Panduan Bahasa Indonesia Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Bahasa-Indonesia-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Bahasa Inggris Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Bahasa-Inggris-BG-KLS-VIII-nsn.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Budidaya Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Prakarya-Budidaya-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Buddha Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Buddha-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Kerajinan Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Prakarya-Kerajinan-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Hindu Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Hindu-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Pengolahan Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Prakarya-Pengolahan-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Informatika Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Informatika-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Rekayasa Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Prakarya-Rekayasa-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan IPA Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/IPA-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan IPS Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/IPS-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Islam Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Islam-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Katolik Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Katolik-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Kepercayaan Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Kepercayaan-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Seni Musik Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Seni-Musik-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Khonghucu Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Khonghucu-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Seni Rupa Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Seni-Rupa-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Kristen Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Kristen-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Seni Tari Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Seni-Tari-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Seni Teater Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Seni-Teater-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Matematika Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Matematika-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan PJOK Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/PJOK-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan PPKN Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/PPKN-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Matematika Baru Kelas VIII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/8/panduan/Matematika-BG-KLS-VIII-Baru.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+        ];
+
+        foreach ($panduan8 as $item) {
+            $buku = Buku::create([
+                'judul' => $item['judul'],
+                'isbn' => $item['isbn'],
+                'pengarang' => $item['pengarang'],
+                'stok' => $item['stok'],
+                'pdf' => $item['pdf'],
+                'penerbit_id' => $item['penerbit_id'],
+            ]);
+
+            DB::table('buku_kategori')->insert([
+                'buku_id' => $buku->id,
+                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'created_at' => Carbon::now(),
+            ]);
+
+            // stok
+            $stok = $item['stok'];
+            $kode = getKodeBuku();
+            $newKode = (int) substr($kode, 2);
+
+            for ($i = 0; $i < $stok; $i++) {
+                BukuItem::create([
+                    'buku_id' => $buku->id,
+                    'kode' => 'BK' . str_pad($newKode++, 5, '0', STR_PAD_LEFT),
+                ]);
+            }
+        }
+
+        $panduan7 = [
+            [
+                'judul' => 'Panduan Bahasa Indonesia Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Bahasa-Indonesia-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Bahasa Inggris Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Bahasa-Inggris-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Buddha Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Buddha-BG-KLS-VII (1).pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Hindu Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Hindu-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Pengolahan Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Prakarya-Pengolahan-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Informatika Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/IInformatika-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Rekayasa Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/IPA-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan IPA Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/IPS-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan IPS Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/IPS-BG-KLS-VIII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Islam Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Islam-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Katolik Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/KATOLIK-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Kepercayaan Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Kepercayaan-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Khonghucu Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Khonghucu-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Kristen Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Kristen-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Matematika Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Matematika-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Matematika Licensi Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Matematika-BG-KLS-VII-Licensi.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan PJOK Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/PJOK-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan PPKN Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/PPKN-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Budi Daya Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Prakarya-Budi-Daya-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Kerajinan Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Prakarya-Kerajinan-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Pengolahan Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Prakarya-Pengolahan-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Prakarya Rekayasa Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Prakarya-Rekayasa-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Seni Rupa Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Seni-Rupa-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Seni Tari Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Seni-Tari-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+            [
+                'judul' => 'Panduan Seni Teater Kelas VII',
+                'isbn' => '123-4556-678-93-1',
+                'pengarang' => 'aaaa',
+                'stok' => 4,
+                'pdf' => 'demo/7/panduan/Seni-Teater-BG-KLS-VII.pdf',
+                'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
+            ],
+        ];
+
+        foreach ($panduan7 as $item) {
+            $buku = Buku::create([
+                'judul' => $item['judul'],
+                'isbn' => $item['isbn'],
+                'pengarang' => $item['pengarang'],
+                'stok' => $item['stok'],
+                'pdf' => $item['pdf'],
+                'penerbit_id' => $item['penerbit_id'],
+            ]);
+
+            DB::table('buku_kategori')->insert([
+                'buku_id' => $buku->id,
+                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'created_at' => Carbon::now(),
+            ]);
+
+            // stok
+            $stok = $item['stok'];
+            $kode = getKodeBuku();
+            $newKode = (int) substr($kode, 2);
+
+            for ($i = 0; $i < $stok; $i++) {
+                BukuItem::create([
+                    'buku_id' => $buku->id,
+                    'kode' => 'BK' . str_pad($newKode++, 5, '0', STR_PAD_LEFT),
+                ]);
+            }
+        }
     }
 }
