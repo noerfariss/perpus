@@ -25,14 +25,14 @@ const Home = () => {
     }, []);
 
     const downloadFile = () => {
-        // alert('File APK belum tersedia');
+        const file_apk = document.head.querySelector('meta[name="file-apk"]').content;
         axios({
             method : 'GET',
-            url : `${domain}/storage/file/demo.apk`,
+            url : `${domain}/storage/file/${file_apk}`,
             responseType : 'blob'
         })
         .then((res) => {
-            fileDownload(res.data, 'demo.apk');
+            fileDownload(res.data, `${file_apk}`);
         });
     }
 
