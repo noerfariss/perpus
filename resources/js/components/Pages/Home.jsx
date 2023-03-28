@@ -25,15 +25,15 @@ const Home = () => {
     }, []);
 
     const downloadFile = () => {
-        alert('File APK belum tersedia');
-        // axios({
-        //     method : 'GET',
-        //     url : `${domain}/storage/file/demo.apk`,
-        //     responseType : 'blob'
-        // })
-        // .then((res) => {
-        //     fileDownload(res.data, 'demo.apk');
-        // });
+        // alert('File APK belum tersedia');
+        axios({
+            method : 'GET',
+            url : `${domain}/storage/file/demo.apk`,
+            responseType : 'blob'
+        })
+        .then((res) => {
+            fileDownload(res.data, 'demo.apk');
+        });
     }
 
     return (
