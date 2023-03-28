@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 use Laratrust\LaratrustFacade as Laratrust;
 use Maatwebsite\Excel\Facades\Excel;
@@ -78,7 +79,10 @@ class KelasController extends Controller
     public function create()
     {
         $validator = JsValidatorFacade::make([
-            'kelas' => 'required|unique:kelas,kelas',
+            'kelas' => [
+                'required',
+                Rule::unique('kelas', 'kelas'),
+            ],
             'kelas.*' => 'required|distinct',
         ]);
 
@@ -94,7 +98,10 @@ class KelasController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'kelas' => 'required|unique:kelas,kelas',
+            'kelas' => [
+                'required',
+                Rule::unique('kelas', 'kelas'),
+            ],
             'kelas.*' => 'nullable|distinct',
         ]);
 
@@ -170,7 +177,10 @@ class KelasController extends Controller
     public function edit(Kelas $kela)
     {
         $validator = JsValidatorFacade::make([
-            'kelas' => 'required|unique:kelas,kelas,id' . $kela->id,
+            'kelas' => [
+                'required',
+                Rule::unique('kelas', 'kelas')->ignore($kela->id),
+            ],
         ]);
 
         return view('backend.kelas.edit', compact('validator', 'kela'));
@@ -186,7 +196,10 @@ class KelasController extends Controller
     public function update(Request $request, Kelas $kela)
     {
         $validasi = $request->validate([
-            'kelas' => 'required|unique:kelas,kelas,id' . $kela->id,
+            'kelas' => [
+                'required',
+                Rule::unique('kelas', 'kelas')->ignore($kela->id),
+            ],
         ]);
 
         DB::beginTransaction();

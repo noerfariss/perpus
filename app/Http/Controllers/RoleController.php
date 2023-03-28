@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Validation\Rule;
 use Yajra\DataTables\Facades\DataTables;
 use Laratrust\LaratrustFacade as Laratrust;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade;
@@ -58,7 +59,10 @@ class RoleController extends Controller
     public function create()
     {
         $validator = JsValidatorFacade::make([
-            'name' => 'required|unique:roles,name',
+            'name' => [
+                'required',
+                Rule::unique('roles', 'name'),
+            ],
             'display_name' => 'nullable',
             'description' => 'nullable',
             'permission.*' => 'required',
@@ -76,7 +80,10 @@ class RoleController extends Controller
     public function store(Request $request)
     {
         $validasi = $request->validate([
-            'name' => 'required|unique:roles,name',
+            'name' => [
+                'required',
+                Rule::unique('roles', 'name'),
+            ],
             'display_name' => 'nullable',
             'description' => 'nullable',
         ]);
@@ -121,12 +128,15 @@ class RoleController extends Controller
     public function edit(Role $role)
     {
         $validator = JsValidatorFacade::make([
-            'name' => 'required|unique:roles,name,'.$role->id,
+            'name' => [
+                'required',
+                Rule::unique('roles', 'name')->ignore($role->id),
+            ],
             'display_name' => 'nullable',
             'description' => 'nullable',
         ]);
 
-        return view('backend.role.edit', compact('role','validator'));
+        return view('backend.role.edit', compact('role', 'validator'));
     }
 
     /**
@@ -139,7 +149,10 @@ class RoleController extends Controller
     public function update(Request $request, Role $role)
     {
         $validasi = $request->validate([
-            'name' => 'required|unique:roles,name,'.$role->id,
+            'name' => [
+                'required',
+                Rule::unique('roles', 'name')->ignore($role->id),
+            ],
             'display_name' => 'nullable',
             'description' => 'nullable',
         ]);

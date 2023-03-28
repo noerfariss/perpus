@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade;
 use Intervention\Image\Facades\Image;
 use Yajra\DataTables\Facades\DataTables;
@@ -107,7 +108,11 @@ class UserController extends Controller
     public function create()
     {
         $validator = JsValidatorFacade::make([
-            'username' => 'required|unique:users|alpha_dash',
+            'username' => [
+                'required',
+                'alpha_dash',
+                Rule::unique('users', 'username'),
+            ],
             'nama' => 'required',
             'email' => 'email|required',
             'foto' => 'nullable',
@@ -126,7 +131,11 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $validasi = $request->validate([
-            'username' => 'required|unique:users|alpha_dash',
+            'username' => [
+                'required',
+                'alpha_dash',
+                Rule::unique('users', 'username'),
+            ],
             'nama' => 'required',
             'email' => 'email|required',
             'foto' => 'nullable',
@@ -179,7 +188,11 @@ class UserController extends Controller
     public function edit(User $user)
     {
         $validator = JsValidatorFacade::make([
-            'username' => 'required|alpha_dash|unique:users,username,' . $user->id,
+            'username' => [
+                'required',
+                'alpha_dash',
+                Rule::unique('users', 'username')->ignore($user->id),
+            ],
             'nama' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'foto' => 'nullable',
@@ -199,7 +212,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $validasi = $request->validate([
-            'username' => 'required|alpha_dash|unique:users,username,' . $user->id,
+            'username' => [
+                'required',
+                'alpha_dash',
+                Rule::unique('users', 'username')->ignore($user->id),
+            ],
             'nama' => 'required',
             'email' => 'required|email|unique:users,email,' . $user->id,
             'foto' => 'nullable',

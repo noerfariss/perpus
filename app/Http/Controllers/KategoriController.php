@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use Laratrust\LaratrustFacade as Laratrust;
@@ -78,7 +79,10 @@ class KategoriController extends Controller
     public function create()
     {
         $validator = JsValidatorFacade::make([
-            'kategori' => 'required|unique:kategoris,kategori',
+            'kategori' => [
+                'required',
+                Rule::unique('kategoris','kategori'),
+            ],
             'kategori.*' => 'required|distinct',
         ]);
 
@@ -96,7 +100,10 @@ class KategoriController extends Controller
         if ($request->exists('tipe')) {
             $request->validate([
                 'kode' => 'required|unique:kategoris,kode',
-                'kategori' => 'required',
+                'kategori' => [
+                    'required',
+                    Rule::unique('kategoris'),
+                ],
             ]);
 
             DB::beginTransaction();
@@ -195,7 +202,10 @@ class KategoriController extends Controller
     public function edit(Kategori $kategori)
     {
         $validator = JsValidatorFacade::make([
-            'kategori' => 'required|unique:kategoris,kategori,id' . $kategori->id,
+            'kategori' => [
+                'required',
+                Rule::unique('kategoris','kategori')->ignore($kategori->id),
+            ]
         ]);
 
         return view('backend.kategori.edit', compact('validator', 'kategori'));
@@ -211,7 +221,10 @@ class KategoriController extends Controller
     public function update(Request $request, Kategori $kategori)
     {
         $validasi = $request->validate([
-            'kategori' => 'required|unique:kategoris,kategori,id' . $kategori->id,
+            'kategori' => [
+                'required',
+                Rule::unique('kategoris','kategori')->ignore($kategori->id),
+            ]
         ]);
 
         DB::beginTransaction();

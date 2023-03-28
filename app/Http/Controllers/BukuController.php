@@ -50,7 +50,7 @@ class BukuController extends Controller
                 });
             })
             ->when($cari, function ($e, $cari) {
-                $e->where(function($e) use($cari){
+                $e->where(function ($e) use ($cari) {
                     $e->where('judul', 'like', '%' . $cari . '%')->orWhere('pengarang', 'like', '%' . $cari . '%')->orWhere('isbn', 'like', '%' . $cari . '%');
                 });
             })
@@ -109,7 +109,10 @@ class BukuController extends Controller
     {
 
         $validator = JsValidatorFacade::make([
-            'judul' => 'required|unique:bukus,judul',
+            'judul' => [
+                'required',
+                Rule::unique('bukus', 'judul'),
+            ],
             'pengarang' => 'nullable',
             'isbn' => 'required',
             'stok' => 'required|numeric|min:1',
@@ -137,7 +140,10 @@ class BukuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'judul' => 'required|unique:bukus,judul',
+            'judul' => [
+                'required',
+                Rule::unique('bukus', 'judul'),
+            ],
             'pengarang' => 'nullable',
             'isbn' => 'required',
             'stok' => 'required|numeric|min:1',
@@ -332,7 +338,7 @@ class BukuController extends Controller
         $validator = JsValidatorFacade::make([
             'judul' => [
                 'required',
-                Rule::unique('bukus')->ignore($buku->id),
+                Rule::unique('bukus', 'judul')->ignore($buku->id),
             ],
             'pengarang' => 'nullable',
             'isbn' => 'required',
@@ -363,7 +369,7 @@ class BukuController extends Controller
         $request->validate([
             'judul' => [
                 'required',
-                Rule::unique('bukus')->ignore($buku->id),
+                Rule::unique('bukus', 'judul')->ignore($buku->id),
             ],
             'pengarang' => 'nullable',
             'isbn' => 'required',

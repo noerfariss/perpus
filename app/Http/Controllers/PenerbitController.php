@@ -9,6 +9,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Maatwebsite\Excel\Facades\Excel;
 use Yajra\DataTables\Facades\DataTables;
 use Laratrust\LaratrustFacade as Laratrust;
@@ -77,7 +78,10 @@ class PenerbitController extends Controller
     public function create()
     {
         $validator = JsValidatorFacade::make([
-            'penerbit' => 'required|unique:penerbits,penerbit',
+            'penerbit' => [
+                'required',
+                Rule::unique('penerbits', 'penerbit'),
+            ],
             'penerbit.*' => 'required|distinct',
         ]);
 
@@ -95,7 +99,10 @@ class PenerbitController extends Controller
         if ($request->exists('tipe')) {
             $request->validate([
                 'kode' => 'required|unique:penerbits,kode',
-                'penerbit' => 'required',
+                'penerbit' => [
+                    'required',
+                    Rule::unique('penerbits', 'penerbit'),
+                ]
             ]);
 
             DB::beginTransaction();
@@ -194,7 +201,10 @@ class PenerbitController extends Controller
     {
         $validator = JsValidatorFacade::make([
             'kode' => 'required',
-            'penerbit' => 'required|unique:penerbits,penerbit,id' . $penerbit->id,
+            'penerbit' => [
+                'required',
+                Rule::unique('penerbits', 'penerbit')->ignore($penerbit->id),
+            ],
         ]);
 
         return view('backend.penerbit.edit', compact('validator', 'penerbit'));
@@ -210,7 +220,10 @@ class PenerbitController extends Controller
     public function update(Request $request, Penerbit $penerbit)
     {
         $validasi = $request->validate([
-            'penerbit' => 'required|unique:penerbits,penerbit,id' . $penerbit->id,
+            'penerbit' => [
+                'required',
+                Rule::unique('penerbits', 'penerbit')->ignore($penerbit->id),
+            ],
         ]);
 
         DB::beginTransaction();

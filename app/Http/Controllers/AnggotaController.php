@@ -128,8 +128,14 @@ class AnggotaController extends Controller
     public function create()
     {
         $validator = JsValidatorFacade::make([
-            'nomor_induk' => 'required|unique:anggotas,nomor_induk',
-            'nomor_anggota' => 'required|unique:anggotas,nomor_anggota',
+            'nomor_induk' => [
+                'required',
+                Rule::unique('anggotas', 'nomor_induk'),
+            ],
+            'nomor_anggota' => [
+                'required',
+                Rule::unique('anggotas', 'nomor_anggota'),
+            ],
             'password' => 'nullable',
             'foto' => 'nullable',
             'nama' => 'required',
@@ -190,8 +196,14 @@ class AnggotaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nomor_induk' => 'required|unique:anggotas,nomor_induk',
-            'nomor_anggota' => 'required|unique:anggotas,nomor_anggota',
+            'nomor_induk' => [
+                'required',
+                Rule::unique('anggotas', 'nomor_induk'),
+            ],
+            'nomor_anggota' => [
+                'required',
+                Rule::unique('anggotas', 'nomor_anggota'),
+            ],
             'password' => 'nullable',
             'foto' => 'nullable',
             'nama' => 'required',
@@ -251,11 +263,11 @@ class AnggotaController extends Controller
         $validator = JsValidatorFacade::make([
             'nomor_induk' => [
                 'required',
-                Rule::unique('anggotas')->ignore($siswa->id)
+                Rule::unique('anggotas', 'nomor_induk')->ignore($siswa->id)
             ],
             'nomor_anggota' => [
                 'required',
-                Rule::unique('anggotas')->ignore($siswa->id)
+                Rule::unique('anggotas', 'nomor_anggota')->ignore($siswa->id)
             ],
             'password' => 'nullable',
             'foto' => 'nullable',
@@ -286,11 +298,11 @@ class AnggotaController extends Controller
         $request->validate([
             'nomor_induk' => [
                 'required',
-                Rule::unique('anggotas')->ignore($siswa->id)
+                Rule::unique('anggotas', 'nomor_induk')->ignore($siswa->id)
             ],
             'nomor_anggota' => [
                 'required',
-                Rule::unique('anggotas')->ignore($siswa->id)
+                Rule::unique('anggotas', 'nomor_anggota')->ignore($siswa->id)
             ],
             'password' => 'nullable',
             'password' => 'nullable',
