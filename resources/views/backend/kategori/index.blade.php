@@ -29,9 +29,12 @@
                 <table class="table table-sm table-hover display nowrap mb-4" id="datatable">
                     <thead>
                         <tr>
-                            <th>NO</th>
                             <th>kode</th>
                             <th>kategori</th>
+                            <th>buku</th>
+                            <th>akses siswa</th>
+                            <th>akses guru</th>
+                            <th>urutan</th>
                             <th>time input</th>
                             <th></th>
                         </tr>
@@ -65,14 +68,24 @@
                     d.cari = $('#cari').val();
                 },
             },
-            columns: [{
-                    data: 'DT_RowIndex'
-                },
+            columns: [
                 {
                     data: 'kode'
                 },
                 {
                     data: 'kategori'
+                },
+                {
+                    data: 'buku_count'
+                },
+                {
+                    data: 'akses_siswa'
+                },
+                {
+                    data: 'akses_guru'
+                },
+                {
+                    data: 'urutan'
                 },
                 {
                     data: 'created_at'
@@ -82,6 +95,17 @@
                 },
             ]
         });
+
+        // datatables.on('order.dt search.dt', function() {
+        //     let i = 1;
+
+        //     datatables.cells(null, 0, {
+        //         search: 'applied',
+        //         order: 'applied'
+        //     }).every(function(cell) {
+        //         this.data(i++);
+        //     });
+        // }).draw();
 
         $('#cari').keyup(function() {
             datatables.search($('#cari').val()).draw();

@@ -21,14 +21,40 @@
                             </div>
                         @endif
 
-                        <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data" id="my-form">
+                        <form action="{{ route('kategori.store') }}" method="POST" enctype="multipart/form-data"
+                            id="my-form">
                             @csrf
 
-                            @for ($i = 1; $i <= 10; $i++)
+                            @for ($i = 0; $i < 10; $i++)
                                 <div class="row mb-3">
-                                    <label class="col-sm-2 col-form-label">kategori</label>
-                                    <div class="col-sm-9">
-                                        <input type="text" class="form-control" name="kategori[]">
+                                    <div class="col-sm-6">
+                                        <label class="col-form-label">kategori</label>
+                                        <input type="text" class="form-control" name="data[{{$i}}][kategori]">
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="col-form-label">hak akses</label>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="data[{{$i}}][akses_siswa]" value="1" id="siswa-{{ $i }}" checked>
+                                            <label class="form-check-label" for="siswa-{{ $i }}">
+                                                Siswa
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" name="data[{{$i}}][akses_guru]"
+                                                value="1" id="guru-{{ $i }}" checked>
+                                            <label class="form-check-label" for="guru-{{ $i }}">
+                                                Guru
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-3">
+                                        <label class="col-form-label">urutan</label>
+                                        <select name="data[{{$i}}][urutan]" id="urutan-{{ $i }}"
+                                            class="select2 form-control">
+                                            @for ($x = 1; $x <= 20; $x++)
+                                                <option value="{{ $x }}" {{$i === $x ? 'selected' : ''}} >{{ $x }} </option>
+                                            @endfor
+                                        </select>
                                     </div>
                                 </div>
                             @endfor

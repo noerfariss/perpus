@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\KategoriExport;
 use App\Facade\Weblog;
+use App\Models\AnggotaKategori;
 use App\Models\Kategori;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -39,22 +40,28 @@ class KategoriController extends Controller
     {
         $cari = $request->cari;
         $data = Kategori::query()
+            ->withCount('buku')
             ->when($cari, function ($e, $cari) {
                 $e->where('kategori', 'like', '%' . $cari . '%')->orWhere('kode', 'like', '%' . $cari . '%');
             })
             ->where('status', $request->status)
-            ->orderBy('kode')
-            ->get();
+            ->orderBy('urutan')
+            ->orderBy('id', 'desc');
 
         if ($request->filled('export')) {
             Weblog::set('Export data kategori');
             return Excel::download(new KategoriExport($data), 'KATEGORI.xlsx');
         }
 
-        return DataTables::of($data)
-            ->addIndexColumn()
+        return DataTables::eloquent($data)
             ->editColumn('created_at', function ($e) {
                 return Carbon::parse($e->created_at)->timezone(zona_waktu())->isoFormat('DD MMM YYYY HH:mm');
+            })
+            ->editColumn('akses_siswa', function ($e) {
+                return $e->akses_siswa ? '<span class="badge bg-success">YA</span>' : '<span class="badge bg-danger">TIDAK</span>';
+            })
+            ->editColumn('akses_guru', function ($e) {
+                return $e->akses_guru ? '<span class="badge bg-success">YA</span>' : '<span class="badge bg-danger">TIDAK</span>';
             })
             ->addColumn('aksi', function ($e) {
                 $btnEdit = Laratrust::isAbleTo('kategori-update') ? '<a href="' . route('kategori.edit', ['kategori' => $e->id]) . '" class="btn btn-xs "><i class="bx bx-edit"></i></a>' : '';
@@ -67,7 +74,7 @@ class KategoriController extends Controller
                     return $btnReload;
                 }
             })
-            ->rawColumns(['aksi'])
+            ->rawColumns(['aksi', 'akses_siswa', 'akses_guru'])
             ->make(true);
     }
 
@@ -81,7 +88,7 @@ class KategoriController extends Controller
         $validator = JsValidatorFacade::make([
             'kategori' => [
                 'required',
-                Rule::unique('kategoris','kategori'),
+                Rule::unique('kategoris', 'kategori'),
             ],
             'kategori.*' => 'required|distinct',
         ]);
@@ -97,6 +104,7 @@ class KategoriController extends Controller
      */
     public function store(Request $request)
     {
+
         if ($request->exists('tipe')) {
             $request->validate([
                 'kode' => 'required|unique:kategoris,kode',
@@ -124,15 +132,20 @@ class KategoriController extends Controller
             }
         }
 
-        $request->validate([
-            'kategori' => 'required|unique:kategoris,kategori',
-            'kategori.*' => 'nullable|distinct',
-        ]);
+        // $request->validate([
+        //     'kategori' => [
+        //         'required',
+        //         Rule::unique('kategoris'),
+        //     ],
+        //     'kategori.*' => 'nullable|distinct',
+        // ]);
+
+        // dump($request->all());
 
         $kategori_arr = [];
-        foreach ($request->kategori as $item) {
-            if ($item <> '') {
-                $kategori_arr[] = $item;
+        foreach ($request->data as $item) {
+            if($item['kategori'] <> ''){
+                $kategori_arr [] = $item;
             }
         }
 
@@ -170,10 +183,13 @@ class KategoriController extends Controller
 
     private function input_item($kategori_arr, $nomor)
     {
-        foreach ($kategori_arr as $item) {
+        foreach ($kategori_arr as $key => $item) {
             $kategories[] = [
                 'kode' => 'KG' . str_pad($nomor++, 4, '0', STR_PAD_LEFT),
-                'kategori' => $item,
+                'kategori' => $item['kategori'],
+                'akses_siswa' => isset($item['akses_siswa']) ? true : false,
+                'akses_guru' => isset($item['akses_guru']) ? true : false,
+                'urutan' => $item['urutan'],
                 'created_at' => Carbon::now(),
             ];
         }
@@ -204,7 +220,7 @@ class KategoriController extends Controller
         $validator = JsValidatorFacade::make([
             'kategori' => [
                 'required',
-                Rule::unique('kategoris','kategori')->ignore($kategori->id),
+                Rule::unique('kategoris', 'kategori')->ignore($kategori->id),
             ]
         ]);
 
@@ -223,13 +239,19 @@ class KategoriController extends Controller
         $validasi = $request->validate([
             'kategori' => [
                 'required',
-                Rule::unique('kategoris','kategori')->ignore($kategori->id),
+                Rule::unique('kategoris', 'kategori')->ignore($kategori->id),
             ]
         ]);
 
         DB::beginTransaction();
         try {
-            Kategori::find($kategori->id)->update($validasi);
+            Kategori::find($kategori->id)->update([
+                'kategori' => $request->kategori,
+                'akses_siswa' => $request->filled('akses_siswa'),
+                'akses_guru' => $request->filled('akses_guru'),
+                'urutan' => $request->urutan,
+            ]);
+
             DB::commit();
 
             Weblog::set('Edit Kategori : ' . $request->kategori);

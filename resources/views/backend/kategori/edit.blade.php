@@ -19,14 +19,47 @@
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">Kode</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="kode" value="{{ $kategori->kode }}" disabled>
+                                    <input type="text" class="form-control" name="kode" value="{{ $kategori->kode }}"
+                                        disabled>
                                 </div>
                             </div>
 
                             <div class="row mb-3">
                                 <label class="col-sm-2 col-form-label">kategori</label>
                                 <div class="col-sm-9">
-                                    <input type="text" class="form-control" name="kategori" value="{{ $kategori->kategori }}">
+                                    <input type="text" class="form-control" name="kategori"
+                                        value="{{ $kategori->kategori }}">
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">hak akses</label>
+                                <div class="col-sm-9">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="akses_siswa" value="1"
+                                            id="flexCheckDefault" {{ $kategori->akses_siswa ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="flexCheckDefault">
+                                            Siswa
+                                        </label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" name="akses_guru" value="1"
+                                            id="flexCheckChecked" {{ $kategori->akses_guru ? 'checked' : '' }}>
+                                        <label class="form-check-label" for="flexCheckChecked">
+                                            Guru
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <label class="col-sm-2 col-form-label">urutan</label>
+                                <div class="col-sm-9">
+                                    <select name="urutan" id="urutan" class="select2 form-control">
+                                        @for ($i = 1; $i <= 20; $i++)
+                                            <option value="{{ $i }}" {{ $kategori->urutan === $i ? 'selected' : '' }} >{{ $i }}</option>
+                                        @endfor
+                                    </select>
                                 </div>
                             </div>
 
