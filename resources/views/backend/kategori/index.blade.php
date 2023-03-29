@@ -55,7 +55,7 @@
             scrollX: true,
             processing: true,
             serverSide: true,
-            searching: true,
+            searching: false,
             lengthChange: false,
             pageLength: 10,
             bDestroy: true,
