@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
@@ -13,8 +14,16 @@ class KategoriController extends Controller
     public function index()
     {
         try {
+            $jabatan = Auth::user()->jabatan;
             $data = Kategori::where('status', true)
                 ->withCount('buku')
+                ->when($jabatan, function ($e, $jabatan) {
+                    if ($jabatan === 'siswa') {
+                        $e->where('akses_siswa', true);
+                    } else {
+                        $e->where('akses_guru', true);
+                    }
+                })
                 ->orderBy('id', 'desc')
                 ->get();
             return $this->responOk(data: $data);
@@ -27,6 +36,7 @@ class KategoriController extends Controller
     public function show($id)
     {
         try {
+            $jabatan = Auth::user()->jabatan;
             $data = Kategori::query()
                 ->with([
                     'buku' => fn ($e) => $e->select('*')
@@ -37,6 +47,13 @@ class KategoriController extends Controller
                         ->with(['penerbit']),
                 ])
                 ->withCount('buku')
+                ->when($jabatan, function ($e, $jabatan) {
+                    if ($jabatan === 'siswa') {
+                        $e->where('akses_siswa', true);
+                    } else {
+                        $e->where('akses_guru', true);
+                    }
+                })
                 ->where('status', true)
                 ->where('id', $id);
 
@@ -44,8 +61,8 @@ class KategoriController extends Controller
                 $data = $data->first();
 
                 $bukus = [];
-                foreach($data->buku as $item){
-                    $bukus [] = [
+                foreach ($data->buku as $item) {
+                    $bukus[] = [
                         'id' => $item->id,
                         'judul' => $item->judul,
                         'foto' => $item->foto,

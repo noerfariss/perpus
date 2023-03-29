@@ -68,19 +68,19 @@ class AuthController extends Controller
         $data = [];
 
         try {
-            $jabatan= Auth::user()->jabatan;
+            $jabatan = Auth::user()->jabatan;
             $kategori = Kategori::query()
                 ->has('buku')
                 ->with([
                     'buku' => fn ($e) => $e->select('id', 'judul', 'pengarang', 'isbn')
                         ->where('status', true)
                         ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
-                        ->orderBy('id','desc'),
+                        ->orderBy('id', 'desc'),
                 ])
-                ->when($jabatan, function($e, $jabatan){
-                    if($jabatan === 'siswa'){
+                ->when($jabatan, function ($e, $jabatan) {
+                    if ($jabatan === 'siswa') {
                         $e->where('akses_siswa', true);
-                    }else{
+                    } else {
                         $e->where('akses_guru', true);
                     }
                 })
