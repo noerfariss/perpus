@@ -41,6 +41,8 @@ Route::middleware('xss')->group(function () {
             Route::post('/list', [BukuController::class, 'index']);
             Route::get('/detail/{id}', [BukuController::class, 'show']);
             Route::post('/peminjaman', [BukuController::class, 'peminjaman']);
+            Route::get('/read/{id}', [BukuController::class, 'log_buku_read']);
+            Route::post('/tutup', [BukuController::class, 'log_buku_tutup']);
         });
 
         Route::prefix('master')->group(function(){

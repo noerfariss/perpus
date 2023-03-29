@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Buku;
+use App\Models\LogBuku;
 use App\Models\Peminjaman;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -63,7 +64,7 @@ class BukuController extends Controller
             if (count($records) > 0) {
                 return $this->responOk(data: $records);
             } else {
-                return $this->responError('Data tidak tersedia', kode:404);
+                return $this->responError('Data tidak tersedia', kode: 404);
             }
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
@@ -101,7 +102,7 @@ class BukuController extends Controller
                     'status_pinjam' => ($data->stok - $data->dipinjam) === 0 ? 'Kosong' : 'Tersedia',
                     'kategori' => $data->kategori,
                     'penerbit' => $data->penerbit,
-                    'pdf' => $data->pdf ? url('/storage/buku/pdf').'/'.$data->pdf : null,
+                    'pdf' => $data->pdf ? url('/storage/buku/pdf') . '/' . $data->pdf : null,
                     'created_at' => $data->created_at,
                 ];
 
@@ -169,6 +170,49 @@ class BukuController extends Controller
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
             return $this->responError('Terjadi kesalahan, cobalah kembali');
+        }
+    }
+
+    public function log_buku_read($buku_id)
+    {
+        DB::beginTransaction();
+        try {
+            $log = LogBuku::insertGetId([
+                'anggota_id' => Auth::id(),
+                'buku_id' => $buku_id,
+                'created_at' => Carbon::now(),
+            ]);
+
+            DB::commit();
+
+            return $this->responOk('Log buku berhasil diinput', data: $log);
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Log::warning($th->getMessage());
+            return $this->responError('Terjadi kesalahan, Log buku gagal');
+        }
+    }
+
+    public function log_buku_tutup(Request $request)
+    {
+        $log = LogBuku::find($request->log_id);
+        if ($log === null) {
+            return $this->responError('Data log tidak tersedia', kode: 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $log = LogBuku::where('id', $request->log_id)->update([
+                'updated_at' => Carbon::now(),
+            ]);
+
+            DB::commit();
+
+            return $this->responOk('Log buku berhasil diperbarui');
+        } catch (\Throwable $th) {
+            Log::warning($th->getMessage());
+            DB::rollBack();
+            return $this->responError('Terjadi kesalahan, Log buku gagal');
         }
     }
 }
