@@ -85,7 +85,14 @@ class ProfilController extends Controller
 
         DB::beginTransaction();
         try {
-            Anggota::where('id', Auth::id())->update($request->all());
+            Anggota::where('id', Auth::id())->update([
+                'nama' => $request->nama,
+                'jenis_kelamin' => $request->jenis_kelamin,
+                'kota_id' => $request->kota_id,
+                'tanggal_lahir' => $request->tanggal_lahir,
+                'kelas_id' => $request->kelas_id ? $request->kelas_id : NULL,
+                'alamat' => $request->alamat,
+            ]);
             DB::commit();
 
             $user = Anggota::with([
