@@ -16,7 +16,56 @@ class KategoriSeeder extends Seeder
      */
     public function run()
     {
-        $data = ['umum', 'novel'];
+        $data = [
+            [
+                'kategori' => 'Buku Pelajaran Siswa kelas 9',
+                'akses_siswa' => true,
+                'akses_guru' => true,
+                'urutan' => 1,
+            ],
+            [
+                'kategori' => 'Buku Pelajaran Siswa kelas 8',
+                'akses_siswa' => true,
+                'akses_guru' => true,
+                'urutan' => 2,
+            ],
+            [
+                'kategori' => 'Buku Pelajaran Siswa kelas 7',
+                'akses_siswa' => true,
+                'akses_guru' => true,
+                'urutan' => 3,
+            ],
+            [
+                'kategori' => 'Buku Panduan Guru kelas 9',
+                'akses_siswa' => false,
+                'akses_guru' => true,
+                'urutan' => 4,
+            ],
+            [
+                'kategori' => 'Buku Panduan Guru kelas 8',
+                'akses_siswa' => false,
+                'akses_guru' => true,
+                'urutan' => 5,
+            ],
+            [
+                'kategori' => 'Buku Panduan Guru kelas 7',
+                'akses_siswa' => false,
+                'akses_guru' => true,
+                'urutan' => 6,
+            ],
+            [
+                'kategori' => 'Novel',
+                'akses_siswa' => true,
+                'akses_guru' => true,
+                'urutan' => 7,
+            ],
+            [
+                'kategori' => 'Buku Umum',
+                'akses_siswa' => true,
+                'akses_guru' => true,
+                'urutan' => 8,
+            ]
+        ];
 
         $kategories = [];
         $kode = Kategori::orderby('id', 'desc')->first();
@@ -39,7 +88,10 @@ class KategoriSeeder extends Seeder
         foreach ($kategori_arr as $item) {
             $kategories[] = [
                 'kode' => 'KG' . str_pad($nomor++, 4, '0', STR_PAD_LEFT),
-                'kategori' => $item,
+                'kategori' => $item['kategori'],
+                'akses_siswa' => $item['akses_siswa'],
+                'akses_guru' => $item['akses_guru'],
+                'urutan' => $item['urutan'],
                 'created_at' => Carbon::now(),
             ];
         }

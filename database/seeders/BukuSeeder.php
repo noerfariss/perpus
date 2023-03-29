@@ -83,7 +83,7 @@ class BukuSeeder extends Seeder
 
             DB::table('buku_kategori')->insert([
                 'buku_id' => $buku->id,
-                'kategori_id' => Kategori::where('kategori', 'novel')->first()->id,
+                'kategori_id' => Kategori::where('kategori', 'Novel')->first()->id,
                 'created_at' => Carbon::now(),
             ]);
 
@@ -235,7 +235,7 @@ class BukuSeeder extends Seeder
 
             DB::table('buku_kategori')->insert([
                 'buku_id' => $buku->id,
-                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'kategori_id' => Kategori::where('kategori', 'Buku Pelajaran Siswa kelas 7')->first()->id,
                 'created_at' => Carbon::now(),
             ]);
 
@@ -795,7 +795,7 @@ class BukuSeeder extends Seeder
 
             DB::table('buku_kategori')->insert([
                 'buku_id' => $buku->id,
-                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'kategori_id' => Kategori::where('kategori', 'Buku Pelajaran Siswa kelas 9')->first()->id,
                 'created_at' => Carbon::now(),
             ]);
 
@@ -956,7 +956,7 @@ class BukuSeeder extends Seeder
 
             DB::table('buku_kategori')->insert([
                 'buku_id' => $buku->id,
-                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'kategori_id' => Kategori::where('kategori', 'Buku Pelajaran Siswa kelas 8')->first()->id,
                 'created_at' => Carbon::now(),
             ]);
 
@@ -1006,7 +1006,7 @@ class BukuSeeder extends Seeder
 
             DB::table('buku_kategori')->insert([
                 'buku_id' => $buku->id,
-                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'kategori_id' => Kategori::where('kategori', 'Buku Panduan Guru kelas 9')->first()->id,
                 'created_at' => Carbon::now(),
             ]);
 
@@ -1230,7 +1230,7 @@ class BukuSeeder extends Seeder
 
             DB::table('buku_kategori')->insert([
                 'buku_id' => $buku->id,
-                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'kategori_id' => Kategori::where('kategori', 'Buku Panduan Guru kelas 8')->first()->id,
                 'created_at' => Carbon::now(),
             ]);
 
@@ -1462,7 +1462,7 @@ class BukuSeeder extends Seeder
 
             DB::table('buku_kategori')->insert([
                 'buku_id' => $buku->id,
-                'kategori_id' => Kategori::where('kategori', 'umum')->first()->id,
+                'kategori_id' => Kategori::where('kategori', 'Buku Panduan Guru kelas 7')->first()->id,
                 'created_at' => Carbon::now(),
             ]);
 

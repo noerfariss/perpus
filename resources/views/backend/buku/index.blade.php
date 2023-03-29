@@ -37,7 +37,7 @@
                             <th>stok</th>
                             <th>dipinjam</th>
                             <th>time input</th>
-                            <th></th>
+                            <th width="100"></th>
                         </tr>
                     </thead>
                 </table>
