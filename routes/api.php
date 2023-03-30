@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\AnggotaController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\BukuController;
 use App\Http\Controllers\Api\KategoriController;
@@ -49,6 +50,7 @@ Route::middleware('xss')->group(function () {
         Route::prefix('master')->group(function () {
             Route::apiResource('kelas', KelasController::class);
             Route::apiResource('kota', KotaController::class);
+            Route::apiResource('siswa', AnggotaController::class);
         });
     });
 });
