@@ -7,6 +7,7 @@ use App\Models\Buku;
 use App\Models\LogBuku;
 use App\Models\Peminjaman;
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -213,6 +214,64 @@ class BukuController extends Controller
             Log::warning($th->getMessage());
             DB::rollBack();
             return $this->responError('Terjadi kesalahan, Log buku gagal');
+        }
+    }
+
+    public function log_siswa(Request $request)
+    {
+        $tmulai = $request->tmulai;
+        $takhir = $request->takhir;
+        $siswa = $request->siswa_id;
+
+        try {
+            $data = LogBuku::query()
+                ->with([
+                    'anggota' => fn ($e) => $e->select('id', 'nomor_induk', 'nomor_anggota', 'nama', 'jenis_kelamin')
+                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto')),
+                    'buku' => fn ($e) => $e->select('id', 'judul', 'pengarang', 'isbn')
+                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
+                        ->with([
+                            'kategori',
+                        ]),
+                ])
+                ->when($siswa, function ($e, $siswa) {
+                    $e->where('anggota_id', $siswa);
+                })
+                ->whereNotNull('updated_at')
+                ->whereDate('created_at', '>=', $tmulai)
+                ->whereDate('created_at', '<=', $takhir)
+                ->orderBy('id','desc');
+
+            if ($data->count() === 0) {
+                return $this->responError('Data tidak tersedia', kode: 404);
+            }
+
+            $data = $data->get();
+            $records = [];
+            foreach ($data as $item) {
+                $buka = Carbon::parse($item->created_at);
+                $tutup = Carbon::parse($item->updated_at);
+
+                $records[] = [
+                    'id' => $item->id,
+                    'tanggal_akses' => Carbon::parse($item->created_at)->timezone(zona_waktu())->isoFormat('DD MMM YYYY'),
+                    'durasi' => CarbonInterval::seconds($tutup->diffInSeconds($buka))->cascade()->forHumans(),
+                    'anggota' => $item->anggota,
+                    'buku' => [
+                        'id' => $item->buku->id,
+                        'judul' => $item->buku->judul,
+                        'pengarang' => $item->buku->pengarang,
+                        'isbn' => $item->buku->isbn,
+                        'foto' => $item->buku->foto,
+                        'kategori' => $item->buku->kategori->implode('kategori', ', ')
+                    ]
+                ];
+            }
+
+            return $this->responOk(data: $records);
+        } catch (\Throwable $th) {
+            Log::warning($th->getMessage());
+            return $this->responError('Terjadi kesalahan saat menampilkan data');
         }
     }
 }
