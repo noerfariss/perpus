@@ -226,13 +226,13 @@ class BukuController extends Controller
         try {
             $data = LogBuku::query()
                 ->with([
-                    'anggota' => fn ($e) => $e->select('id', 'nomor_induk', 'nomor_anggota', 'nama', 'jenis_kelamin')
+                    'anggota' => fn ($e) => $e->with(['kelas', 'kota'])
+                        ->select('*')
                         ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto')),
-                    'buku' => fn ($e) => $e->select('id', 'judul', 'pengarang', 'isbn')
+                    'buku' => fn ($e) => $e->with(['penerbit', 'kategori'])
+                        ->select('*')
                         ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
-                        ->with([
-                            'kategori',
-                        ]),
+
                 ])
                 ->when($siswa, function ($e, $siswa) {
                     $e->where('anggota_id', $siswa);
@@ -240,7 +240,7 @@ class BukuController extends Controller
                 ->whereNotNull('updated_at')
                 ->whereDate('created_at', '>=', $tmulai)
                 ->whereDate('created_at', '<=', $takhir)
-                ->orderBy('id','desc');
+                ->orderBy('id', 'desc');
 
             if ($data->count() === 0) {
                 return $this->responError('Data tidak tersedia', kode: 404);
@@ -263,7 +263,8 @@ class BukuController extends Controller
                         'pengarang' => $item->buku->pengarang,
                         'isbn' => $item->buku->isbn,
                         'foto' => $item->buku->foto,
-                        'kategori' => $item->buku->kategori->implode('kategori', ', ')
+                        'kategori' => $item->buku->kategori->implode('kategori', ', '),
+                        'penerbit' => $item->buku->penerbit,
                     ]
                 ];
             }

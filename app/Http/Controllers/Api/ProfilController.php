@@ -181,7 +181,14 @@ class ProfilController extends Controller
 
                 // Simpan gambar ke Database
                 Anggota::where('id', Auth::id())->update(['foto' => $imageName]);
-                $data = Anggota::where('id', Auth::id())->first();
+                $data = Anggota::query()
+                    ->select('*')
+                    ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
+                    ->with([
+                        'kelas',
+                        'kota'
+                    ])
+                    ->where('id', Auth::id())->first();
 
                 DB::commit();
                 return $this->responOk(data: $data);

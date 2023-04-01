@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Anggota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AnggotaController extends Controller
@@ -17,7 +18,15 @@ class AnggotaController extends Controller
     public function index()
     {
         try {
-            $data = Anggota::where('status', true)->where('jabatan','siswa')->get();
+            $data = Anggota::query()
+                ->select('*')
+                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
+                ->with([
+                    'kelas',
+                    'kota'
+                ])
+                ->where('status', true)->where('jabatan', 'siswa')
+                ->get();
             return $this->responOk(data: $data);
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
@@ -45,9 +54,19 @@ class AnggotaController extends Controller
     public function show($id)
     {
         try {
-            $data = Anggota::where('status', true)->where('id', $id)->where('jabatan', 'siswa')->first();
-            if($data === null){
-                return $this->responError('Data tidak ditemukan', kode:404);
+            $data = Anggota::query()
+                ->select('*')
+                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
+                ->with([
+                    'kelas',
+                    'kota'
+                ])
+                ->where('status', true)
+                ->where('id', $id)
+                ->where('jabatan', 'siswa')
+                ->first();
+            if ($data === null) {
+                return $this->responError('Data tidak ditemukan', kode: 404);
             }
 
             return $this->responOk(data: $data);
