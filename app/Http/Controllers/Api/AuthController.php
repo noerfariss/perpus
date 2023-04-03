@@ -113,8 +113,15 @@ class AuthController extends Controller
 
     public function upload(Request $request)
     {
-        if ($request->hasFile('gambar')) {
+        $validator = Validator::make($request->all(), [
+            'gambar' => 'required|file',
+        ]);
 
+        if($validator->fails()){
+            return $this->responError(data:$validator->errors());
+        }
+
+        if ($request->hasFile('gambar')) {
             try {
                 $gambar = $request->file('gambar');
                 $path = Storage::disk('s3')->put('belajar', $gambar);
