@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Kota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Benchmark;
 use Illuminate\Support\Facades\Log;
 
 class KotaController extends Controller
@@ -34,6 +35,13 @@ class KotaController extends Controller
     public function store(Request $request)
     {
         //
+    }
+
+    public function tes(){
+        Benchmark::dd([
+            'cek 1' => fn() => Kota::first(),
+            'cek 2' => fn() => Kota::all()
+        ]);
     }
 
     /**

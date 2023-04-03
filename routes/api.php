@@ -24,6 +24,7 @@ Route::middleware('xss')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('api.login');
 
     Route::get('/sekolah', [ProfilController::class, 'sekolah']);
+    Route::get('/hitung', [KotaController::class, 'tes']);
 
     Route::post('/upload-file', [AuthController::class, 'upload']);
 
