@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
@@ -107,6 +108,22 @@ class AuthController extends Controller
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
             return $this->responError('Terjadi kesalahan, cobalah kembali');
+        }
+    }
+
+    public function upload(Request $request)
+    {
+        if($request->hasFile('gambar')){
+            $gambar = $request->file('gambar');
+            $path = Storage::disk('s3')->put('belajar', $gambar);
+            $url = Storage::disk('s3')->url($path);
+
+            $data = [
+                'path' => $path,
+                'url' => $url
+            ];
+
+            return $this->responOk(data:$data);
         }
     }
 }

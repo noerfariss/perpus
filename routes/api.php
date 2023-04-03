@@ -25,6 +25,8 @@ Route::middleware('xss')->group(function () {
 
     Route::get('/sekolah', [ProfilController::class, 'sekolah']);
 
+    Route::post('/upload-file', [AuthController::class, 'upload']);
+
     Route::middleware('auth:sanctum')->group(function () {
         Route::get('/logout', [AuthController::class, 'logout'])->name('api.logout');
         Route::get('/init-home', [AuthController::class, 'init_home']);
