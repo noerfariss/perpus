@@ -4,6 +4,7 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use Illuminate\Support\Facades\Log;
 
 class Kernel extends ConsoleKernel
 {
@@ -15,7 +16,10 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('denda:traking')->dailyAt('18:30')->timezone(zona_waktu());
+        // $schedule->command('denda:traking')->dailyAt('18:30')->timezone(zona_waktu());
+        $schedule->call(function(){
+            Log::info('haloo');
+        })->everyMinute();
     }
 
     /**
