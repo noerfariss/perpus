@@ -113,17 +113,23 @@ class AuthController extends Controller
 
     public function upload(Request $request)
     {
-        if($request->hasFile('gambar')){
-            $gambar = $request->file('gambar');
-            $path = Storage::disk('s3')->put('belajar', $gambar);
-            $url = Storage::disk('s3')->url($path);
+        if ($request->hasFile('gambar')) {
 
-            $data = [
-                'path' => $path,
-                'url' => $url
-            ];
+            try {
+                $gambar = $request->file('gambar');
+                $path = Storage::disk('s3')->put('belajar', $gambar);
+                $url = Storage::disk('s3')->url($path);
 
-            return $this->responOk(data:$data);
+                $data = [
+                    'path' => $path,
+                    'url' => $url
+                ];
+
+                return $this->responOk(data: $data);
+            } catch (\Throwable $th) {
+                Log::warning($th->getMessage());
+                return $this->responError();
+            }
         }
     }
 }
