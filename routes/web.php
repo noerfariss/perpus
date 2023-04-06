@@ -61,8 +61,8 @@ Route::middleware('xss')->group(function () {
         Route::prefix('auth')->group(function () {
             Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
             Route::any('/profil', [UserController::class, 'profil'])->name('profil');
-            Route::post('/ganti-foto', [UserController::class, 'ganti_foto'])->name('ganti-foto');
             Route::post('/simpan-foto', [UserController::class, 'simpan_foto'])->name('simpan-foto');
+
             Route::any('/password', [UserController::class, 'password'])->name('password');
             Route::post('/ganti-password', [UserController::class, 'ganti_password'])->name('ganti-password');
             Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -135,6 +135,7 @@ Route::middleware('xss')->group(function () {
                 Route::post('/kelas', [AjaxController::class, 'kelas'])->name('drop-kelas');
                 Route::post('/kategori', [AjaxController::class, 'kategori'])->name('drop-kategori');
                 Route::post('/penerbit', [AjaxController::class, 'penerbit'])->name('drop-penerbit');
+                Route::post('/ganti-foto', [AjaxController::class, 'ganti_foto'])->name('ganti-foto');
             });
         });
     });

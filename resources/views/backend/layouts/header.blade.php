@@ -20,7 +20,7 @@
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                        <img src="{{ Auth::user()->foto === null || Auth::user()->foto == '' ? asset('backend/sneat-1.0.0/assets/img/avatars/1.png') : url('storage/foto/thum_' . Auth::user()->foto) }}"
+                        <img src="{{ Auth::user()->foto === null || Auth::user()->foto == '' ? asset('backend/sneat-1.0.0/assets/img/avatars/1.png') : base_url(Auth::user()->foto) }}"
                             alt class="w-px-40 h-px-40 rounded-circle" />
                     </div>
                 </a>
@@ -30,7 +30,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="{{ Auth::user()->foto === null || Auth::user()->foto == '' ? asset('backend/sneat-1.0.0/assets/img/avatars/1.png') : url('storage/foto/thum_' . Auth::user()->foto) }}"
+                                        <img src="{{ Auth::user()->foto === null || Auth::user()->foto == '' ? asset('backend/sneat-1.0.0/assets/img/avatars/1.png') : base_url(Auth::user()->foto) }}"
                                             alt class="w-px-40 h-px-40 rounded-circle" />
                                     </div>
                                 </div>

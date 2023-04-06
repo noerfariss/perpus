@@ -10,6 +10,8 @@ use App\Models\Kecamatan;
 use App\Models\Kelas;
 use App\Models\Penerbit;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
 
 class AjaxController extends Controller
 {
@@ -182,5 +184,56 @@ class AjaxController extends Controller
     public function get_no_transaksi()
     {
         return getKodeTransaksi();
+    }
+
+    public function ganti_foto(Request $request)
+    {
+        if ($request->has('file')) {
+            $file = $request->file;
+            $path = $request->path;
+
+            switch ($path) {
+                case 'buku':
+                    $size_gambar = 200;
+                    break;
+
+                case 'foto':
+                    $size_gambar = 100;
+                    break;
+
+                case 'anggota':
+                    $size_gambar = 120;
+                    break;
+
+                case 'banner':
+                    $size_gambar = 1024;
+                    break;
+
+                default:
+                    $size_gambar = 150;
+                    break;
+            }
+
+            $request->validate([
+                'file' => 'required|image|max:2000'
+            ]);
+
+            $name = time();
+            $ext  = $file->getClientOriginalExtension();
+            $foto = $name . '.' . $ext;
+
+            $fullPath = $path . '/' . $foto;
+
+            $path = $file->getRealPath();
+            $thum = Image::make($path)->resize($size_gambar, $size_gambar, function ($size) {
+                $size->aspectRatio();
+            });
+
+            $path = Storage::put($fullPath, $thum->stream());
+
+            return response()->json([
+                'file' => $fullPath,
+            ]);
+        }
     }
 }

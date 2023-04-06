@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade;
-use Intervention\Image\Facades\Image;
 use Yajra\DataTables\Facades\DataTables;
 use Laratrust\LaratrustFacade as Laratrust;
 use Maatwebsite\Excel\Facades\Excel;
@@ -327,7 +327,6 @@ class UserController extends Controller
 
         $user = User::find(Auth::id());
         return view('backend.pengaturan.show', compact('user', 'validator'));
-        return view('backend.users.edit', compact('validator', 'user'));
     }
 
     public function password(Request $request)
@@ -373,33 +372,6 @@ class UserController extends Controller
         }
 
         return view('backend.pengaturan.ganti_password');
-    }
-
-    public function ganti_foto(Request $request)
-    {
-        if ($request->has('file')) {
-            $file = $request->file;
-            $request->validate([
-                'file' => 'required|image|max:2000'
-            ]);
-
-            $name = time();
-            $ext  = $file->getClientOriginalExtension();
-            $foto = $name . '.' . $ext;
-
-            $path = $file->getRealPath();
-            $thum = Image::make($path)->resize(80, 80, function ($size) {
-                $size->aspectRatio();
-            });
-            $thumPath = public_path('/storage/foto') . '/thum_' . $foto;
-            $thum = Image::make($thum)->save($thumPath);
-
-            $request->file->storeAs('public/foto', $foto);
-
-            return response()->json([
-                'file' => $foto,
-            ]);
-        }
     }
 
     public function simpan_foto(Request $request)

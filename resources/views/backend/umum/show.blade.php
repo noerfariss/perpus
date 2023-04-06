@@ -36,7 +36,7 @@
                                 @if ($pengaturan->logo === 'logo' || $pengaturan->logo === null || $pengaturan->logo == '')
                                     Logo belum diset
                                 @else
-                                    <img src="{{ url('/storage/foto/thum_' . $pengaturan->logo) }}" alt="">
+                                    <img src="{{ base_url($pengaturan->logo) }}" alt="">
                                 @endif
                             </div>
                         </div>

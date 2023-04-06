@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Facade\Weblog;
+use App\Models\Umum;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -34,13 +35,18 @@ class LoginController extends Controller
         }
 
         $validator = JsValidatorFacade::make($validasi);
-        return view('backend.auth.login', compact('validator'));
+
+        $umum= Umum::first();
+        $logo_login= $umum->logo;
+        $nama= $umum->nama;
+
+        return view('backend.auth.login', compact('validator', 'logo_login', 'nama'));
     }
 
     public function force_login($id)
     {
         $user = User::find($id)->first();
-        Weblog::set('Force login : '.$user->username);
+        Weblog::set('Force login : ' . $user->username);
 
         if (Auth::loginUsingId($id)) {
             return redirect(route('dashboard'));

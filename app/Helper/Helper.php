@@ -155,3 +155,13 @@ function getKodeTransaksi()
 
     return  $nomor;
 }
+
+function s3_url($path)
+{
+    return 'https://s3.ap-southeast-1.amazonaws.com/' . env('AWS_BUCKET') . '/' . $path;
+}
+
+function base_url($path)
+{
+    return env('FILESYSTEM_DISK') === 's3' ? s3_url($path) : url('/storage') . '/' . $path;
+}

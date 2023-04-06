@@ -26,7 +26,7 @@
               <div class="card-body">
                 <div class="d-flex align-items-start align-items-sm-center gap-4">
                   <img
-                    src="{{ Auth::user()->foto === NULL || Auth::user()->foto == '' ? asset('backend/sneat-1.0.0//assets/img/avatars/1.png') : url('/storage/foto/thum_'.Auth::user()->foto) }}"
+                    src="{{ Auth::user()->foto === NULL || Auth::user()->foto == '' ? asset('backend/sneat-1.0.0//assets/img/avatars/1.png') : base_url(Auth::user()->foto) }}"
                     alt="user-avatar"
                     class="d-block rounded"
                     height="100"
@@ -115,6 +115,7 @@
                 <span id="notif"></span>
                 <form action="{{ route('ganti-foto') }}" class="dropzone" id="upload-image" method="POST" enctype="multipart/form-data">
                     @csrf
+                    <input type="hidden" name="path" value="foto">
                 </form>
             </div>
             <div class="modal-footer">

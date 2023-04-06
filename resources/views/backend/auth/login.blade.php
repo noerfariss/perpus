@@ -57,16 +57,23 @@
               <!-- Logo -->
               <div class="app-brand justify-content-center">
                 <a href="{{ route('login') }}" class="app-brand-link gap-2">
-                  <span class="app-brand-text demo text-body fw-bolder">{!! $logo_login !!}</span>
+                    <span class="app-brand-text demo text-body fw-bolder">
+                        @if ($logo)
+                            <div class="text-center"><img src="{{ base_url($logo_login) }}" class="mb-2" width="80%"></div>
+                        @endif
+                        <h1 style="text-transform: uppercase; font-size:14px; text-align:center; margin:0 0 2px 0; padding:0;">Perpustakaan</h1>
+                        <h2 style="text-transform:uppercase; font-weight:bold; font-size:16px; text-align:center; margin:0; padding:0;">{{ $nama }}</h2>
+                    </span>
                 </a>
               </div>
               <!-- /Logo -->
+
               <h4 class="mb-2">Selamat Datang! 👋</h4>
               <p class="mb-4">Pastikan username Anda sudah sesuai.</p>
 
               @if (session()->has('pesan'))
-                {!! session('pesan') !!}
-              @endif
+{!! session('pesan') !!}
+@endif
 
               <form class="mb-3" action="{{ route('login') }}" method="POST" enctype="multipart/form-data" id="my-form">
                 @csrf
@@ -113,5 +120,5 @@
 </html>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
-<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js')}}"></script>
+<script type="text/javascript" src="{{ asset('vendor/jsvalidation/js/jsvalidation.js') }}"></script>
 {!! $validator->selector('#my-form') !!}
