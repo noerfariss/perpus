@@ -29,7 +29,6 @@
                 <table class="table table-sm table-hover display nowrap mb-4" id="datatable">
                     <thead>
                         <tr>
-                            <th>NO</th>
                             <th>foto</th>
                             <th>nama</th>
                             <th>username</th>
@@ -108,7 +107,7 @@
         let datatables = $('#datatable').DataTable({
             scrollX: true,
             processing: true,
-            serverSide: false,
+            serverSide: true,
             searching: true,
             lengthChange: false,
             pageLength: 10,
@@ -122,9 +121,7 @@
                     d.status = $('.btn-check:checked').val();
                 },
             },
-            columns: [{
-                    data: 'DT_RowIndex'
-                },
+            columns: [
                 {
                     data: 'foto'
                 },

@@ -65,7 +65,7 @@
                                 <div class="col-sm-9">
                                     <div id="box-foto">
                                         @if ($user->foto)
-                                            <img src="{{ url('/storage/foto/thum_' . $user->foto) }}" class="rounded">
+                                            <img src="{{ base_url($user->foto) }}" class="rounded">
                                         @endif
                                     </div>
                                 </div>
@@ -101,6 +101,7 @@
                     <form action="{{ route('ganti-foto') }}" class="dropzone" id="upload-image" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="path" value="foto">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -150,7 +151,7 @@
                 $('#notif').html(`<div class="alert alert-danger">Tidak dapat menambahkan foto</div>`);
             } else {
                 $('#modalUploadFoto').modal('hide');
-                $('#box-foto').html(`<img src="{{ url('/storage/foto/thum_${foto}') }}" class="rounded">`);
+                $('#box-foto').html(`<img src="{{ base_url('${foto}') }}" class="rounded">`);
             }
         }
     </script>
