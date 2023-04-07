@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('nomor_induk', 20)->unique();
             $table->string('nomor_anggota', 20)->unique();
             $table->string('password');
-            $table->string('foto', 20)->nullable();
+            $table->string('foto')->nullable();
             $table->string('nama');
             $table->enum('jenis_kelamin', ['L','P']);
             $table->foreignId('kota_id')->nullable()->constrained('kotas')->onDelete('cascade');

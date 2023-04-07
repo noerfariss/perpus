@@ -52,8 +52,7 @@ class GuruController extends Controller
             })
             ->where('status', $request->status)
             ->where('jabatan', self::$siswa)
-            ->orderBy('id')
-            ->get();
+            ->orderBy('id');
 
         if ($request->filled('export')) {
             $request->merge([
@@ -61,14 +60,16 @@ class GuruController extends Controller
             ]);
 
             Weblog::set('Export data guru');
-            return Excel::download(new AnggotaExport($data, $request->all()), 'GURU.xlsx');
+            return Excel::download(new AnggotaExport($data->get(), $request->all()), 'GURU.xlsx');
         }
 
-        return DataTables::of($data)
-            ->addIndexColumn()
+        return DataTables::eloquent($data)
             ->editColumn('foto', function ($e) {
-                $foto = ($e->foto === "" || $e->foto === null) ? '/storage/foto/pasfoto.jpg' : '/storage/anggota/thum_' . $e->foto;
-                return '<div><img src="' . url($foto) . '" class="rounded" width="40"/></div>';
+                if ($e->foto) {
+                    return '<div><img src="' . base_url($e->foto) . '" class="rounded" width="40"/></div>';
+                } else {
+                    return '<img src="' . url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png') . '" />';
+                }
             })
             ->addColumn('anggota', function ($e) {
                 $jenis_kelamin = $e->jenis_kelamin === 'L' ? '<span class="badge bg-danger">Laki-laki</span>' : '<span class="badge bg-warning">Perempuan</span>';

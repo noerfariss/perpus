@@ -102,7 +102,6 @@ Route::middleware('xss')->group(function () {
             Route::get('/siswa/kartu/{anggota}', [AnggotaController::class, 'kartu'])->name('siswa.kartu');
             Route::post('/ajax-siswa', [AnggotaController::class, 'ajax'])->name('ajax-siswa');
             Route::post('/siswa-ganti-password', [AnggotaController::class, 'ganti_password'])->name('siswa-ganti-password');
-            Route::post('/ganti-foto-anggota', [AnggotaController::class, 'ganti_foto'])->name('ganti-foto-anggota');
 
             Route::resource('guru', GuruController::class);
             Route::post('/ajax-guru', [GuruController::class, 'ajax'])->name('ajax-guru');
