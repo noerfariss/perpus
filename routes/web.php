@@ -84,8 +84,6 @@ Route::middleware('xss')->group(function () {
             // Data Buku
             Route::resource('buku', BukuController::class);
             Route::post('/ajax-buku', [BukuController::class, 'ajax'])->name('ajax-buku');
-            Route::post('/ganti-foto-buku', [BukuController::class, 'ganti_foto'])->name('ganti-foto-buku');
-            Route::post('/ganti-pdf-buku', [BukuController::class, 'ganti_pdf'])->name('ganti-pdf-buku');
             Route::post('/buku/hapus-item', [BukuController::class, 'hapus_item'])->name('hapus_buku_item');
             Route::post('/buku/tambah-stok', [BukuController::class, 'tambah_stok'])->name('tambah_stok');
             Route::get('/kode-kategori', [BukuController::class, 'getKodeKategori'])->name('buku.get_kode_kategori');
@@ -135,6 +133,7 @@ Route::middleware('xss')->group(function () {
                 Route::post('/kategori', [AjaxController::class, 'kategori'])->name('drop-kategori');
                 Route::post('/penerbit', [AjaxController::class, 'penerbit'])->name('drop-penerbit');
                 Route::post('/ganti-foto', [AjaxController::class, 'ganti_foto'])->name('ganti-foto');
+                Route::post('/ganti-pdf', [AjaxController::class, 'ganti_pdf'])->name('ganti-pdf');
             });
         });
     });

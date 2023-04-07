@@ -236,4 +236,20 @@ class AjaxController extends Controller
             ]);
         }
     }
+
+    public function ganti_pdf(Request $request)
+    {
+        if ($request->has('file')) {
+            $file = $request->file;
+            $request->validate([
+                'file' => 'required|mimes:pdf|max:2000'
+            ]);
+
+            $path = Storage::put('buku/pdf', $request->file);
+
+            return response()->json([
+                'file' => $path,
+            ]);
+        }
+    }
 }

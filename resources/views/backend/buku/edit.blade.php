@@ -95,7 +95,7 @@
                                             <span class="d-none d-sm-block">Ganti Berkas</span>
                                             <i class="bx bx-upload d-block d-sm-none"></i>
                                         </button>
-                                        <input type="hidden" name="pdf" id="pdf" value="{{$buku->pdf}}">
+                                        <input type="hidden" name="pdf" id="pdf" value="{{ $buku->pdf }}">
                                         <div><small class="text-muted mb-0">Format : PDF Maksimal ukuran 5000
                                                 Kb</small></div>
                                     </div>
@@ -106,7 +106,9 @@
                                 <div class="col-sm-9">
                                     <div id="box-pdf">
                                         @if ($buku->pdf)
-                                            <div><img src="{{ url('/storage/buku/pdf/demo/pdf-icon.png') }}" width="60"></div>
+                                            <div><img
+                                                    src="{{ url('/backend/sneat-1.0.0/assets/img/avatars/pdf-icon.png') }}"
+                                                    width="60"></div>
                                             <button class="btn btn-xs btn-outline-danger mt-2">Lihat PDF</button>
                                         @endif
                                     </div>
@@ -122,7 +124,8 @@
                                             <span class="d-none d-sm-block">Ganti foto</span>
                                             <i class="bx bx-upload d-block d-sm-none"></i>
                                         </button>
-                                        <input type="hidden" name="foto" id="foto" value="{{$buku->foto}}">
+                                        <input type="hidden" name="foto" id="foto"
+                                            value="{{ $buku->foto }}">
                                         <div><small class="text-muted mb-0">Format : JPG, GIF, PNG. Maksimal ukuran 2000
                                                 Kb</small></div>
                                     </div>
@@ -133,8 +136,7 @@
                                 <div class="col-sm-9">
                                     <div id="box-foto">
                                         @if ($buku->foto)
-                                            <img src="{{ url('/storage/buku/thum_' . $buku->foto) }}"
-                                                class="img-thumbnail">
+                                            <img src="{{ base_url($buku->foto) }}" class="img-thumbnail rounded">
                                         @endif
                                     </div>
                                 </div>
@@ -187,9 +189,10 @@
                 </div>
                 <div class="modal-body">
                     <span id="notif"></span>
-                    <form action="{{ route('ganti-foto-buku') }}" class="dropzone" id="upload-image" method="POST"
+                    <form action="{{ route('ganti-foto') }}" class="dropzone" id="upload-image" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="path" value="buku">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -211,7 +214,7 @@
                 </div>
                 <div class="modal-body">
                     <span id="notif-pdf"></span>
-                    <form action="{{ route('ganti-pdf-buku') }}" class="dropzone" id="upload-pdf" method="POST"
+                    <form action="{{ route('ganti-pdf') }}" class="dropzone" id="upload-pdf" method="POST"
                         enctype="multipart/form-data">
                         @csrf
                     </form>
@@ -445,7 +448,7 @@
                 $('#notif').html(`<div class="alert alert-danger">Tidak dapat menambahkan foto</div>`);
             } else {
                 $('#modalUploadFoto').modal('hide');
-                $('#box-foto').html(`<img src="{{ url('/storage/buku/thum_${foto}') }}" class="rounded">`);
+                $('#box-foto').html(`<img src="{{ base_url('${foto}') }}" class="rounded">`);
             }
         }
 
@@ -456,7 +459,8 @@
                 $('#notif-pdf').html(`<div class="alert alert-danger">Tidak dapat menambahkan berkas</div>`);
             } else {
                 $('#modalUploadPDF').modal('hide');
-                $('#box-pdf').html(`<img src="{{ url('/storage/buku/pdf/demo/pdf-icon.png') }}" width="60">`);
+                $('#box-pdf').html(
+                    `<img src="{{ url('/backend/sneat-1.0.0/assets/img/avatars/pdf-icon.png') }}" width="60">`);
             }
         }
 
