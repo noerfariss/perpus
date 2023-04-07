@@ -39,19 +39,20 @@ class BannerController extends Controller
     {
         $data = Banner::query()
             ->where('status', $request->status)
-            ->orderBy('id')
-            ->get();
+            ->orderBy('id');
 
         if ($request->filled('export')) {
             Weblog::set('Export data banner');
-            return Excel::download(new BannerExport($data, $request->all()), 'BANNER.xlsx');
+            return Excel::download(new BannerExport($data->get(), $request->all()), 'BANNER.xlsx');
         }
 
-        return DataTables::of($data)
-            ->addIndexColumn()
-            ->editColumn('foto', function ($e) {
-                $gambar = ($e->gambar === "" || $e->gambar === null) ? '/storage/foto/pasfoto.jpg' : '/storage/banner/' . $e->gambar;
-                return '<div><img src="' . url($gambar) . '" class="" height="40"/></div>';
+        return DataTables::eloquent($data)
+            ->editColumn('gambar', function ($e) {
+                if($e->gambar){
+                    return '<img src="'.base_url($e->gambar).'" class="img-fluid">';
+                }else{
+                    return '-';
+                }
             })
             ->addColumn('aksi', function ($e) {
                 $btnEdit = Laratrust::isAbleTo('banner-update') ? '<a href="' . route('banner.edit', ['banner' => $e->id]) . '" class="btn btn-xs "><i class="bx bx-edit"></i></a>' : '';
@@ -64,7 +65,7 @@ class BannerController extends Controller
                     return $btnReload;
                 }
             })
-            ->rawColumns(['foto', 'aksi'])
+            ->rawColumns(['gambar', 'aksi'])
             ->make(true);
     }
 
@@ -204,31 +205,6 @@ class BannerController extends Controller
             return response()->json([
                 'pesan' => 'Terjadi kesalahan'
             ], 500);
-        }
-    }
-
-    public function ganti_foto(Request $request)
-    {
-        if ($request->has('file')) {
-            $file = $request->file;
-            $request->validate([
-                'file' => 'required|image|max:2000'
-            ]);
-
-            $name = time();
-            $ext  = $file->getClientOriginalExtension();
-            $foto = $name . '.' . $ext;
-
-            $path = $file->getRealPath();
-            $thum = Image::make($path)->resize(80, 80, function ($size) {
-                $size->aspectRatio();
-            });
-
-            $request->file->storeAs('public/banner', $foto);
-
-            return response()->json([
-                'file' => $foto,
-            ]);
         }
     }
 }

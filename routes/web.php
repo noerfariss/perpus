@@ -119,7 +119,6 @@ Route::middleware('xss')->group(function () {
 
             Route::resource('banner', BannerController::class);
             Route::post('/ajax-banner', [BannerController::class, 'ajax'])->name('ajax-banner');
-            Route::post('/ganti-foto-banner', [BannerController::class, 'ganti_foto'])->name('ganti-foto-banner');
 
             Route::resource('role', RoleController::class);
             Route::post('/ajax-role', [RoleController::class, 'ajax'])->name('ajax-roles');

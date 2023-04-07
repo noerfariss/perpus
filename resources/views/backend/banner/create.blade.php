@@ -80,9 +80,10 @@
                 </div>
                 <div class="modal-body">
                     <span id="notif"></span>
-                    <form action="{{ route('ganti-foto-banner') }}" class="dropzone" id="upload-image" method="POST"
+                    <form action="{{ route('ganti-foto') }}" class="dropzone" id="upload-image" method="POST"
                         enctype="multipart/form-data">
                         @csrf
+                        <input type="hidden" name="path" value="banner">
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -132,7 +133,7 @@
                 $('#notif').html(`<div class="alert alert-danger">Tidak dapat menambahkan gambar</div>`);
             } else {
                 $('#modalUploadFoto').modal('hide');
-                $('#box-foto').html(`<img src="{{ url('/storage/banner/${foto}') }}" class="img-fluid">`);
+                $('#box-foto').html(`<img src="{{ base_url('${foto}') }}" class="img-fluid">`);
             }
         }
     </script>

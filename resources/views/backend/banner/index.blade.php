@@ -9,19 +9,16 @@
             </h5>
             <div class="card-body">
                 <div class="row mb-4">
-                    <div class="col-sm-2 mt-2"><select name="kelas" id="kelas" class="form-control kelas-select"
-                            data-ajax--url={{ route('drop-kelas') }} onchange="datatables.ajax.reload()"></select>
-                    </div>
                     <div class="col-sm-3 mt-2"><input type="text" id="cari" class="form-control"
                             placeholder="Cari...">
                     </div>
-                    <div class="col-sm-7 mt-2">
+                    <div class="col-sm-9 mt-2">
                         @permission('banner-create')
                             <a href="{{ route('banner.create') }}" class="btn btn-sm btn-primary float-end">Tambah</a>
                         @endpermission
 
                         @permission('banner-print')
-                            {!! exportBtn(['data', 'foto'], route('ajax-banner'), 'DATA banner') !!}
+                            {!! exportBtn(['data', 'foto'], route('ajax-banner'), 'DATA BANNER') !!}
                         @endpermission
                     </div>
                 </div>
@@ -33,7 +30,6 @@
                 <table class="table table-sm table-hover display nowrap mb-4" id="datatable">
                     <thead>
                         <tr>
-                            <th>NO</th>
                             <th>banner</th>
                             <th>keterangan</th>
                             <th></th>
@@ -43,7 +39,6 @@
             </div>
         </div>
     </div>
-
 @endsection
 
 @section('script')
@@ -71,10 +66,7 @@
                 },
             },
             columns: [{
-                    data: 'DT_RowIndex'
-                },
-                {
-                    data: 'foto'
+                    data: 'gambar'
                 },
                 {
                     data: 'keterangan'
