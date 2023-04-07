@@ -26,7 +26,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '978-602-244-926-3',
                 'pengarang' => 'Ammy Kudo',
                 'stok' => 9,
-                'foto' => 'demo/novel/Biji_Merah_Luna_Cover.png',
+                'foto' => 'demo/buku/novel/Biji_Merah_Luna_Cover.png',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -34,7 +34,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '978-602-244-930-0',
                 'pengarang' => 'Futri Wijayanti',
                 'stok' => 7,
-                'foto' => 'demo/novel/Aku_Sudah_Besar_Cover.png',
+                'foto' => 'demo/buku/novel/Aku_Sudah_Besar_Cover.png',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -42,7 +42,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '978-602-244-936-2',
                 'pengarang' => 'Tyas Widjati',
                 'stok' => 3,
-                'foto' => 'demo/novel/Gambar_Lucu_Mika_Cover.png',
+                'foto' => 'demo/buku/novel/Gambar_Lucu_Mika_Cover.png',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -50,7 +50,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '978-602-244-944-7',
                 'pengarang' => 'Debby Lukito Goeyardi, Widyasari Hanaya',
                 'stok' => 11,
-                'foto' => 'demo/novel/Karena_Anggrek_Ibu_Cover.png',
+                'foto' => 'demo/buku/novel/Karena_Anggrek_Ibu_Cover.png',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -58,7 +58,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '978-602-427-921-9',
                 'pengarang' => 'Anna Farida, Felishia',
                 'stok' => 2,
-                'foto' => 'demo/novel/Namaku_Kali_Cover.png',
+                'foto' => 'demo/buku/novel/Namaku_Kali_Cover.png',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -66,7 +66,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '978-602-244-937-9',
                 'pengarang' => 'Sarah Fauzia',
                 'stok' => 1,
-                'foto' => 'demo/novel/Naik_Naik_Kepuncak_Bukit_Cover.png',
+                'foto' => 'demo/buku/novel/Naik_Naik_Kepuncak_Bukit_Cover.png',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
@@ -106,7 +106,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/Bahasa-Indonesia-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Bahasa-Indonesia-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -114,7 +114,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/7/Bahasa-Inggris-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Bahasa-Inggris-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -122,7 +122,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 8,
-                'pdf' => 'demo/7/Buddha-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Buddha-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -130,7 +130,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/Hindu-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Hindu-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -138,7 +138,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/7/Informatika-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Informatika-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -146,7 +146,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/7/IPA-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/IPA-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -154,7 +154,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/7/IPS-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/IPS-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -162,7 +162,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/7/Islam-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Islam-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -170,7 +170,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/7/Kepercayaan-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Kepercayaan-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -178,7 +178,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 9,
-                'pdf' => 'demo/7/Khonghucu-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Khonghucu-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -186,7 +186,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 3,
-                'pdf' => 'demo/7/Kristen-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Kristen-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -194,7 +194,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 13,
-                'pdf' => 'demo/7/Matematika-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Matematika-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -202,7 +202,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 13,
-                'pdf' => 'demo/7/Matematika-BS-KLS-VII-Licensi.pdf',
+                'pdf' => 'demo/buku/pdf/7/Matematika-BS-KLS-VII-Licensi.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -210,7 +210,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/7/PPKN-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/PPKN-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -218,7 +218,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/7/Seni-Musik-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/Seni-Musik-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
@@ -258,7 +258,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/9/Kelas9_Aktif_Berolah_Raga_3_989.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Aktif_Berolah_Raga_3_989.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -266,7 +266,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Alam_Sekitar_IPA_Terpadu_632.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Alam_Sekitar_IPA_Terpadu_632.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -274,7 +274,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 8,
-                'pdf' => 'demo/9/Kelas9_Arena_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_1002.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Arena_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_1002.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -282,7 +282,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/9/Kelas9_Asyiknya_Belajar_Bahasa_dan_Sastra_Indonesia_3_691.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Asyiknya_Belajar_Bahasa_dan_Sastra_Indonesia_3_691.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -290,7 +290,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/9/Kelas9_Bahasa_dan_Sastra_Indonesia_3_45.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Bahasa_dan_Sastra_Indonesia_3_45.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -298,7 +298,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/9/Kelas9_Bahasa_Indonesia_9_60.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Bahasa_Indonesia_9_60.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -306,7 +306,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 14,
-                'pdf' => 'demo/9/Kelas9_Bahasa_Indonesia_1236.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Bahasa_Indonesia_1236.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -314,7 +314,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Bahasa_Indonesia_Bahasa_Bangsaku_3.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Bahasa_Indonesia_Bahasa_Bangsaku_3.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -322,7 +322,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kepercayaan-BS-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kepercayaan-BS-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -330,7 +330,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 9,
-                'pdf' => 'demo/9/Kelas9_Bahasa_Indonesia_Indonesia_Kelas_IX_116.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Bahasa_Indonesia_Indonesia_Kelas_IX_116.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -338,7 +338,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 3,
-                'pdf' => 'demo/9/Kelas9_Bahasa_Inggris_117.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Bahasa_Inggris_117.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -346,7 +346,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 13,
-                'pdf' => 'demo/9/Kelas9_Berbahasa_Dan_Bersastra_Indonesia_1239.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Berbahasa_Dan_Bersastra_Indonesia_1239.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -354,7 +354,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 13,
-                'pdf' => 'demo/9/Kelas9_Berbahasa_Indonesia_1208.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Berbahasa_Indonesia_1208.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -362,7 +362,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_buku_siswa_ppkn_kelas_ix_2175.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_buku_siswa_ppkn_kelas_ix_2175.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -370,7 +370,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Cakap_Berbahasa_Indonesia_923.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Cakap_Berbahasa_Indonesia_923.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -378,7 +378,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_English_in_Focus_74.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_English_in_Focus_74.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -386,7 +386,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Alam_3_710.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Alam_3_710.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -394,7 +394,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Alam_682.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Alam_682.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -402,7 +402,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Alam_Kelas_IX_121.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Alam_Kelas_IX_121.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -410,7 +410,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Sosial_3_720.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Sosial_3_720.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -418,7 +418,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Sosial_111.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Sosial_111.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -426,7 +426,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Sosial_159.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Sosial_159.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -434,7 +434,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Sosial_600.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Sosial_600.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -442,7 +442,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Sosial_605.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Sosial_605.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -450,7 +450,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Ilmu_Pengetahuan_Sosial_untuk_SMP_MTs_67.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Ilmu_Pengetahuan_Sosial_untuk_SMP_MTs_67.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -458,7 +458,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Jelajah_Cakrawala_Sosial_3_669.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Jelajah_Cakrawala_Sosial_3_669.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -466,7 +466,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Kreatif_Berbahasa_Indonesia_3_703.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Kreatif_Berbahasa_Indonesia_3_703.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -474,7 +474,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Matematika_3_1197.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Matematika_3_1197.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -482,7 +482,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Matematika_47.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Matematika_47.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -490,7 +490,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_MATEMATIKA_1195.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_MATEMATIKA_1195.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -498,7 +498,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_MATEMATIKA_1202.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_MATEMATIKA_1202.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -506,7 +506,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Matematika_Aktif_dan_Menyenangkan_84.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Matematika_Aktif_dan_Menyenangkan_84.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -514,7 +514,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Membuka_Cakrawala_Teknologi_Informasi_Dan_Komunikasi_986.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Membuka_Cakrawala_Teknologi_Informasi_Dan_Komunikasi_986.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -522,7 +522,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Membuka_Jendela_Ilmu_Pengetahuan_Bahasa_dan_Sastra_Indonesia_27.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Membuka_Jendela_Ilmu_Pengetahuan_Bahasa_dan_Sastra_Indonesia_27.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -530,7 +530,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Mudah_Belajar_Matematika_kelas_IX_19.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Mudah_Belajar_Matematika_kelas_IX_19.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -538,7 +538,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pegangan_Belajar_Matematika_3_163.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pegangan_Belajar_Matematika_3_163.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -546,7 +546,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pelajaran_Bahasa_Indonesia_59.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pelajaran_Bahasa_Indonesia_59.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -554,7 +554,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pembelajaran_Ilmu_Pengetahuan_Alam_Terpadu_Dan_Kontekstual_IX_181.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pembelajaran_Ilmu_Pengetahuan_Alam_Terpadu_Dan_Kontekstual_IX_181.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -562,7 +562,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Agama_Islam_1191.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Agama_Islam_1191.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -570,7 +570,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Agama_Islam_1210.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Agama_Islam_1210.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -578,7 +578,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Agama_Islam_1213.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Agama_Islam_1213.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -586,7 +586,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Agama_Islam_1214.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Agama_Islam_1214.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -594,7 +594,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_3_967.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_3_967.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -602,7 +602,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_3_992.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_3_992.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -610,7 +610,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_3_1000.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_3_1000.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -618,7 +618,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_977.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_977.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -626,7 +626,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_996.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_996.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -634,7 +634,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_1007.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_1007.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -642,7 +642,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_1011.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Jasmani_Olahraga_dan_Kesehatan_1011.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -650,7 +650,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Kewarganegaraan_3_685.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Kewarganegaraan_3_685.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -658,7 +658,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Kewarganegaraan_3_748.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Kewarganegaraan_3_748.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -666,7 +666,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Kewarganegaraan_676.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Kewarganegaraan_676.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -674,7 +674,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Kewarganegaraan_802.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Kewarganegaraan_802.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -682,7 +682,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Kewarganegaraan_838.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Kewarganegaraan_838.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -690,7 +690,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_Kewarganegaraan_877.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_Kewarganegaraan_877.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -698,7 +698,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Pendidikan_kewarganegaraan_1275.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Pendidikan_kewarganegaraan_1275.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -706,7 +706,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Penjasorkes_IX_1223.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Penjasorkes_IX_1223.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -714,7 +714,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_PKn_Kecakapan_Berbangsa_dan_Bernegara_665.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_PKn_Kecakapan_Berbangsa_dan_Bernegara_665.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -722,7 +722,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Satelit_TIK_984.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Satelit_TIK_984.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -730,7 +730,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_971.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_971.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -738,7 +738,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_973.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_973.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -746,7 +746,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_979.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_979.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -754,7 +754,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_981.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_981.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -762,7 +762,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_988.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_988.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -770,7 +770,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_991.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Teknologi_Informasi_Dan_Komunikasi_991.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -778,7 +778,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 7,
-                'pdf' => 'demo/9/Kelas9_Teknologi_Informasi_dan_Komunikasi_1212.pdf',
+                'pdf' => 'demo/buku/pdf/9/Kelas9_Teknologi_Informasi_dan_Komunikasi_1212.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
@@ -819,7 +819,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Bahasa-Indonesia-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Bahasa-Indonesia-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -827,7 +827,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Bahasa-Inggris-BS-KLS-VIII-nsn.pdf',
+                'pdf' => 'demo/buku/pdf/8/Bahasa-Inggris-BS-KLS-VIII-nsn.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -835,7 +835,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Buddha-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Buddha-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -843,7 +843,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Hindu-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Hindu-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -851,7 +851,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Informatika-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Informatika-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -859,7 +859,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/IPA-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/IPA-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -867,7 +867,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/IPS-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/IPS-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -875,7 +875,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Islam-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Islam-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -883,7 +883,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Katolik-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Katolik-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -891,7 +891,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Kelas8_pjok_buku_siswa_smp_mts_kelas_viii_2027.pdf',
+                'pdf' => 'demo/buku/pdf/8/Kelas8_pjok_buku_siswa_smp_mts_kelas_viii_2027.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -899,7 +899,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Kepercayaan-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Kepercayaan-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -907,7 +907,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Khonghucu-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Khonghucu-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -915,7 +915,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Kristen-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Kristen-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -923,7 +923,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Matematika-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/Matematika-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -931,7 +931,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/Matematika-BS-KLS-VIII-Baru.pdf',
+                'pdf' => 'demo/buku/pdf/8/Matematika-BS-KLS-VIII-Baru.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -939,7 +939,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/PPKN-BS-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/PPKN-BS-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
@@ -981,7 +981,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/9/panduan/Kelas9_buku_guru_bahasa_indonesia_kelas_ix_2119.pdf',
+                'pdf' => 'demo/buku/pdf/9/panduan/Kelas9_buku_guru_bahasa_indonesia_kelas_ix_2119.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -989,7 +989,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/9/panduan/Kelas9_buku_guru_bahasa_inggris_kelas_ix_2141.pdf',
+                'pdf' => 'demo/buku/pdf/9/panduan/Kelas9_buku_guru_bahasa_inggris_kelas_ix_2141.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
@@ -1029,7 +1029,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Bahasa-Indonesia-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Bahasa-Indonesia-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1037,7 +1037,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Bahasa-Inggris-BG-KLS-VIII-nsn.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Bahasa-Inggris-BG-KLS-VIII-nsn.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1045,7 +1045,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Prakarya-Budidaya-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Prakarya-Budidaya-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1053,7 +1053,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Buddha-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Buddha-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1061,7 +1061,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Prakarya-Kerajinan-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Prakarya-Kerajinan-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1069,7 +1069,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Hindu-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Hindu-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1077,7 +1077,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Prakarya-Pengolahan-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Prakarya-Pengolahan-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1085,7 +1085,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Informatika-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Informatika-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1093,7 +1093,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Prakarya-Rekayasa-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Prakarya-Rekayasa-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1101,7 +1101,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/IPA-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/IPA-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1109,7 +1109,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/IPS-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/IPS-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1117,7 +1117,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Islam-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Islam-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1125,7 +1125,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Katolik-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Katolik-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1133,7 +1133,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Kepercayaan-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Kepercayaan-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1141,7 +1141,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Seni-Musik-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Seni-Musik-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1149,7 +1149,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Khonghucu-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Khonghucu-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1157,7 +1157,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Seni-Rupa-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Seni-Rupa-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1165,7 +1165,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Kristen-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Kristen-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1173,7 +1173,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Seni-Tari-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Seni-Tari-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1181,7 +1181,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Seni-Teater-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Seni-Teater-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1189,7 +1189,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Matematika-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Matematika-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1197,7 +1197,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/PJOK-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/PJOK-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1205,7 +1205,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/PPKN-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/PPKN-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1213,7 +1213,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/8/panduan/Matematika-BG-KLS-VIII-Baru.pdf',
+                'pdf' => 'demo/buku/pdf/8/panduan/Matematika-BG-KLS-VIII-Baru.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
@@ -1253,7 +1253,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Bahasa-Indonesia-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Bahasa-Indonesia-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1261,7 +1261,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Bahasa-Inggris-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Bahasa-Inggris-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1269,7 +1269,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Buddha-BG-KLS-VII (1).pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Buddha-BG-KLS-VII (1).pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1277,7 +1277,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Hindu-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Hindu-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1285,7 +1285,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Prakarya-Pengolahan-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Prakarya-Pengolahan-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1293,7 +1293,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/IInformatika-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/IInformatika-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1301,7 +1301,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/IPA-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/IPA-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1309,7 +1309,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/IPS-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/IPS-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1317,7 +1317,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/IPS-BG-KLS-VIII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/IPS-BG-KLS-VIII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1325,7 +1325,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Islam-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Islam-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1333,7 +1333,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/KATOLIK-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/KATOLIK-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1341,7 +1341,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Kepercayaan-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Kepercayaan-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1349,7 +1349,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Khonghucu-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Khonghucu-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1357,7 +1357,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Kristen-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Kristen-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1365,7 +1365,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Matematika-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Matematika-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1373,7 +1373,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Matematika-BG-KLS-VII-Licensi.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Matematika-BG-KLS-VII-Licensi.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1381,7 +1381,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/PJOK-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/PJOK-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1389,7 +1389,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/PPKN-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/PPKN-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1397,7 +1397,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Prakarya-Budi-Daya-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Prakarya-Budi-Daya-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1405,7 +1405,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Prakarya-Kerajinan-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Prakarya-Kerajinan-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1413,7 +1413,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Prakarya-Pengolahan-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Prakarya-Pengolahan-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1421,7 +1421,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Prakarya-Rekayasa-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Prakarya-Rekayasa-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1429,7 +1429,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Seni-Rupa-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Seni-Rupa-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1437,7 +1437,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Seni-Tari-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Seni-Tari-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
             [
@@ -1445,7 +1445,7 @@ class BukuSeeder extends Seeder
                 'isbn' => '123-4556-678-93-1',
                 'pengarang' => 'aaaa',
                 'stok' => 4,
-                'pdf' => 'demo/7/panduan/Seni-Teater-BG-KLS-VII.pdf',
+                'pdf' => 'demo/buku/pdf/7/panduan/Seni-Teater-BG-KLS-VII.pdf',
                 'penerbit_id' => Penerbit::inRandomOrder()->first()->id,
             ],
         ];
