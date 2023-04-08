@@ -82,9 +82,9 @@ class AuthController extends Controller
             $data['banner'] = $banner;
             foreach ($banner as $key => $row) {
                 if ($row->gambar) {
-                    $data['banner'][$key]['gambar'] = base_url($row->gambar);
+                    $data['banner'][$key]['foto'] = base_url($row->gambar);
                 } else {
-                    $data['banner'][$key]['gambar'] = url('backend/sneat-1.0.0/assets/img/avatars/banner.jpg');
+                    $data['banner'][$key]['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/banner.jpg');
                 }
             }
 
