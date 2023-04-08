@@ -33,7 +33,6 @@
                 <table class="table table-sm table-hover display nowrap mb-4" id="datatable">
                     <thead>
                         <tr>
-                            <th>NO</th>
                             <th>foto</th>
                             <th>guru</th>
                             <th>ttl</th>
@@ -198,9 +197,7 @@
                     d.kelas = $('#kelas').val();
                 },
             },
-            columns: [{
-                    data: 'DT_RowIndex'
-                },
+            columns: [
                 {
                     data: 'foto'
                 },

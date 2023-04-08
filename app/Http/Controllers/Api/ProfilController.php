@@ -51,9 +51,15 @@ class ProfilController extends Controller
                 'kota'
             ])
                 ->where('id', Auth::id())
-                ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
                 ->first();
+
+            $foto = $user->foto;
+            if ($foto) {
+                $user['foto'] = base_url($foto);
+            } else {
+                $user['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
+            }
+
             return $this->responOk('Data berhasil ditemukan', $user);
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
@@ -99,9 +105,14 @@ class ProfilController extends Controller
                 'kelas',
                 'kota'
             ])
-                ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
                 ->where('id', Auth::id())->first();
+
+            $foto = $user->foto;
+            if ($foto) {
+                $user['foto'] = base_url($foto);
+            } else {
+                $user['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
+            }
 
             return $this->responOk(data: $user);
         } catch (\Throwable $th) {
@@ -169,26 +180,32 @@ class ProfilController extends Controller
                 $image = str_replace($replace, '', $image_64);
                 $image = str_replace(' ', '+', $image);
                 $imageName = time() . '.' . $extension;
-                Storage::disk('public')->put('anggota/' . $imageName, base64_decode($image));
+                // Storage::disk('public')->put('storage/export/' . $imageName, base64_decode($image));
 
                 // Simpan versi thumb_
                 $path = base64_decode($image);
-                $thum = Image::make($path)->resize(80, 80, function ($size) {
+                $thum = Image::make($path)->resize(120, 120, function ($size) {
                     $size->aspectRatio();
                 });
-                $thumPath = public_path('/storage/anggota') . '/thum_' . $imageName;
-                $thum = Image::make($thum)->save($thumPath);
+
+                $fullPath = 'anggota/' . $imageName;
+                $path = Storage::put($fullPath, $thum->stream());
 
                 // Simpan gambar ke Database
-                Anggota::where('id', Auth::id())->update(['foto' => $imageName]);
+                Anggota::where('id', Auth::id())->update(['foto' => $fullPath]);
                 $data = Anggota::query()
-                    ->select('*')
-                    ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
                     ->with([
                         'kelas',
                         'kota'
                     ])
                     ->where('id', Auth::id())->first();
+
+                $foto = $data->foto;
+                if ($foto) {
+                    $data['foto'] = base_url($foto);
+                } else {
+                    $data['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
+                }
 
                 DB::commit();
                 return $this->responOk(data: $data);
@@ -216,6 +233,25 @@ class ProfilController extends Controller
             return $this->responError('Data tidak ditemukan', kode: 404);
         }
 
+        $foto = $anggota->foto;
+        if ($foto) {
+            $anggota['foto'] = base_url($foto);
+        } else {
+            $anggota['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
+        }
+
+        if (env('FILESYSTEM_DISK') === 's3') {
+            if ($foto) {
+                $url = base_url($foto);
+                $contents = file_get_contents($url);
+                $name = substr($url, strrpos($url, '/') + 1);
+                Storage::disk('public')->put('export/' . $name, $contents);
+                $anggota['namafoto'] = $name;
+            }
+        } else {
+            $anggota['namafoto'] = $foto;
+        }
+
         $generator = new \Picqer\Barcode\BarcodeGeneratorPNG();
         $barcode = '<img src="data:image/png;base64,' . base64_encode($generator->getBarcode($anggota->nomor_anggota, $generator::TYPE_CODE_128, widthFactor: 1,  height: 40)) . '">';
 
@@ -224,10 +260,10 @@ class ProfilController extends Controller
         $pdf->set_paper([0, 0, 243.78, 158.74]); // -------- ukuran ID CARD 8.6cm * 5.6cm
 
         $konten = $pdf->download()->getOriginalContent();
-        Storage::put('public/kartu/' . Auth::user()->nomor_anggota . '.pdf', $konten);
+        Storage::put('kartu/' . Auth::user()->nomor_anggota . '.pdf', $konten);
 
         $collect = collect($anggota);
-        $collect->put('kartu', url('/storage/kartu' . '/' . Auth::user()->nomor_anggota . '.pdf'));
+        $collect->put('kartu', base_url('kartu' . '/' . Auth::user()->nomor_anggota . '.pdf'));
 
         return $this->responOk(data: $collect);
     }

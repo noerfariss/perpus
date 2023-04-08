@@ -40,7 +40,6 @@ class KategoriController extends Controller
             $data = Kategori::query()
                 ->with([
                     'buku' => fn ($e) => $e->select('*')
-                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
                         ->withCount([
                             'buku_item as dipinjam' => fn ($e) => $e->has('peminjaman_belum_kembali'),
                         ])
@@ -65,7 +64,7 @@ class KategoriController extends Controller
                     $bukus[] = [
                         'id' => $item->id,
                         'judul' => $item->judul,
-                        'foto' => $item->foto,
+                        'foto' => ($item->foto == null or $item->foto == '') ? url('backend/sneat-1.0.0/assets/img/avatars/coverbook.jpg') : base_url($item->foto),
                         'pengarang' => $item->pengarang,
                         'isbn' => $item->isbn,
                         'stok' => $item->stok,

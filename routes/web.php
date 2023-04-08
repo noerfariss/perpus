@@ -61,8 +61,8 @@ Route::middleware('xss')->group(function () {
         Route::prefix('auth')->group(function () {
             Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
             Route::any('/profil', [UserController::class, 'profil'])->name('profil');
-            Route::post('/ganti-foto', [UserController::class, 'ganti_foto'])->name('ganti-foto');
             Route::post('/simpan-foto', [UserController::class, 'simpan_foto'])->name('simpan-foto');
+
             Route::any('/password', [UserController::class, 'password'])->name('password');
             Route::post('/ganti-password', [UserController::class, 'ganti_password'])->name('ganti-password');
             Route::get('/logout', [LoginController::class, 'logout'])->name('logout');
@@ -84,8 +84,6 @@ Route::middleware('xss')->group(function () {
             // Data Buku
             Route::resource('buku', BukuController::class);
             Route::post('/ajax-buku', [BukuController::class, 'ajax'])->name('ajax-buku');
-            Route::post('/ganti-foto-buku', [BukuController::class, 'ganti_foto'])->name('ganti-foto-buku');
-            Route::post('/ganti-pdf-buku', [BukuController::class, 'ganti_pdf'])->name('ganti-pdf-buku');
             Route::post('/buku/hapus-item', [BukuController::class, 'hapus_item'])->name('hapus_buku_item');
             Route::post('/buku/tambah-stok', [BukuController::class, 'tambah_stok'])->name('tambah_stok');
             Route::get('/kode-kategori', [BukuController::class, 'getKodeKategori'])->name('buku.get_kode_kategori');
@@ -102,7 +100,6 @@ Route::middleware('xss')->group(function () {
             Route::get('/siswa/kartu/{anggota}', [AnggotaController::class, 'kartu'])->name('siswa.kartu');
             Route::post('/ajax-siswa', [AnggotaController::class, 'ajax'])->name('ajax-siswa');
             Route::post('/siswa-ganti-password', [AnggotaController::class, 'ganti_password'])->name('siswa-ganti-password');
-            Route::post('/ganti-foto-anggota', [AnggotaController::class, 'ganti_foto'])->name('ganti-foto-anggota');
 
             Route::resource('guru', GuruController::class);
             Route::post('/ajax-guru', [GuruController::class, 'ajax'])->name('ajax-guru');
@@ -114,12 +111,12 @@ Route::middleware('xss')->group(function () {
             Route::singleton('umum', UmumController::class);
             Route::get('/umum/peminjaman', [UmumController::class, 'peminjaman'])->name('umum.peminjaman');
             Route::any('/umum/peminjaman/edit', [UmumController::class, 'editPinjam'])->name('umum.peminjaman.edit');
+
             Route::resource('user', UserController::class);
             Route::post('/ajax-user', [UserController::class, 'ajax'])->name('ajax-user');
 
             Route::resource('banner', BannerController::class);
             Route::post('/ajax-banner', [BannerController::class, 'ajax'])->name('ajax-banner');
-            Route::post('/ganti-foto-banner', [BannerController::class, 'ganti_foto'])->name('ganti-foto-banner');
 
             Route::resource('role', RoleController::class);
             Route::post('/ajax-role', [RoleController::class, 'ajax'])->name('ajax-roles');
@@ -135,6 +132,8 @@ Route::middleware('xss')->group(function () {
                 Route::post('/kelas', [AjaxController::class, 'kelas'])->name('drop-kelas');
                 Route::post('/kategori', [AjaxController::class, 'kategori'])->name('drop-kategori');
                 Route::post('/penerbit', [AjaxController::class, 'penerbit'])->name('drop-penerbit');
+                Route::post('/ganti-foto', [AjaxController::class, 'ganti_foto'])->name('ganti-foto');
+                Route::post('/ganti-pdf', [AjaxController::class, 'ganti_pdf'])->name('ganti-pdf');
             });
         });
     });

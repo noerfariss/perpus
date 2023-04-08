@@ -55,7 +55,7 @@ class BukuController extends Controller
                 });
             })
             ->where('status', $request->status)
-            ->orderBy('judul');
+            ->orderBy('id','desc');
 
         if ($request->filled('export')) {
             Weblog::set('Export data kelas');
@@ -67,8 +67,11 @@ class BukuController extends Controller
                 return (count($e->buku_item));
             })
             ->editColumn('foto', function ($e) {
-                $foto = ($e->foto === "" || $e->foto === null) ? '/storage/user/coverbook.jpg' : '/storage/buku/thum_' . $e->foto;
-                return '<div><img src="' . url($foto) . '" class="img-thumbnail"/></div>';
+                if ($e->foto) {
+                    return '<div><img src="' . base_url($e->foto) . '" class="rounded" width="40"/></div>';
+                } else {
+                    return '<img src="' . url('backend/sneat-1.0.0/assets/img/avatars/coverbook.jpg') . '" />';
+                }
             })
             ->editColumn('judul', function ($e) {
                 $judul = '<a href="#" class="detail-anggota" data-id="' . $e->id . '" data-judul="' . $e->judul . '" data-kategori="' . $e->kategori->implode('kategori', ', ') . '" data-pengarang="' . $e->pengarang . '" data-isbn="' . $e->isbn . '">
@@ -442,53 +445,6 @@ class BukuController extends Controller
             return response()->json([
                 'pesan' => 'Terjadi kesalahan'
             ], 500);
-        }
-    }
-
-    public function ganti_foto(Request $request)
-    {
-        if ($request->has('file')) {
-            $file = $request->file;
-            $request->validate([
-                'file' => 'required|image|max:2000'
-            ]);
-
-            $name = time();
-            $ext  = $file->getClientOriginalExtension();
-            $foto = $name . '.' . $ext;
-
-            $path = $file->getRealPath();
-            $thum = Image::make($path)->resize(80, 80, function ($size) {
-                $size->aspectRatio();
-            });
-            $thumPath = public_path('/storage/buku') . '/thum_' . $foto;
-            $thum = Image::make($thum)->save($thumPath);
-
-            $request->file->storeAs('public/buku', $foto);
-
-            return response()->json([
-                'file' => $foto,
-            ]);
-        }
-    }
-
-    public function ganti_pdf(Request $request)
-    {
-        if ($request->has('file')) {
-            $file = $request->file;
-            $request->validate([
-                'file' => 'required|mimes:pdf|max:2000'
-            ]);
-
-            $name = time();
-            $ext  = $file->getClientOriginalExtension();
-            $foto = $name . '.' . $ext;
-
-            $request->file->storeAs('public/buku/pdf', $foto);
-
-            return response()->json([
-                'file' => $foto,
-            ]);
         }
     }
 

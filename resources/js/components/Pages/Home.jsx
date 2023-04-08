@@ -5,7 +5,7 @@ import fileDownload from 'js-file-download';
 const Home = () => {
 
     const domain = document.head.querySelector('meta[name="base-url"]').content;
-    const imgURL = `${domain}/storage/foto/header.png`
+    const imgURL = `${domain}/backend/sneat-1.0.0/assets/img/avatars/header.png`
 
     const [sekolah, setSekolah] = useState('');
 

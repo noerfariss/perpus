@@ -2,13 +2,17 @@
 
 namespace App\Exports;
 
+use App\Traits\ExportGambar;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Events\AfterSheet;
 use Maatwebsite\Excel\Concerns\WithEvents;
 
 class BannerExport implements FromView, WithEvents
 {
+    use ExportGambar;
+
     public $data;
     public $request;
 
@@ -30,7 +34,7 @@ class BannerExport implements FromView, WithEvents
                 $records = $this->data;
                 $nomor = 2;
                 foreach ($records as $row) {
-                    $this->setImage2Excel($event, 'C' . $nomor, $row->gambar, 0, 130);
+                    $this->simpanGambar($event, 'C' . $nomor, $row->gambar, 0, 130);
                     $event->sheet->getDelegate()->getRowDimension($nomor)->setRowHeight(100);
                     $nomor++;
                 }
@@ -40,15 +44,16 @@ class BannerExport implements FromView, WithEvents
         }
     }
 
-    private function setImage2Excel($event, $position, $path, $width, $height)
+    public function __destruct()
     {
-        if ($path != '' || $path != null) {
-            $drawing = new \PhpOffice\PhpSpreadsheet\Worksheet\Drawing();
-            $drawing->setCoordinates($position);
-            $drawing->setPath(public_path('storage/banner/' . $path));
-            ($width == 0) ? null : $drawing->setWidth($width);
-            ($height == 0) ? null : $drawing->setHeight($height);
-            $drawing->setWorksheet($event->sheet->getDelegate());
+        if (env('FILESYSTEM_DISK') === 's3') {
+            foreach ($this->data as $item) {
+                if ($item->gambar) {
+                    $url = base_url($item->gambar);
+                    $name = substr($url, strrpos($url, '/') + 1);
+                    File::delete(public_path('storage/export/' . $name));
+                }
+            }
         }
     }
 }

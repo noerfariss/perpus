@@ -185,36 +185,13 @@
                     <span id="notif"></span>
                     <form action="{{ route('ganti-foto') }}" class="dropzone" id="upload-image" method="POST"
                         enctype="multipart/form-data">
+                        <input type="hidden" name="path" value="foto">
                         @csrf
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-sm btn-simpan"
                         onclick="simpanFoto()">Tambahkan</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal FAVICON-->
-    <div class="modal fade" id="modalUploadFavicon" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="modalUploadFaviconLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalUploadFaviconLabel">Unggah favicon</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <span id="notif-favicon"></span>
-                    <form action="{{ route('ganti-foto') }}" class="dropzone" id="upload-favicon" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary btn-sm btn-simpan"
-                        onclick="simpanFoto('favicon')">Tambahkan</button>
                 </div>
             </div>
         </div>
@@ -253,31 +230,6 @@
             }
         };
 
-        // ------------- Favicon
-        Dropzone.options.uploadFavicon = {
-            maxFilesize: 2000,
-            acceptedFiles: ".jpeg,.jpg,.png",
-            method: 'post',
-            createImageThumbnails: true,
-            init: function() {
-                this.on("addedfile", file => {
-                    $('.btn-simpan').attr('disabled', 'disabled').text('Loading...');
-                });
-            },
-            success: function(file, response) {
-                $('.btn-simpan').removeAttr('disabled').text('Tambahkan');
-                const foto = response.file;
-                $('.modal-body #notif-favicon').html(
-                    `<div class="alert alert-success">Favicon berhasil diunggah</div>`);
-                $('#favicon').val(foto);
-            },
-            error: function(file, response) {
-                $('.btn-simpan').removeAttr('disabled').text('Tambahkan');
-                const pesan = response.message;
-                $('.modal-body #notif-favicon').html(`<div class="alert alert-danger">${pesan}</div>`);
-            }
-        };
-
         function simpanFoto($tipe = '') {
             let title = '';
             let foto = '';
@@ -296,13 +248,11 @@
                 notif = $('#notif-favicon');
             }
 
-            console.log(boxImage);
-
             if (foto === '' || foto === null) {
                 $(notif).html(`<div class="alert alert-danger">Tidak dapat menambahkan ${title}</div>`);
             } else {
                 $('#modalUploadFoto, #modalUploadFavicon').modal('hide');
-                $(boxImage).html(`<img src="{{ url('/storage/foto/thum_${foto}') }}" class="rounded">`);
+                $(boxImage).html(`<img src="{{ base_url('${foto}') }}" class="rounded">`);
             }
         }
     </script>

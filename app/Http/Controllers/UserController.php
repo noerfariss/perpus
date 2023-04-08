@@ -13,9 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\Rule;
 use Proengsoft\JsValidation\Facades\JsValidatorFacade;
-use Intervention\Image\Facades\Image;
 use Yajra\DataTables\Facades\DataTables;
 use Laratrust\LaratrustFacade as Laratrust;
 use Maatwebsite\Excel\Facades\Excel;
@@ -53,18 +53,19 @@ class UserController extends Controller
             })
             ->where('id', '<>', 1)
             ->where('status', $status)
-            ->orderBy('id', 'desc')
-            ->get();
+            ->orderBy('id', 'desc');
 
         if ($request->filled('export')) {
-            return Excel::download(new UserExport($data, $request->all()), 'USER.xlsx');
+            return Excel::download(new UserExport($data->get(), $request->all()), 'USER.xlsx');
         }
 
-        return DataTables::of($data)
-            ->addIndexColumn()
+        return DataTables::eloquent($data)
             ->editColumn('foto', function ($e) {
-                $foto = ($e->foto === "" || $e->foto === null) ? '/backend/sneat-1.0.0/assets/img/avatars/1.png' : '/storage/foto/thum_' . $e->foto;
-                return '<div><img src="' . url($foto) . '" class="rounded" width="40"/></div>';
+                if ($e->foto) {
+                    return '<div><img src="' . base_url($e->foto) . '" class="rounded" width="40"/></div>';
+                } else {
+                    return '<img src="' . url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png') . '" />';
+                }
             })
             ->editColumn('created_at', function ($e) {
                 return '<div class="badge bg-dark rounded-pill">' . Carbon::parse($e->created_at)->isoFormat('DD MMM YYYY HH:mm') . '</div>';
@@ -327,7 +328,6 @@ class UserController extends Controller
 
         $user = User::find(Auth::id());
         return view('backend.pengaturan.show', compact('user', 'validator'));
-        return view('backend.users.edit', compact('validator', 'user'));
     }
 
     public function password(Request $request)
@@ -373,33 +373,6 @@ class UserController extends Controller
         }
 
         return view('backend.pengaturan.ganti_password');
-    }
-
-    public function ganti_foto(Request $request)
-    {
-        if ($request->has('file')) {
-            $file = $request->file;
-            $request->validate([
-                'file' => 'required|image|max:2000'
-            ]);
-
-            $name = time();
-            $ext  = $file->getClientOriginalExtension();
-            $foto = $name . '.' . $ext;
-
-            $path = $file->getRealPath();
-            $thum = Image::make($path)->resize(80, 80, function ($size) {
-                $size->aspectRatio();
-            });
-            $thumPath = public_path('/storage/foto') . '/thum_' . $foto;
-            $thum = Image::make($thum)->save($thumPath);
-
-            $request->file->storeAs('public/foto', $foto);
-
-            return response()->json([
-                'file' => $foto,
-            ]);
-        }
     }
 
     public function simpan_foto(Request $request)
