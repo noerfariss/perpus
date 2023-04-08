@@ -39,9 +39,14 @@ class AuthController extends Controller
                     'kota'
                 ])
                 ->where('nomor_anggota', $request->anggota)
-                ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
                 ->first();
+
+            $foto = $user->foto;
+            if ($foto) {
+                $user['foto'] = base_url($foto);
+            } else {
+                $user['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
+            }
 
             $token = $user->createToken($user->nama)->plainTextToken;
 
@@ -69,13 +74,26 @@ class AuthController extends Controller
         $data = [];
 
         try {
+            $banner = Banner::where('status', true)
+                ->orderBy('id', 'desc')
+                ->limit(5)
+                ->get();
+
+            $data['banner'] = $banner;
+            foreach ($banner as $key => $row) {
+                if ($row->gambar) {
+                    $data['banner'][$key]['gambar'] = base_url($row->gambar);
+                } else {
+                    $data['banner'][$key]['gambar'] = url('backend/sneat-1.0.0/assets/img/avatars/banner.jpg');
+                }
+            }
+
             $jabatan = Auth::user()->jabatan;
             $kategori = Kategori::query()
                 ->has('buku')
                 ->with([
-                    'buku' => fn ($e) => $e->select('id', 'judul', 'pengarang', 'isbn')
+                    'buku' => fn ($e) => $e->select('id', 'judul', 'foto', 'pengarang', 'isbn')
                         ->where('status', true)
-                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
                         ->orderBy('id', 'desc'),
                 ])
                 ->when($jabatan, function ($e, $jabatan) {
@@ -94,17 +112,19 @@ class AuthController extends Controller
                     return $e->setRelation('buku', $e->buku->take(10));
                 });
 
-            $banner = Banner::where('status', true)
-                ->select('id', 'keterangan')
-                ->addSelect(DB::raw('concat("' . url('/storage/banner') . '","/", gambar) as foto'))
-                ->orderBy('id', 'desc')
-                ->limit(5)
-                ->get();
-
-            $data['banner'] = $banner;
             $data['kategori'] = $kategori;
+            foreach ($kategori as $key => $item) {
+                foreach ($item->buku as $x => $row) {
+                    if ($row->foto) {
+                        $data['kategori'][$key]['buku'][$x]['foto'] = base_url($row->foto);
+                    } else {
+                        $data['kategori'][$key]['buku'][$x]['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/coverbook.jpg');
+                    }
+                }
+            }
+            return $this->responOk(data: $data['kategori']);
 
-            return $this->responOk(data: $data);
+            // return $this->responOk(data: $data);
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
             return $this->responError('Terjadi kesalahan, cobalah kembali');
@@ -117,8 +137,8 @@ class AuthController extends Controller
             'gambar' => 'required|file',
         ]);
 
-        if($validator->fails()){
-            return $this->responError(data:$validator->errors());
+        if ($validator->fails()) {
+            return $this->responError(data: $validator->errors());
         }
 
         if ($request->hasFile('gambar')) {

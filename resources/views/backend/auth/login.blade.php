@@ -58,7 +58,7 @@
               <div class="app-brand justify-content-center">
                 <a href="{{ route('login') }}" class="app-brand-link gap-2">
                     <span class="app-brand-text demo text-body fw-bolder">
-                        @if ($logo)
+                        @if ($logo_login)
                             <div class="text-center"><img src="{{ base_url($logo_login) }}" class="mb-2" width="80%"></div>
                         @endif
                         <h1 style="text-transform: uppercase; font-size:14px; text-align:center; margin:0 0 2px 0; padding:0;">Perpustakaan</h1>

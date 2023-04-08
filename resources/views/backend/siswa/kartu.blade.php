@@ -14,21 +14,23 @@
         @page {
             margin: 0;
             font-size: 11px;
-            background-image: url({{ public_path('/storage/foto/bg-kartu.jpg') }})
+            background-image: url({{ public_path('backend/sneat-1.0.0/assets/img/avatars/bg-kartu.jpg') }})
         }
 
         .wrapper {
-            background: url("{{ public_path('/storage/foto/bg-kartu.jpg') }}") no-repeat;
+            background: url({{ public_path('backend/sneat-1.0.0/assets/img/avatars/bg-kartu.jpg') }}) no-repeat;
             background-size: cover;
             width: 100%;
             height: 100%;
         }
-        .wrapper-back{
+
+        .wrapper-back {
             background: #101D93;
             width: 100%;
             height: 100%;
             color: white;
         }
+
         .container {
             padding: 3mm 4mm;
         }
@@ -117,8 +119,8 @@
             margin: 8px 0 0 0;
             display: inline-block;
             background: white;
-            border:1px solid rgb(191, 191, 191);
-            padding:4px;
+            border: 1px solid rgb(191, 191, 191);
+            padding: 4px;
             border-radius: 4px;
         }
     </style>
@@ -131,17 +133,20 @@
                 <table>
                     <tr>
                         <td width="35" valign="top">
-                            <div id="logo-kiri"><img src="{{ public_path('/storage/foto/thum_1679297466.png') }}"
+                            <div id="logo-kiri"><img
+                                    src="{{ public_path('backend/sneat-1.0.0/assets/img/avatars/logo-kartu.png') }}"
                                     width="50"></div>
                         </td>
                         <td valign="top">
                             <h2>Kartu Anggota perpustakaan</h2>
-                            <h1>{{ $sekolah->nama}}</h1>
-                            <p>{{ $sekolah->alamat }}, {{ ucfirst(strtolower($sekolah->kota?->kota)) }} <br> {{ ucwords(strtolower($sekolah->provinsi?->provinsi)) }}</p>
+                            <h1>{{ $sekolah->nama }}</h1>
+                            <p>{{ $sekolah->alamat }}, {{ ucfirst(strtolower($sekolah->kota?->kota)) }} <br>
+                                {{ ucwords(strtolower($sekolah->provinsi?->provinsi)) }}</p>
                             <p>Telp: {{ $sekolah->telpon }} | Email: {{ $sekolah->email }} </p>
                         </td>
                         <td width="35" align="right" valign="top">
-                            <div id="logo-kanan"><img src="{{ public_path('/storage/foto/thum_1679297466.png') }}"
+                            <div id="logo-kanan"><img
+                                    src="{{ public_path('backend/sneat-1.0.0/assets/img/avatars/logo-kartu.png') }}"
                                     width="50"></div>
                         </td>
                     </tr>
@@ -172,7 +177,20 @@
                 </table>
 
                 <div id="foto">
-                    <img src="{{ $anggota->foto === null || $anggota->foto == '' ? public_path('/storage/foto/pasfoto.jpg') : public_path('/storage/anggota').'/'.$anggota->foto }}" width="100%">
+                    @php
+                        if($anggota->foto === null || $anggota->foto == ''){
+                            $foto_path = public_path('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
+                        }else{
+                            if(env('FILESYSTEM_DISK') === 's3'){
+                                $foto_path = public_path('storage/export/' . $anggota->namafoto);
+                            }else{
+                                $foto_path = public_path('storage/' . $anggota->namafoto);
+                            }
+                        }
+                    @endphp
+
+                    <img src="{{ $foto_path }}"
+                        width="100%">
                 </div>
 
                 <div id="barcode">
@@ -194,7 +212,7 @@
                         </td>
                         <td valign="top">
                             <h2>TATA tertib perpustakaan</h2>
-                            <h1>{{ $sekolah->nama}}</h1>
+                            <h1>{{ $sekolah->nama }}</h1>
                         </td>
                         <td width="35" align="right" valign="top">
 
@@ -207,8 +225,10 @@
                     <li>Berpakaian sopan dan tidak diperkenankan memakai kaos oblong, jaket dan sandal.</li>
                     <li>Mengisi daftar pengunjung yang sudah disediakan.</li>
                     <li>Menjaga kerapihan bahan pustaka, kebersihan, keamanan dan ketenangan belajar.</li>
-                    <li>Tidak diperkenankan membawa makanan dan minuman atau pun makan-makan dan merokok di ruang perpustakaan.</li>
-                    <li>Memperlihatkan kepada petugas barang/buku yang dibawa pada saat masuk dan keluar perpustakaan.</li>
+                    <li>Tidak diperkenankan membawa makanan dan minuman atau pun makan-makan dan merokok di ruang
+                        perpustakaan.</li>
+                    <li>Memperlihatkan kepada petugas barang/buku yang dibawa pada saat masuk dan keluar perpustakaan.
+                    </li>
                 </ol>
             </section>
         </div>

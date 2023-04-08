@@ -19,14 +19,20 @@ class AnggotaController extends Controller
     {
         try {
             $data = Anggota::query()
-                ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
                 ->with([
                     'kelas',
                     'kota'
                 ])
                 ->where('status', true)->where('jabatan', 'siswa')
                 ->get();
+
+            foreach ($data as $key => $row) {
+                if ($row->foto) {
+                    $data[$key]['foto'] = base_url($row->foto);
+                } else {
+                    $data[$key]['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
+                }
+            }
             return $this->responOk(data: $data);
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
@@ -55,8 +61,6 @@ class AnggotaController extends Controller
     {
         try {
             $data = Anggota::query()
-                ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto'))
                 ->with([
                     'kelas',
                     'kota'
@@ -67,6 +71,12 @@ class AnggotaController extends Controller
                 ->first();
             if ($data === null) {
                 return $this->responError('Data tidak ditemukan', kode: 404);
+            }
+
+            if ($data->foto) {
+                $data['foto'] = base_url($data->foto);
+            } else {
+                $data['foto'] = url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png');
             }
 
             return $this->responOk(data: $data);

@@ -22,8 +22,6 @@ class BukuController extends Controller
 
         try {
             $data = Buku::query()
-                ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
                 ->withCount([
                     'buku_item as dipinjam' => fn ($e) => $e->has('peminjaman_belum_kembali'),
                 ])
@@ -50,7 +48,7 @@ class BukuController extends Controller
                 $records[] = [
                     'id' => $item->id,
                     'judul' => $item->judul,
-                    'foto' => $item->foto,
+                    'foto' => ($item->foto == null or $item->foto == '') ? url('backend/sneat-1.0.0/assets/img/avatars/coverbook.jpg') : base_url($item->foto),
                     'pengarang' => $item->pengarang,
                     'isbn' => $item->isbn,
                     'stok' => $item->stok,
@@ -77,8 +75,6 @@ class BukuController extends Controller
     {
         try {
             $data = Buku::query()
-                ->select('*')
-                ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
                 ->withCount([
                     'buku_item as dipinjam' => fn ($e) => $e->has('peminjaman_belum_kembali'),
                 ])
@@ -95,7 +91,7 @@ class BukuController extends Controller
                 $data = [
                     'id' => $data->id,
                     'judul' => $data->judul,
-                    'foto' => $data->foto,
+                    'foto' => ($data->foto == null or $data->foto == '') ? url('backend/sneat-1.0.0/assets/img/avatars/coverbook.jpg') : base_url($data->foto),
                     'pengarang' => $data->pengarang,
                     'isbn' => $data->isbn,
                     'stok' => $data->stok,
@@ -103,7 +99,7 @@ class BukuController extends Controller
                     'status_pinjam' => ($data->stok - $data->dipinjam) === 0 ? 'Kosong' : 'Tersedia',
                     'kategori' => $data->kategori,
                     'penerbit' => $data->penerbit,
-                    'pdf' => $data->pdf ? url('/storage/buku/pdf') . '/' . $data->pdf : null,
+                    'pdf' => $data->pdf ? base_url($data->pdf) : null,
                     'created_at' => $data->created_at,
                 ];
 
@@ -130,8 +126,6 @@ class BukuController extends Controller
                             'kategori',
                             'penerbit'
                         ])
-                            ->select('*')
-                            ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto')),
                     ]),
                 ])
                 ->withSum('denda', 'denda')
@@ -153,7 +147,7 @@ class BukuController extends Controller
                             'id' => $item->buku_item->buku->id,
                             'kode_buku' => $item->buku_item->kode,
                             'judul' => $item->buku_item->buku->judul,
-                            'foto' => $item->buku_item->buku->foto,
+                            'foto' => ($item->buku_item->buku->foto == null or $item->buku_item->buku->foto == '') ? url('backend/sneat-1.0.0/assets/img/avatars/coverbook.jpg') : base_url($item->buku_item->buku->foto),
                             'pengarang' => $item->buku_item->buku->pengarang,
                             'isbn' => $item->buku_item->buku->isbn,
                             'kategori' => $item->buku_item->buku->kategori,
@@ -226,13 +220,8 @@ class BukuController extends Controller
         try {
             $data = LogBuku::query()
                 ->with([
-                    'anggota' => fn ($e) => $e->with(['kelas', 'kota'])
-                        ->select('*')
-                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/foto/pasfoto.jpg') . '" else concat("' . url('/storage/anggota') . '","/", foto) end as foto')),
+                    'anggota' => fn ($e) => $e->with(['kelas', 'kota']),
                     'buku' => fn ($e) => $e->with(['penerbit', 'kategori'])
-                        ->select('*')
-                        ->addSelect(DB::raw('case when foto is null or foto = "" then "' . url('/storage/user/coverbook.jpg') . '" else concat("' . url('/storage/buku') . '","/thum_", foto) end as foto'))
-
                 ])
                 ->when($siswa, function ($e, $siswa) {
                     $e->where('anggota_id', $siswa);
@@ -256,13 +245,28 @@ class BukuController extends Controller
                     'id' => $item->id,
                     'tanggal_akses' => Carbon::parse($item->created_at)->timezone(zona_waktu())->isoFormat('DD MMM YYYY'),
                     'durasi' => CarbonInterval::seconds($tutup->diffInSeconds($buka))->cascade()->forHumans(),
-                    'anggota' => $item->anggota,
+                    'anggota' => [
+                        'id' => $item->anggota->id,
+                        'nomor_induk' => $item->anggota->nomor_induk,
+                        'nomor_anggota' => $item->anggota->nomor_anggota,
+                        'foto' => ($item->anggota->foto == null or $item->anggota->foto == '') ? url('backend/sneat-1.0.0/assets/img/avatars/user-avatar.png') : base_url($item->anggota->foto),
+                        'nama' => $item->anggota->nama,
+                        'jenis_kelamin' => $item->anggota->jenis_kelamin,
+                        'jabatan' => $item->anggota->jabatan,
+                        'alamat' => $item->anggota->alamat,
+                        'status' => $item->anggota->status,
+                        'kelas_id' => $item->anggota->kelas_id,
+                        'kelas' => $item->anggota->kelas,
+                        'kota_id' => $item->anggota->kota_id,
+                        'kota' => $item->anggota->kota,
+
+                    ],
                     'buku' => [
                         'id' => $item->buku->id,
                         'judul' => $item->buku->judul,
                         'pengarang' => $item->buku->pengarang,
                         'isbn' => $item->buku->isbn,
-                        'foto' => $item->buku->foto,
+                        'foto' => ($item->buku->foto == null or $item->buku->foto == '') ? url('backend/sneat-1.0.0/assets/img/avatars/coverbook.jpg') : base_url($item->buku->foto),
                         'kategori' => $item->buku->kategori->implode('kategori', ', '),
                         'penerbit' => $item->buku->penerbit,
                     ]
