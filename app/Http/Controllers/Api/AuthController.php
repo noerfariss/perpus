@@ -122,9 +122,8 @@ class AuthController extends Controller
                     }
                 }
             }
-            return $this->responOk(data: $data['kategori']);
 
-            // return $this->responOk(data: $data);
+            return $this->responOk(data: $data);
         } catch (\Throwable $th) {
             Log::warning($th->getMessage());
             return $this->responError('Terjadi kesalahan, cobalah kembali');
