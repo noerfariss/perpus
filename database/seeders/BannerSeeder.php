@@ -18,7 +18,7 @@ class BannerSeeder extends Seeder
         $data = ['banner1.jpg', 'banner2.jpg'];
         foreach($data as $item){
             Banner::create([
-                'gambar' => 'banner/'.$item,
+                'gambar' => 'demo/banner/'.$item,
             ]);
         }
     }
