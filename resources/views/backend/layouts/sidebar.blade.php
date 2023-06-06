@@ -35,6 +35,12 @@
                     <div data-i18n="Analytics">Pengembalian</div>
                 </a>
             </li>
+            <li class="menu-item {{ menuAktif('history') }}">
+                <a href="{{ route('history.index')}}" class="menu-link">
+                    <i class="menu-icon tf-icons bx bx-history"></i>
+                    <div data-i18n="Analytics">History</div>
+                </a>
+            </li>
         @endpermission
 
         @permission('buku-read', 'kategori-read', 'penerbit-read')

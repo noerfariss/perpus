@@ -5,6 +5,7 @@ use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\BannerController;
 use App\Http\Controllers\BukuController;
 use App\Http\Controllers\GuruController;
+use App\Http\Controllers\HistoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\KelasController;
@@ -80,6 +81,9 @@ Route::middleware('xss')->group(function () {
             Route::post('/pengembalian/anggota', [PengembalianController::class, 'get_anggota'])->name('get-anggota-kembali');
             Route::post('/pengembalian/daftar-buku', [PengembalianController::class, 'daftar_buku'])->name('pengembalian.daftar_buku');
             Route::post('/pengembalian/simpan', [PengembalianController::class, 'proses_kembali'])->name('pengembalian.simpan');
+
+            Route::resource('history', HistoryController::class);
+            Route::post('ajax-history', [HistoryController::class, 'ajax'])->name('ajax-history');
 
             // Data Buku
             Route::resource('buku', BukuController::class);
